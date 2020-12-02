@@ -1,0 +1,126 @@
+/*-------------------------- Changing logo --------------------------------------------*/
+#kt_aside_brand img[alt="logo"]{
+    box-sizing: border-box;
+    width: 125px;
+    height: 40px;
+    padding-left: 125px;
+    padding-bottom: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image:url(../img/logoTopBar.png);
+}
+.kt-subheader--solid .kt-subheader{
+    background-color:transparent;
+}
+.hideThis{
+    display: none !important;
+}
+#loginBox2 language-switch,#loginBox1 img[alt="logo"],
+#loginBox1 .kt-login__title,#loginBox1 .kt-login__subtitle,
+#loginBox2 kt-divider, #kt_footer{
+    display: none;
+}
+#loginBox1{
+    background-image:url(../img/bgBack.svg) !important;
+}
+#loginBox1 > div:last-child{
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:contain;
+    background-image:url(../img/bgfront.svg);
+    height: 100%;
+    overflow: hidden;
+}
+#loginOuter form > div:last-child button{
+    width:100%;
+}
+#projectLogo img[alt="logo"]{
+    width: 93px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+#loginBox2 .kt-login__title{
+    margin-bottom:0;
+}
+#loginBox2 .kt-login__title h3
+{
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+.tableStylePlain .ui-table table thead tr th{
+    background-color:transparent;
+    font-weight: 500 !important;
+    vertical-align: top;
+    border-bottom:1px solid #ccc !important;
+}
+.tableStylePlain.noAdvance .form-body > div:last-child{
+    display: none;
+}
+.tableStylePlain .form-body > div:first-child
+{
+    padding: 20px;
+    background-color: #fafafa;
+
+}
+#kt_header_mobile img[alt="logo"]{
+    box-sizing:border-box;
+    width:100px;
+    padding-left:100px;
+    height:30px;
+    padding-bottom:30px;
+    background-color:transparent;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-image:url('/assets/qstl/img/logoTopBar.png');
+}
+#forget-password{
+    display: none;
+}
+ngx-spinner .overlay{
+    position: fixed !important;
+}
+/*------------------------------------------- 20/12/2019 -------------------------------------------------------*/
+#loginTmpl01 + .kt-login__divider{
+    display: none;
+
+}
+.currencyLocal{
+    vertical-align: top;
+    margin-right:5px;
+    line-height: 1;
+}
+.currencyLocal + span
+{
+    line-height: 0.9;
+    display: inline-block;
+    margin-bottom: 0.2em;
+}
+#kt_quick_sidebar_toggle{display: none;}
+.kt-header__topbar .kt-header__topbar-item.kt-header__topbar-item--user .kt-header__topbar-user img{
+    max-width:34px !important;
+}
+select,
+select option{
+    font-family: Poppins;
+    
+}
+/*--------------------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width:768px)
+{
+    #chartTotal
+    {
+        position: absolute;
+        top: 50%;
+    }
+    #dataChartWrp p-chart{
+        /* margin-top:50px; */
+    }
+}
+@media only screen and (min-width:1250px){
+    #loginBox1{
+        width:605px;
+    }
+}

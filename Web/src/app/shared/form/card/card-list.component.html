@@ -1,0 +1,7 @@
+<div class="p-grid p-justify-even">
+    <ng-container *ngFor="let item of primengTableHelper.records">
+        <div class="p-col">
+            <ng-container [ngTemplateOutlet]="cardTemplate" [ngTemplateOutletContext]="{item: item}"></ng-container>
+        </div>
+    </ng-container>
+</div>

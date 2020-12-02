@@ -1,0 +1,46 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        {{"EmployeeList" | localize}}
+                    </h3>
+                    <div class="kt-subheader__breadcrumbs">
+                        <a href="#" class="kt-subheader__breadcrumbs-home">
+                            <i class="flaticon2-shelter"></i>
+                        </a>
+                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                        <a class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">{{"EmployeeList" | localize}}</a>
+                    </div>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button (click)="goBack()" class="btn btn-bold btn-md btn-font-md btn-label-warning">
+                            <i class="fa fa-arrow-circle-left"></i> {{"Back" | localize}}
+                        </button>
+                        <button class="btn btn-primary" (click)="createEmployee()">
+                            <i class="flaticon2-plus"></i>
+                            {{"NewEmployee" | localize}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">                    
+                    <base-list #employeeList [(gridUrl)]="employeeListUrl" 
+                        [permissionView]="permissionView" (onViewClick)="viewEditEmployee($event, 'view')"
+                        [permissionEdit]="permissionEdit" (onEditClick)="viewEditEmployee($event)"
+                        [permissionDelete]="permissionDelete" (onDeleteClick)="delete($event)"
+                        actionColumn="action" [enableFilter]="false">
+                    </base-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<createOrEditEmployeeModal #createOrEditEmployeeModal (modalSave)="refresh()"></createOrEditEmployeeModal>

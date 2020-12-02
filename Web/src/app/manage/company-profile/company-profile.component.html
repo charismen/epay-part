@@ -1,0 +1,476 @@
+<div>
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding: 0">
+        <div class="kt-subheader kt-grid__item"  id="kt_subheader">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"CompanyProfile" | localize}}</span>
+                    </h3>
+                    <div class="kt-subheader__breadcrumbs">
+                          <a href="app/workorder/workorder" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                          <span class="kt-subheader__breadcrumbs-separator"></span>
+                          <a href="" class="kt-subheader__breadcrumbs-link">
+                          {{"CompanyProfile" | localize}}</a>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+        <div class="kt-portlet">
+            <div class="kt-portlet__body">
+              <div class="kt-grid kt-wizard-v1 kt-wizard-v1--white" id="kt_wizard_v1" data-ktwizard-state="first">                    
+                  <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">                      
+                      <div class="tabWrapper">
+                        <tabset #mainTabs>
+                              <!--Section 1 : Company Profile-->
+                              <tab heading="{{'CompanyProfile' | localize}}" index="1" id="tab1" class="tab-wrapper" >
+                                  <div class="kt-wizard-v1__content">
+                                     <!-- <div class="kt-heading kt-heading--md">{{'EditCompanyProfile' | localize }}</div> -->
+                                     <div class="row">
+                                        <div class="col-md-6 cl-lg-6 col-sm-12">
+                                            <div class="kt-wizard-v1__form">
+                                                <div class="form-group">
+                                                    <label>{{'ROCNo' | localize }} :</label>
+                                                    <select class="form-control" disabled>
+                                                        <option>{{inputHelper.RegNo}}</option>
+                                                    </select>
+                                                </div>
+                                            
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group">
+                                                            <label>{{'ClinicNo' | localize }} :</label>
+                                                            <select class="form-control" disabled>
+                                                                <option>{{inputHelper.FileNo}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group">
+                                                            <label>{{'CompanyProfileName' | localize }} :</label>
+                                                            <input id="companyName" type="text" name="companyName" class="form-control" [(ngModel)]="inputHelper.CompanyName" [disabled] = "isSubmited">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                     <div class="form-group">
+                                                         <label>{{'BusinessAddress' | localize }} :</label>
+                                                         <input id="businessAddress1" type="text" name="businessAddress1" class="form-control" [(ngModel)]="inputHelper.Address1" [disabled] = "isSubmited">
+                                                         <input id="businessAddress2" type="text" name="businessAddress2" class="form-control kt-margin-t-10" [(ngModel)]="inputHelper.Address2" [disabled] = "isSubmited">
+                                                         <input id="businessAddress3" type="text" name="businessAddress3" class="form-control  kt-margin-t-10" [(ngModel)]="inputHelper.Address3" [disabled] = "isSubmited">
+                                                     </div>
+                                                 </div>
+                                                </div>                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 cl-lg-6 col-sm-12">
+                                            <div class="kt-wizard-v1__form">
+                                                 <div class="col-xl-6">
+                                                     <div class="form-group">
+                                                         <label>{{'TelNo' | localize }} :</label>
+                                                         <input id="businessTelNo" type="text" name="businessTelNo" class="form-control" [(ngModel)]="inputHelper.CompanyTelNo" [disabled] = "isSubmited">
+                                                     </div>
+                                                  </div>
+                                                  <div class="col-xl-6">
+                                                     <div class="form-group">
+                                                         <label>{{'FaxNo' | localize }} :</label>
+                                                         <input id="businessFaxNo" type="text" name="businessFaxNo" class="form-control" [(ngModel)]="inputHelper.CompanyFaxNo" [disabled] = "isSubmited">
+                                                     </div>
+                                                  </div>                                   
+                                                <div class="col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>{{'PostCode' | localize }} :</label>
+                                                        <input id="businessPostCode" type="text" name="businessPostCode" class="form-control" [(ngModel)]="inputHelper.CompanyPostCode" [disabled] = "isSubmited">
+                                                    </div>
+                                                 </div>
+                                                 <div class="col-xl-6">
+                                                     <div class="form-group">
+                                                         <label>{{'State' | localize }} :</label>
+                                                         <ng-select #stateCombobox name="companyStateCombo" [(ngModel)]="selectedCompanyState"
+                                                                [items]="stateList" [closeOnSelect]="true" id="companyStateCombo" bindValue="Code" [disabled] = "isSubmited" 
+                                                                bindLabel="Remark" (change)="stateChanged()">
+
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>{{'City' | localize }} :</label>
+                                                        <ng-select #cityCombobox name="companyCityCombo" [(ngModel)]="selectedCompanyCity"
+                                                                [items]="cityList" [closeOnSelect]="true" bindValue="Code" [disabled] = "isSubmited" 
+                                                                bindLabel="Remark" >
+
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                                     <div class="col-xl-6">
+                                                         <div class="form-group">
+                                                             <label>{{'BillingAddress' | localize }} :</label>
+                                                             <div class="kt-radio-inline">
+                                                                 <label class="kt-radio">
+                                                                     <input type="radio" value="BA" name="radio4" [(ngModel)]="inputHelper.CommID" [disabled] = "isSubmited">{{'BusinessAddress' | localize }}
+                                                                     <span></span>
+                                                                 </label>
+                                                                 <label class="kt-radio">
+                                                                     <input type="radio" value="CA" name="radio4" [(ngModel)]="inputHelper.CommID" [disabled] = "isSubmited">{{'CollectionAddress' | localize }}
+                                                                     <span></span>
+                                                                 </label>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 cl-lg-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>{{'ClinicName' | localize }} :</label>
+                                                <input id="clinicName" type="text" name="clinicName" class="form-control" [(ngModel)]="inputHelper.BranchName" [disabled] = "isSubmited">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>{{'CollectionAddress' | localize }} :</label>
+                                                <input id="collectAddress1" type="text" name="collectAddress1" class="form-control" [(ngModel)]="inputHelper.BranchAddress1" [disabled] = "isSubmited">
+                                                <input id="collectAddress2" type="text" name="collectAddress2" class="form-control kt-margin-t-10" [(ngModel)]="inputHelper.BranchAddress2" [disabled] = "isSubmited">
+                                                <input id="collectAddress3" type="text" name="collectAddress3" class="form-control kt-margin-t-10" [(ngModel)]="inputHelper.BranchAddress3" [disabled] = "isSubmited">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>{{'PostCode' | localize }} :</label>
+                                                        <input id="collectPostCode" type="text" name="collectPostCode" class="form-control" [(ngModel)]="inputHelper.BranchPostCode" [disabled] = "isSubmited">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>{{'State' | localize }} :</label>
+                                                        <ng-select #stateCombobox name="branchStateCombo" [(ngModel)]="selectedBranchState"
+                                                         [items]="BranchStateList" [closeOnSelect]="true" id="branchStateCombo" bindValue="Code" [disabled] = "isSubmited" 
+                                                         bindLabel="Remark" (change)="BranchStateChanged()">
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>{{'City' | localize }} :</label>
+                                                        <ng-select #stateCombobox name="branchStateCombo" [(ngModel)]="selectedBranchCity"
+                                                        [items]="BranchCityList" [closeOnSelect]="true" id="branchStateCombo" bindValue="Code" [disabled] = "isSubmited" 
+                                                        bindLabel="Remark">
+                                                       </ng-select>
+                                                    </div>
+                                                </div>
+             
+                                                <div class="col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>{{'Products' | localize }} :</label>
+                                                        <input id="product" type="text" name="product" class="form-control" [(ngModel)]="inputHelper.Remark" [disabled] = "isSubmited">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>{{'IndustryKey' | localize }} :</label>
+                                                        <ng-select #industryCombobox name="industryKeyCombo" [(ngModel)]="selectedIndustryKey" [disabled] = "isSubmited" 
+                                                        [items]="industryList" [closeOnSelect]="true" id="industryKeyCombo" bindValue="Code"
+                                                        bindLabel="CodeDesc">
+                                                       </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 cl-lg-6 col-sm-12">
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{{'TelNo' | localize }} :</label>
+                                                    <input id="telNo" type="text" name="telNo" class="form-control" [(ngModel)]="inputHelper.BranchTelNo" [disabled] = "isSubmited">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{{'FaxNo' | localize }} :</label>
+                                                    <input id="faxNo" type="text" name="faxNo" class="form-control" [(ngModel)]="inputHelper.BranchFaxNo" [disabled] = "isSubmited">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{{'Email' | localize }} :</label>
+                                                    <input id="email" type="email" name="email" class="form-control" [(ngModel)]="inputHelper.Email" [disabled] = "isSubmited">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{{'CEO' | localize }} :</label>
+                                                    <input id="ceo" type="text" name="ceo" class="form-control" [(ngModel)]="inputHelper.ContactPerson2" [disabled] = "isSubmited">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{{'ContactPersonProfile' | localize }} :</label>
+                                                    <input id="contactPerson" type="text" name="contactPerson" class="form-control" [(ngModel)]="inputHelper.ContactPerson" [disabled] = "isSubmited">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{{'NRICNo' | localize }} :</label>
+                                                    <input id="nric" type="text" name="nric" class="form-control" [(ngModel)]="inputHelper.ICNo" [disabled] = "isSubmited" [disabled] = "isSubmited">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                 <div class="form-group">
+                                                     <label>{{'CPTelNo' | localize }} :</label>
+                                                     <input id="CPTelNo" type="text" name="CPTelNo" class="form-control" [(ngModel)]="inputHelper.ContactPersonTelNo" [disabled] = "isSubmited">
+                                                 </div>
+                                             </div>
+                                             <div class="col-xl-6">
+                                                 <div class="form-group">
+                                                     <label>{{'CPMobileNo' | localize }} :</label>
+                                                     <input id="CPMobileNo" type="text" name="CPMobleNo" class="form-control" [(ngModel)]="inputHelper.ContactPersonMobile" [disabled] = "isSubmited">
+                                                 </div>
+                                             </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label>{{'Role' | localize }} :</label>
+                                                    <ng-select #designCombobox name="designationCombo" [(ngModel)]="inputHelper.designationCode"
+                                                        [items]="designationList" [closeOnSelect]="true" id="designationCombo" bindValue="Code"
+                                                        bindLabel="CodeDesc" [disabled] = "isSubmited" >
+
+                                                        </ng-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                        <div class="kt-form__actions save-company-profile" style="
+                                        display: flex;
+                                        justify-content: flex-end;">
+                                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="saveCustomer()">
+                                                {{ 'Save' | localize }}
+                                            </button>
+                                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="nextTabTnc(1)">
+                                                {{ 'Next' | localize }}
+                                            </button>                                                 
+                                        </div>
+                                  </div>
+                                </div>
+                              </tab>
+                              
+                              <!--Section 2 : Terms & Conditions-->
+                              <tab heading="{{'TermsConditions' | localize}}" index="2" id="tab2" class="tab-wrapper">
+                                  <div class="kt-wizard-v1__content">
+                                      <!-- <terms-and-conditions #termsAndConditions></terms-and-conditions> -->
+                                      <div class="accept kt-margin-t-25">
+                                        <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                            <input type="checkbox"  [(ngModel)]="checkWaste" checked >{{'AcceptTermsConditions' | localize}}
+                                            <span></span>
+                                        </label>
+                                     </div>
+
+                                      <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                        <div class="kt-form__actions save-company-profile" style="
+                                        display: flex;
+                                        justify-content: flex-end;">
+                                         
+                                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="nextTabTnc(2)">
+                                                {{ 'Next' | localize }}
+                                            </button>                                                 
+                                        </div>
+                                       </div>
+                                  </div>
+                              </tab>
+                              
+                              <!--Section 3 : Waste Description-->
+                              <tab heading="{{'WasteDescription' | localize}}" index="3" id="tab3" class="tab-wrapper">
+                                  <div class="kt-wizard-v1__content" >
+                                      <div class="kt-heading kt-heading--md">{{'WasteData' | localize}}</div>
+                                      <div class="kt-form__section kt-form__section--first">
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label" style="text-align: left;">1.	{{'WasteName' | localize}}*</label>
+                                              <div class="col-6">
+                                                  <input class="form-control" type="text"  placeholder="Clinical Waste" id="" [(ngModel)]="wasteHelper.ItemName" disabled>
+                                              </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label" style="text-align: left;">2.	{{'WasteOrigin' | localize}}</label>
+                                              <div class="col-6">
+                                                  <input class="form-control" type="text" [(ngModel)]="wasteHelper.ItemComponent" placeholder="" id="" [disabled] = "isSubmited">
+                                              </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label" style="text-align: left;">3.	{{'WasteCode' | localize}}*</label>
+                                              <div class="col-6">
+                                                  <!--<select autofocus size="1" class="form-control"
+                                                          [(ngModel)]="selectedWaste" id="wasteTypeCombo" name="wasteTypeCombo" disabled>
+                                                      <option *ngFor="let waste of wasteTypeCombo" [value]="waste.Code">
+                                                          {{waste.Code | localize}}
+                                                      </option>
+                                                  </select>-->
+                                                 
+                                                  <ng-select #wasteDetailCombobox name="wasteItemCode" [(ngModel)]="wasteHelper.ItemCode"
+                                                  [items]="itemCodeList" [closeOnSelect]="true" id="wasteItemCode" bindValue="Code"
+                                                  bindLabel="CodeDesc" >
+                                                  </ng-select>                                                                                                         
+                                              </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label" style="text-align: left;">4.	{{'WasteQtyStorage' | localize}}*</label>
+                                              <div class="col-6">
+                                                  <input class="form-control" type="text" [(ngModel)]="wasteHelper.CummQty" id="cummqty" placeholder="0.00" id="cummqty" [disabled] = "isSubmited">
+                                              </div>
+                                              <!-- {{wasteDetails.cummQty|number:1.2-2}} -->
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label" style="text-align: left;">5.	{{'WasteQtyGenerated' | localize}}</label>
+                                              <div class="col-6">
+                                                  <input class="form-control" type="text" value="mthqty" [(ngModel)]="wasteHelper.MthQty"  placeholder="0.00" id="mthqty" [disabled] = "isSubmited">
+                                              </div>
+                                              <!-- {{wasteDetails.mthQty|number:1.2-2}} -->
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label" style="text-align: left;">6.	{{'WasteDetail' | localize}}</label>
+                                              <div class="col-6">
+                                                  <!--<select autofocus size="1" class="form-control"
+                                                          [(ngModel)]="selectedWaste" id="wasteTypeCombo" name="wasteTypeCombo" disabled>
+                                                      <option *ngFor="let waste of wasteTypeCombo" [value]="waste.Code">
+                                                          {{waste.CodeDesc | localize}}
+                                                      </option>
+                                                  </select>-->
+                                                  
+                                                  <ng-select #wasteDetailCombobox name="wasteDetailCombo" [(ngModel)]="wasteHelper.ItemType"
+                                                  [items]="wasteDetailList" [closeOnSelect]="true" id="wasteDetailCombo" bindValue="Code"
+                                                  bindLabel="CodeDesc" (change)="wasteDetailChanged()" >
+                                                  </ng-select>                                                
+                                              </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label"  style="text-align: left;">7. {{'WasteProperties' | localize}}</label>
+                                              <div class="col-6">
+                                                  <textarea class="form-control" [disabled] = "isSubmited" [(ngModel)]="wasteHelper.ShortDesc" rows="3" placeholder="">Refer to Annexure 1 Section 6</textarea>
+                                              </div>
+                                              <!-- {{wasteDetails.ShortDesc}} -->
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-6 col-form-label" style="text-align: left;">8.	{{'ChemicalCertificate' | localize}}</label>
+                                              <div class="col-6">
+                                                  <textarea class="form-control" [disabled] = "isSubmited" [(ngModel)]="wasteHelper.MarkNo" rows="3"></textarea>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                        <div class="kt-form__actions save-company-profile" style="
+                                        display: flex;
+                                        justify-content: flex-end;">
+                                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="saveWaste()">
+                                                {{ 'Save' | localize }}
+                                            </button>
+                                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="nextTabTnc(3)">
+                                                {{ 'Next' | localize }}
+                                            </button>                                                 
+                                        </div>
+                                       </div>
+                                  </div>
+                              </tab>
+                              
+                              <!--Section 4 : Treatment Fees-->
+                              <tab heading="{{'TreatmentFees' | localize}}" index="4" id="tab4" class="tab-wrapper">
+                                  <div class="kt-wizard-v1__content">
+                                      <div class="kt-heading kt-heading--md row">
+                                         <label for="example-text-input" class="col-4" style="text-align: left;max-width: 700px;">
+                                                 <div>
+                                                     {{'FillPackageType' | localize}} :
+                                                 </div>
+                                             </label>
+                                             <div class="col-5" style="display: flex; justify-content: center; align-items: center;">
+                                                 <select autofocus size="1" class="form-control"
+                                                     [(ngModel)]="selectedPackage" id="packageCombo" name="packageCombo" [disabled] = "isSubmited">
+                                                     <option *ngFor="let package of packageCombo" [value]="package.Code">
+                                                         {{package.Remark | localize}}
+                                                     </option>
+                                                 </select>
+                                             </div>
+                                          <!-- {{'FillPackageType' | localize}} : 
+                                         <select autofocus size="1" class="form-control"
+                                         [(ngModel)]="selectedPackage" id="packageCombo" name="packageCombo" disabled>
+                                         <option *ngFor="let package of packageCombo" [value]="package.Code">
+                                             {{package.Remark | localize}}
+                                         </option>
+                                         </select> -->
+                                      </div>
+                                      <!-- <div class="kt-heading kt-heading--md">
+                                          <div class="form-group row">
+                                              <label for="example-text-input" class="col-4 col-form-label" style="text-align: left;max-width: 700px;">
+                                                  <div class="kt-heading kt-heading--md">
+                                                      {{'FillPackageType' | localize}} :
+                                                  </div>
+                                              </label>
+                                              <div class="col-5" style="display: flex; justify-content: center; align-items: center;">
+                                                  <select autofocus size="1" class="form-control"
+                                                      [(ngModel)]="selectedPackage" id="packageCombo" name="packageCombo" disabled>
+                                                      <option *ngFor="let package of packageCombo" [value]="package.Code">
+                                                          {{package.Remark | localize}}
+                                                      </option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </div> -->
+                                      <div class="kt-form__section kt-form__section--first">
+                                          <div class="treatment-content" style="text-align: center;">
+                                              <span style="font-size: 14px; font-weight: 400;">
+                                                  {{ 'SurchargeForKelantan' | localize }}
+                                              </span>
+                                          </div>
+                                          <!-- Treatment Fees Table -->
+                                          <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded kt-margin-t-25 table-responsive" id="local-data">
+                                              <table class="kt-datatable__table" style="display: block;">
+                                                  <thead class="kt-datatable__head" style="background: aliceblue;">
+                                                      <tr class="kt-datatable__row" style="left: 0px;">
+                                                          <th data-field="OrderID" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 114px;">{{'PackageType' | localize}}</span></th>
+                                                          <th data-field="Country" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 114px;">{{'Collection' | localize}}</span></th>
+                                                          <th data-field="ShipDate" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 114px;">{{'TreatmentFee' | localize}}</span></th>
+                                                          <th data-field="CompanyName" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 114px;">{{'CollectionPerTrip' | localize}}</span></th>
+                                                          <th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 114px;">{{'Consumable' | localize}}</span></th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody class="kt-datatable__body">
+                                                      <tr data-row="0" class="kt-datatable__row kt-datatable__row--hover" style="left: 0px;" *ngFor="let waste of newWasteList">
+                                                          <td data-field="OrderID" class="kt-datatable__cell"><span style="width: 114px;">{{waste.ItemDesc}}</span></td>
+                                                          <td data-field="Country" class="kt-datatable__cell"><span style="width: 114px;">{{waste.CodeDesc}}</span></td>
+                                                          <td data-field="ShipDate" class="kt-datatable__cell"><span style="width: 114px;">{{waste.Treat}}</span></td>
+                                                          <td data-field="CompanyName" class="kt-datatable__cell"><span style="width: 114px;">{{waste.CollectionFeeShort}}</span></td>
+                                                          <td colspan=2 data-field="Type" data-autohide-disabled="false" class="kt-datatable__cell consumable-data">
+                                                              <span style="width: 114px;" *ngFor="let consumable of waste.ConsumableDesc">
+                                                                  <tr>
+                                                                      <span>{{consumable}}</span>
+                                                                  </tr>                                                                    
+                                                              </span>
+                                                          </td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                      <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                        <div class="kt-form__actions save-company-profile" style="
+                                        display: flex;
+                                        justify-content: flex-end;">
+                                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="savePackage()" [disabled] = "isSubmited">
+                                                {{ 'Submit' | localize }}
+                                            </button>
+                                                                                            
+                                        </div>
+                                       </div>
+
+                                  </div>
+                              </tab>
+                              
+                          </tabset>                            
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+</div>

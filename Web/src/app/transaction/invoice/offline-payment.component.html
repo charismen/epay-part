@@ -1,0 +1,130 @@
+<div appBsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+    aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" *ngIf="active">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{"OfflinePayment" | localize}} | {{"Balance" | localize}} : {{totalAmount | number : '1.2-2'}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{"PaymentMethod" | localize}}</label>
+                            <ng-select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;" [(ngModel)]="selectedPayment"
+                                [items]="paymentCombo" [closeOnSelect]="true" bindLabel="Remark"
+                                placeholder="Select Payment Method" (change)="onPaymentMethodTypeChange($event)">
+                            </ng-select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{"Date" | localize}}</label>
+                            <div id="billingDateWrp" class="valueMatrix">
+                                <input name="DateToPicker" type="text"
+                                    style="display: inline-block;width: 372px;" #DateToPicker name="DateToPicker"
+                                    class="form-control" bsDatepicker datePickerMomentModifier [(date)]="date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{"Amount" | localize}}</label>
+                            <input type="number" name="amout" id="amount" class="form-control" [(ngModel)]="tempSave.amount">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" *ngIf="!IsCheque">
+                            <label>{{"BankList" | localize}}</label>
+                            <ng-select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;"
+                                [(ngModel)]="selectedBankListType" [items]="bankListCombo" [closeOnSelect]="true"
+                                bindLabel="CodeDesc" placeholder="Select Bank List" (change)="onBankListTypeChange($event)">
+                            </ng-select>
+                        </div>
+                        <div class="form-group" *ngIf="IsRefNum">
+                            <label>{{"Chq No./Payment Ref" | localize}}</label>
+                            <input type="text" name="chqno" id="chqno" class="form-control" [(ngModel)]="tempSave.refNum">
+                        </div>
+                        <div class="form-group">
+                            <label>{{"Notes" | localize}}</label>
+                            <input type="text" name="Notes" id="Notes" class="form-control" [(ngModel)]="tempSave.notes">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" (click)="saveTemporary()">{{"AddTender" | localize}}</button>
+
+                <div class="row align-items-center" style="padding-top: 1rem">
+                    <!--<Primeng-TurboTable-Start>-->
+                    <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                        <p-table #dataTable (onLazyLoad)="refresh()" [value]="tempData"
+                            rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true"
+                            [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 75px; text-align: center">
+                                        {{'Actions' | localize}}
+                                    </th>
+                                    <th style="width: 87px">
+                                        {{'PaymentMethod' | localize}}
+                                    </th>
+                                    <th style="width: 75px" pSortableColumn="name">
+                                        {{'ClearingDate' | localize}}
+                                    </th>
+                                    <th style="width: 95px">
+                                        {{'BankDetails' | localize}}
+                                    </th>
+                                    <th style="width: 100px">
+                                        {{'Ref.Num' | localize}}
+                                    </th>
+                                    <th style="width: 75px; text-align: right">
+                                        {{'Amount' | localize}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-tempData>
+                            <!-- <ng-template pTemplate="body" let-record="tempData" *ngFor="let item of tempData"> -->
+                                <tr>
+                                    <td style="width: 85px">
+                                        <button class="btn btn-sm btn-primary" (click)="removeItem(tempData)">
+                                            <i class="fa fa-minus"></i><span class="caret"></span>
+                                            {{"Remove" | localize}}
+                                        </button>
+                                    </td>
+                                    <td style="width: 87px">
+                                        <span class="ui-column-title"> {{'PaymentMethod' | localize}}</span>
+                                        {{tempData.paymentMethodRemark}}
+                                    </td>
+                                    <td style="width: 75px">
+                                        <span class="ui-column-title"> {{'ClearingDate' | localize}}</span>
+                                        {{tempData.date}}
+                                    </td>
+                                    <td style="width: 95px">
+                                        <span class="ui-column-title"> {{'BankDetails' | localize}}</span>
+                                        {{tempData.bankList}}
+                                    </td>
+                                    <td style="width: 100px">
+                                        <span class="ui-column-title"> {{'Ref.Num' | localize}}</span>
+                                        {{tempData.refNum}}
+                                    </td>
+                                    <td class="currValue" style="width: 75px; text-align: right">
+                                        <span class="ui-column-title"> {{'Amount' | localize}}</span>
+                                        <span class="currencyType" style="position: relative;"></span>
+                                        {{tempData.amount | number : '1.2-2'}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    <!--<Primeng-TurboTable-End>-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" [disabled]="saving" class="btn btn-success" [disabled]="totalAmount != 0"
+                    (click)="submit()">{{"Submit" | localize}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<paymentSummaryModal #paymentSummaryModal (modalSave)="refresh()"></paymentSummaryModal> 

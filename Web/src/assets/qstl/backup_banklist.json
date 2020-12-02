@@ -1,0 +1,199 @@
+{
+	'PersonalBank' : [
+		{
+		  "bankcode": "ABB0234",
+		  "bankdisplayname": "ABB0234"
+		},
+		{
+		  "bankcode": "ABB0233",
+		  "bankdisplayname": "Affin Bank"
+		},
+		{
+		  "bankcode": "ABMB0212",
+		  "bankdisplayname": "Alliance Bank"
+		},
+		{
+		  "bankcode": "AMBB0209",
+		  "bankdisplayname": "AmBank"
+		},
+		{
+		  "bankcode": "BIMB0340",
+		  "bankdisplayname": "Bank Islam"
+		},
+		{
+		  "bankcode": "BMMB0341",
+		  "bankdisplayname": "Bank Muamalat"
+		},
+		{
+		  "bankcode": "BKRM0602",
+		  "bankdisplayname": "Bank Rakyat"
+		},
+		{
+		  "bankcode": "BSN0601",
+		  "bankdisplayname": "BSN"
+		},
+		{
+		  "bankcode": "BCBB0235",
+		  "bankdisplayname": "CIMB Clicks"
+		},
+		{
+		  "bankcode": "CIT0219",
+		  "bankdisplayname": "CIT0219 (OFFLINE)"
+		},
+		{
+		  "bankcode": "HLB0224",
+		  "bankdisplayname": "Hong Leong Bank"
+		},
+		{
+		  "bankcode": "HSBC0223",
+		  "bankdisplayname": "HSBC Bank"
+		},
+		{
+		  "bankcode": "KFH0346",
+		  "bankdisplayname": "KFH"
+		},
+		{
+		  "bankcode": "MBB0228",
+		  "bankdisplayname": "Maybank2E"
+		},
+		{
+		  "bankcode": "MB2U0227",
+		  "bankdisplayname": "Maybank2U"
+		},
+		{
+		  "bankcode": "OCBC0229",
+		  "bankdisplayname": "OCBC Bank"
+		},
+		{
+		  "bankcode": "PBB0233",
+		  "bankdisplayname": "Public Bank"
+		},
+		{
+		  "bankcode": "RHB0218",
+		  "bankdisplayname": "RHB Bank"
+		},
+		{
+		  "bankcode": "TEST0021",
+		  "bankdisplayname": "SBI Bank A"
+		},
+		{
+		  "bankcode": "TEST0022",
+		  "bankdisplayname": "SBI Bank B"
+		},
+		{
+		  "bankcode": "TEST0023",
+		  "bankdisplayname": "SBI Bank C"
+		},
+		{
+		  "bankcode": "SCB0216",
+		  "bankdisplayname": "Standard  Chartered"
+		},
+		{
+		  "bankcode": "UOB0226",
+		  "bankdisplayname": "UOB Bank"
+		},
+		{
+		  "bankcode": "UOB0229",
+		  "bankdisplayname": "UOB0229"
+		}
+	],
+	'CorporateBank' : [
+		{
+		  "bankcode": "ABB0235",
+		  "bankdisplayname": "ABB0235"
+		},
+		{
+		  "bankcode": "ABB0232",
+		  "bankdisplayname": "Affin Bank"
+		},
+		{
+		  "bankcode": "ABMB0213",
+		  "bankdisplayname": "Alliance Bank"
+		},
+		{
+		  "bankcode": "AMBB0208",
+		  "bankdisplayname": "AmBank"
+		},
+		{
+		  "bankcode": "BIMB0340",
+		  "bankdisplayname": "Bank Islam"
+		},
+		{
+		  "bankcode": "BMMB0342",
+		  "bankdisplayname": "Bank Muamalat"
+		},
+		{
+		  "bankcode": "BKRM0602",
+		  "bankdisplayname": "BKRM0602"
+		},
+		{
+		  "bankcode": "BNP003",
+		  "bankdisplayname": "BNP003"
+		},
+		{
+		  "bankcode": "BCBB0235",
+		  "bankdisplayname": "CIMB Bank "
+		},
+		{
+		  "bankcode": "CIT0218",
+		  "bankdisplayname": "CIT0218"
+		},
+		{
+		  "bankcode": "DBB0199",
+		  "bankdisplayname": "Deutsche Bank"
+		},
+		{
+		  "bankcode": "HLB0224",
+		  "bankdisplayname": "Hong Leong Bank"
+		},
+		{
+		  "bankcode": "HSBC0223",
+		  "bankdisplayname": "HSBC Bank"
+		},
+		{
+		  "bankcode": "KFH0346",
+		  "bankdisplayname": "KFH "
+		},
+		{
+		  "bankcode": "MBB0228",
+		  "bankdisplayname": "Maybank2E"
+		},
+		{
+		  "bankcode": "OCBC0229",
+		  "bankdisplayname": "OCBC Bank"
+		},
+		{
+		  "bankcode": "PBB0234",
+		  "bankdisplayname": "PBB0234"
+		},
+		{
+		  "bankcode": "PBB0233",
+		  "bankdisplayname": "Public Bank"
+		},
+		{
+		  "bankcode": "RHB0218",
+		  "bankdisplayname": "RHB Bank"
+		},
+		{
+		  "bankcode": "TEST0021",
+		  "bankdisplayname": "SBI Bank A"
+		},
+		{
+		  "bankcode": "TEST0022",
+		  "bankdisplayname": "SBI Bank B"
+		},
+		{
+		  "bankcode": "TEST0023",
+		  "bankdisplayname": "SBI Bank C"
+		},
+		{
+		  "bankcode": "SCB0215",
+		  "bankdisplayname": "Standard Chartered "
+		},
+		{
+		  "bankcode": "UOB0228",
+		  "bankdisplayname": "UOB REGIONAL"
+		}
+	],
+	'LastCheck' : '20200131180030'
+}

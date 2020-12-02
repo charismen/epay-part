@@ -1,0 +1,20 @@
+<div style="margin-bottom: 1rem;" class="form-group col">
+    <div class="col-12 row">
+        <label class="col-md-9 col-form-label">{{ question | localize }}</label>
+        <div class="col-md-3">
+            <div class="form-group row">
+                <div class="col-10">
+                    <ng-select [disabled]="mode!== 1" [(ngModel)]="answer" [items]="options" [closeOnSelect]="true" bindLabel="remark"
+                        (change)="onSelected($event)">
+                    </ng-select>
+                </div>
+    
+                <div [hidden]="mode!== 1" class="col-2">
+                    <button class="btn btn-sm btn-icon btn-circle {{ isRemark ? 'btn-outline-danger' : 'btn-outline-success' }}" title="{{ isRemark ? 'Clear' : 'Add'}} Remark" (click)="showRemark()"><i class="la {{ isRemark ? 'la-close' : 'la-pencil' }}"></i></button>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <textarea [disabled]="mode!== 1" *ngIf="isRemark" class="col-12" rows="2" spellcheck="true" placeholder="Add Remark.." [(ngModel)]="remark" (ngModelChange)="onRemarkChanged()" (blur)="onRemarkBlurred()">{{remark}}</textarea>
+</div>

@@ -1,0 +1,237 @@
+<div appBsModal #detailInvoiceModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="detailInvoiceModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-xl" [busyIf]="loading">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{DetailModal | localize}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')"
+                    [disabled]="loading">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+                    <div>
+                        <div [busyIf]="isLoading" style="color:#000;">
+                            <div class="kt-invoice-2 invoiceCustomStyle1">
+                                <div class="kt-invoice__head">
+                                    <div class="kt-invoice__container kt-invoice__container--centered">
+                                        <div class="kt-invoice__brand row">
+                                            <div class="col-md-4">
+                                                <h1 class="kt-invoice__title">
+                                                    {{InvoiceTitle | localize | uppercase}}
+                                                </h1>
+                                                <div class="kt-invoice__titlestat row">
+                                                    <div class="col-md-4">{{"BillNo" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.billno}}</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">{{"BillDate" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.billDate}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;width: 30px;display: inline-block;margin-top: -15px;fill: #089608;" xml:space="preserve">
+                                                <g>
+                                                    <g>
+                                                    <path d="M468.907,214.604c-11.423,0-20.682,9.26-20.682,20.682v20.831c-0.031,54.338-21.221,105.412-59.666,143.812    c-38.417,38.372-89.467,59.5-143.761,59.5c-0.04,0-0.08,0-0.12,0C132.506,459.365,41.3,368.056,41.364,255.883    c0.031-54.337,21.221-105.411,59.667-143.813c38.417-38.372,89.468-59.5,143.761-59.5c0.04,0,0.08,0,0.12,0    c28.672,0.016,56.49,5.942,82.68,17.611c10.436,4.65,22.659-0.041,27.309-10.474c4.648-10.433-0.04-22.659-10.474-27.309    c-31.516-14.043-64.989-21.173-99.492-21.192c-0.052,0-0.092,0-0.144,0c-65.329,0-126.767,25.428-172.993,71.6    C25.536,129.014,0.038,190.473,0,255.861c-0.037,65.386,25.389,126.874,71.599,173.136c46.21,46.262,107.668,71.76,173.055,71.798    c0.051,0,0.092,0,0.144,0c65.329,0,126.767-25.427,172.993-71.6c46.262-46.209,71.76-107.668,71.798-173.066v-20.842    C489.589,223.864,480.33,214.604,468.907,214.604z"></path>
+                                                    </g>
+                                                </g>
+                                                <g>
+                                                    <g>
+                                                    <path d="M505.942,39.803c-8.077-8.076-21.172-8.076-29.249,0L244.794,271.701l-52.609-52.609c-8.076-8.077-21.172-8.077-29.248,0    c-8.077,8.077-8.077,21.172,0,29.249l67.234,67.234c4.038,4.039,9.332,6.058,14.625,6.058c5.293,0,10.586-2.019,14.625-6.058    L505.942,69.052C514.019,60.975,514.019,47.88,505.942,39.803z"></path>
+                                                    </g>
+                                                </g>
+                                                </svg> -->
+                                                <!-- <div  class="{{inputHelper.status | lowercase}} billStatus"></div> -->
+                                            </div>
+                                            <div class="kt-invoice__logo col-md-5">
+                                                <div>
+                                                    {{"TotalAmountDue" | localize}} <br />
+                                                    <span id="totalAmount"
+                                                          class="currencyShow backDefault">{{inputHelper.totalamountdue | number:'1.2-2'}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-invoice__items row">
+                                            <div class="kt-invoice__item col-md-5">
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"Attn" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.attn}}</div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"Company" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.customer}}</div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"Address" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">
+                                                        {{inputHelper.address}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="kt-invoice__item col-md-5">
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"CustomerNo" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.customerno}}</div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"CreditVote" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.creditvote}}</div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"ProjectCode" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.projectcode}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="kt-invoice__items row">
+                                            <div class="kt-invoice__item col-md-5">
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"RefNo" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.refno}}</div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"DeliveryRef" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.deliveryref}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="kt-invoice__item col-md-5">
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"OurRef" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.ourref}}</div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-4">{{"YourRef" | localize}}</div>
+                                                    <div class="col-md-8 valueSet">{{inputHelper.yourref}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kt-invoice__body kt-padding-0">
+                                    <div id="invoiceTableWrp" class="row  align-items-center tableStylePlain">
+                                        <!--<Primeng-TurboTable-Start>-->
+                                        <div class="primeng-datatable-container"
+                                            [busyIf]="primengTableHelper.isLoading">
+                                            <p-table #dataTable [value]="primengTableHelper.records"
+                                                rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                                [paginator]="false" [lazy]="true" [scrollable]="true" ScrollWidth="100%"
+                                                [responsive]="primengTableHelper.isResponsive"
+                                                [resizableColumns]="primengTableHelper.resizableColumns">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th style="width: 60px">
+                                                            {{'ItemCode' | localize}}
+                                                        </th>
+                                                        <th style="width: 200px">
+                                                            {{'Description' | localize}}
+                                                        </th>
+                                                        <!-- <th style="width: 60px">
+                                                            {{'TaxCode' | localize}}
+                                                        </th> -->
+                                                        <th style="width: 60px;text-align: right;">
+                                                            {{'Quantity' | localize}}
+                                                        </th>
+                                                        <th style="width: 75px;text-align: right;">
+                                                            {{'UnitPrice' | localize}}
+                                                        </th>
+                                                        <th style="width: 75px;text-align: right">
+                                                            {{'SubTotal' | localize}}
+                                                        </th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-record="$implicit">
+                                                    <tr>
+                                                        <td style="width: 60px">
+                                                            <span class="ui-column-title">
+                                                                {{'ItemCode' | localize}}</span>
+                                                            {{record.ItemCode}}
+                                                        </td>
+                                                        <td style="width: 200px">
+                                                            <span class="ui-column-title">
+                                                                {{'Description' | localize}}</span>
+                                                            {{record.Description}}
+                                                        </td>
+                                                        <!-- <td style="width: 60px">
+                                                            <span class="ui-column-title">
+                                                                {{'TaxCode' | localize}}</span>
+                                                            {{record.TaxCode}}
+                                                        </td> -->
+                                                        <td style="width: 60px; text-align: right">
+                                                            <span class="ui-column-title">
+                                                                {{'Quantity' | localize}}</span>
+                                                            {{record.Quantity}}
+                                                        </td>
+                                                        <td class="currValue" style="width: 75px; text-align: right">
+                                                            <span class="ui-column-title">
+                                                                {{'UnitPrice' | localize}}</span>
+                                                            <span class="currencyType"
+                                                                style="position: relative;"></span>{{record.UnitPrice | number:'1.2-2'}}
+                                                        </td>
+                                                        <td class="currValue" style="width: 75px; text-align: right">
+                                                            <span class="ui-column-title">
+                                                                {{'SubTotal' | localize}}</span>
+                                                            <span class="currencyType"
+                                                                style="position: relative;"></span>{{record.SubTotal | number:'1.2-2'}}
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                        <!--<Primeng-TurboTable-End>-->
+                                    </div>                                    
+                                </div>
+                                <div class="kt-invoice__footer invoiceFooter kt-padding-0">
+                                    <div class="kt-invoice__container">
+                                        <div class="kt-invoice__items row col-md-12">
+                                            <div id="subTotalSection" class="kt-invoice__item col-md-4">
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-5">{{"SubTotal" | localize}}</div>
+                                                    <div class="col-md-7 currValue">
+                                                        <span class="currencyType"
+                                                            style="position:relative;">{{inputHelper.subtotal | number:'1.2-2'}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-5">{{"SST" | localize}}</div>
+                                                    <div class="col-md-7 currValue">
+                                                        <span class="currencyType"
+                                                            style="position: relative;">{{inputHelper.sst | number:'1.2-2'}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-5">{{"Rounding" | localize}}</div>
+                                                    <div class="col-md-7 currValue">
+                                                        <span class="currencyType"
+                                                            style="position: relative;">{{inputHelper.rounding | number:'1.2-2'}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="kt-invoice__subtitle row">
+                                                    <div class="col-md-5">{{"Total" | localize}}</div>
+                                                    <div class="col-md-7 currValue  valueSet">
+                                                        <span class="currencyType" style="position: relative;">
+                                                            {{inputHelper.totalamountdue | number:'1.2-2'}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="invoiceTableWrp" class="modal-footer kt-padding-10">
+                <button (click)="printToPdf()" class="btn btn-bold btn-md btn-font-md  btn-label-danger">
+                    <i class="fa fa-file-pdf"></i> {{"printInvoice" | localize}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

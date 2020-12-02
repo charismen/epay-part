@@ -1,0 +1,107 @@
+#TenantDashboard {
+
+    input[type="radio"] {
+        display: none;
+    }
+
+}
+
+.sales-summary-chart {
+    svg.ngx-charts {
+        margin-left: -50px;
+        margin-top: 0px;
+    }
+}
+
+.currencyShow:before,
+.currencyType:before{
+    // content: 'RM';
+    // font-size: 0.6em;
+    // font-weight: normal;
+    // position: absolute;
+    // // left: 16.4rem;
+    // // top: 1.4rem;
+}
+
+#chartTotal {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-size: 3rem;
+    font-weight: 500;
+    color: grey;
+    opacity: 0.7;
+    z-index: 1000;
+    top: 28%;
+}
+
+#invoiceStat{
+    width: 400px;
+    height: 185px;
+    overflow: hidden;
+    position: relative;
+    margin-top: -28px;
+}
+#invoiceStat canvas{
+    margin-left: -108px;
+    width: 334px;
+    height: 214px !important;
+    margin-top: -32px;
+}
+#invoiceChartLegend
+{
+    position: absolute;
+    right: 85px;
+    top: 30px;
+    width:120px;
+}
+#invoiceChartLegend > div > span:first-child{
+    width: 0.6rem !important;
+    height: 2rem !important;
+    border-radius: 3px !important;
+    margin-left: 1.2em;
+    display: inline-block;
+    vertical-align: top;
+}
+#invoiceChartLegend > div > span:last-child{
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    padding-left: 25px !important;
+    width: 95px;
+}
+#invoiceChartLegend > div > span > span{
+    float:right;
+}
+.lgmDashboardHead
+{
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    color: #48465b;
+    text-transform: uppercase;
+}
+.kt-portlet .kt-portlet__head{
+
+}
+
+.currencyShow-2:before,
+.currencyType-2:before {
+    content: 'RM';
+    font-size: 0.6em;
+    font-weight: normal;
+    position: absolute;
+    left: -1.7em;
+    top: 4px;
+}
+.valueSet {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #000;
+}
+.currValue {
+    text-align: right;
+}

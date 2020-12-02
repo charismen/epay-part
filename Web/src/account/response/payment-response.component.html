@@ -1,0 +1,140 @@
+<div [@routerTransition]>
+  <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor pl-0 pt0">
+    <div class="kt-subheader kt-grid__item hideThis pt0">
+      <div [class]="containerClass">
+        <div class="kt-subheader__main hideThis">
+          <h3 class="kt-subheader__title">
+            <span>{{"PaymentResponse" | localize}}</span>
+          </h3>
+        </div>
+        <div class="kt-subheader__toolbar hideThis">
+          <div class="kt-subheader__wrapper">
+            <button (click)="back()" class="btn btn-primary">
+              <i class="fa fa-arrow-circle-left"></i> {{"Back" | localize}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <div style="color:#000;">
+          <div class="wrapper">
+            <section id="companyInformation">
+              <div class="container">
+                <div class="companyInfoBlock">
+                  <div id="logoWrp"></div>
+                </div>
+                <div class="companyInfoBlock">
+                  <div id="companyName">lembaga getah malaysia</div>
+                  <div id="responseTitle">{{"TransactionStatus" | localize}}</div>
+                </div>
+              </div>
+            </section>
+            <!-- New Design -->
+            <div class="kt-portlet main-transaction kt-margin-b-100">
+              <div class="kt-portlite__body main-transaction__title kt-padding-20">
+                <!-- <h2>Payment Via FPX</h2> -->
+                <h2>{{inputHelper.paymentvia}}</h2>
+                <div class="show-transaction">
+                  <!-- <i class="fa fa-arrow-left"></i> -->
+                  <!-- <span class="kt-margin-l-10" (click)="back()">
+                                {{"ShowTransaction" | localize }}
+                            </span> -->
+                  <button (click)="back()" class="btn btn-bold btn-md btn-font-md  btn-label-success">
+                    <i class="fa fa-arrow-left"></i>{{"ShowTransaction" | localize }}
+                  </button>
+                </div>
+              </div>
+              <div class="main-transaction__content kt-padding-20">
+                <div class="kt-widget1 kt-widget1--fit">
+                  <div class="kt-widget1__item">
+                    <div class="kt-widget1__info">
+                      <h3 class="kt-widget1__title">{{"Status" | localize}}</h3>
+                    </div>
+                    <div class="kt-widget1__number kt-font-default">
+                      <div id="iconStatus" [ngClass]="statClass">
+                        <div id="labelStatus"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kt-widget1__item">
+                    <div class="kt-widget1__info">
+                      <h3 class="kt-widget1__title">{{"TransactionDate" | localize}}</h3>
+                    </div>
+                    <span class="kt-widget1__number kt-font-default">{{inputHelper.transdate}}</span>
+                  </div>
+                  <div class="kt-widget1__item">
+                    <div class="kt-widget1__info">
+                      <h3 class="kt-widget1__title">{{"SellerOrderInformation" | localize}}</h3>
+                    </div>
+                    <span class="kt-widget1__number kt-font-default">{{inputHelper.transno}}</span>
+                  </div>
+                  <div class="kt-widget1__item" *ngIf="creditCard == false && inputHelper.fpxid !== ''">
+                    <div class="kt-widget1__info">
+                      <h3 class="kt-widget1__title" *ngIf="creditCard == false">{{"FPXID" | localize}}</h3>
+                    </div>
+                    <span class="kt-widget1__number kt-font-default"
+                      *ngIf="creditCard == false">{{inputHelper.fpxid}}</span>
+                  </div>
+                  <div class="kt-widget1__item">
+                    <div class="kt-widget1__info">
+                      <h3 class="kt-widget1__title">{{"BuyerBank" | localize}}</h3>
+                    </div>
+                    <span class="kt-widget1__number kt-font-default">{{inputHelper.bankcode}}</span>
+                  </div>
+                  <div class="kt-widget1__item">
+                    <div class="kt-widget1__info">
+                      <h3 class="kt-widget1__title">{{"TransactionAmount" | localize}}</h3>
+                    </div>
+                    <span class="kt-widget1__number kt-font-default">{{"CurrencyMyr" | localize}}
+                      {{inputHelper.amount | number:'.2-2'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <section id="bannerSection" class="headline fadeInDown animated">
+              <div class="container">
+                <img [src]="appRootUrl() + 'assets/qstl/img/bannerLGM.jpg'" />
+              </div>
+            </section>
+            <section id="responseTransactionSection" class="main fadeInDown animated" style="animation-delay:0.7s">
+              <div class="container">
+                <div id="status" class="status row">
+                  <h1 class="col-md-9">{{"PaymentViaFPX" | localize}}</h1>
+                  <button (click)="back()" class="col-md-3 btn btn-bold btn-md btn-font-md  btn-label-success">
+                    <i class="fa fa-arrow-left"></i>{{"ShowTransaction" | localize }}
+                  </button>
+                </div>
+                <div class="line">
+                  <hr style="width:100%;">
+                </div>
+                <div class="info" style="margin-top: 1vh;">
+                  <div class="main-info1">
+                    <p>{{"TransactionDate" | localize}}</p>
+                    <p>{{"SellerOrderInformation" | localize}}</p>
+                    <p *ngIf="creditCard == false && inputHelper.fpxid !== ''">{{"FPXID" | localize}}</p>
+                    <p>{{"BuyerBank" | localize}}</p>
+                    <p>{{"TransactionAmount" | localize}}</p>
+                  </div>
+                  <div class="main-info2" style="margin-left: 2vh;">
+                    <p>{{inputHelper.transdate}}</p>
+                    <p>{{inputHelper.transno}}</p>
+                    <p *ngIf="creditCard == false && inputHelper.fpxid !== ''">{{inputHelper.fpxid}}</p>
+                    <p>{{inputHelper.bankcode}}</p>
+                      <p>{{"CurrencyMyr" | localize}} {{inputHelper.amount | number:'.2-2'}}</p>
+                  </div>
+                  <div id="iconStatus" [ngClass]="statClass">
+                    <div id="iconCtr" class="animated bounce hideThis"></div>
+                    <div id="labelStatus" class="animated fadeInUp hideThis"></div>
+                  </div>
+                </div>
+              </div>
+            </section> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

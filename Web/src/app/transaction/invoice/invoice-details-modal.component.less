@@ -1,0 +1,235 @@
+.kt-invoice-2  .kt-invoice__head {
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat; } 
+    .kt-invoice-2  .kt-invoice__head .kt-invoice__container {
+        padding-top: 5rem;
+        padding-left: 5rem;
+        padding-right: 5rem; }
+    .kt-invoice-2 .kt-invoice__head .kt-invoice__container.kt-invoice__container--centered {
+        width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+        .kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__brand {
+            padding-bottom: 1.4em;
+            border-bottom: 1px solid #e2e2e2; }
+            .kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__brand .kt-invoice__title {
+                font-weight: 600; }
+                .kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__brand .kt-invoice__title .kt-invoice__titlestat {
+                    padding-top: 1.2rem; }
+            .kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__brand .kt-invoice__logo {
+                display: flex;
+                flex-direction: column;
+                margin-top: 5px;
+                text-align: right;
+            }
+        .kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__items {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            width: 100%;
+            padding: 2rem 0 0 0; }
+            .kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__items .kt-invoice__item {
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                overflow: hidden; }
+                .kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__items .kt-invoice__item .kt-invoice__subtitle {
+                    font-weight: 500;
+                    padding-bottom: 0.5rem; }
+
+.kt-invoice-2 .kt-invoice__body {
+    padding: 2rem 5rem 0 5rem; }
+    .kt-invoice-2 .kt-invoice__body .kt-invoice__container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: inherit; }
+
+.kt-invoice-2 .kt-invoice__footer {
+    margin-top: 7rem;
+    background-color: #f7f8fa;
+    padding-left: 5rem;
+    padding-right: 5rem; }
+    .kt-invoice-2 .kt-invoice__footer .kt-invoice__container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 4rem 0 4rem 0; }
+
+body, html{
+    font-size:13px;
+}
+
+.billStatus {
+    font-size: 2.3em;
+    color: #f66;
+    font-weight: 700;
+    padding-top: 3px;
+    padding: 0.3em 0.8em;
+    padding-left: 5px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+#billStatus {
+    font-size: 2.6em;
+    color: #089608;
+    font-weight: 700;
+    padding-top: 3px;
+    padding: 0.3em 0.8em;
+    padding-left: 5px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+#totalAmount{
+    text-align: right;
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: 1px;
+	position:relative;
+}
+.currencyShow:before,
+.currencyType:before{
+    content: 'MYR';
+    font-size: 0.6em;
+    font-weight: normal;
+    // position: absolute;
+    // left: -1.7em;
+    // top: 4px;
+}
+.valueSet {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #000;
+}
+.currValue {
+    text-align: right;
+}
+.paymentSelect{
+	padding-top:0.5em;
+}
+.wrpPayMethod{
+    width: 70px;
+    height: 40px;
+    margin-top: -10px;
+    border-radius: 3px;
+}
+.fpxBtn .wrpPayMethod,.maybankBtn .wrpPayMethod{
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:contain;
+	background-image:url(../../../assets/qstl/img/fpxLogo.jpg);
+}
+.maybankBtn .wrpPayMethod{
+    background-image:url(assets/qstl/img/maybankLogo.png);
+    background-image:url(assets/qstl/img/paymentt.svg);
+}
+/*------------------------------- 26/09/2019 -------------------------------------------------------*/
+.payText {
+    padding: 5px;
+    color: #fff;
+    background-color: #e8641b;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px -1px #666;
+    border-color: #e8641b;
+}
+.invoiceFooter {
+    margin-bottom: -20px;
+}
+.kt-invoice-2 .kt-invoice__head .kt-invoice__container .kt-invoice__items .kt-invoice__item .kt-invoice__subtitle{
+}
+
+#totalAmount.backDefault:before{
+    margin-left:-1.7em !important;
+}
+/*--------------------------------------------- 10/09/2019 -----------------------------------------------------------*/
+.bankTypeList{
+    max-width: 300px;
+    float: right;
+    margin: 20px 0;
+}
+/*--------------------------------------------- 17/10/2019 ----------------------------------------------------*/
+.invoiceCustomStyle1 .kt-invoice__title{
+    color: #666;
+    margin-bottom: 20px;
+}
+.invoiceCustomStyle1 .kt-invoice__head .kt-invoice__container .kt-invoice__items .kt-invoice__item .kt-invoice__subtitle
+{
+    font-weight:normal;
+}
+#invoiceTableWrp {
+    padding-right: 5rem;
+    padding-left: 5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.invoiceFooter > div > div{
+    padding: 0 4rem 0 6rem;
+}
+.invoiceCustomStyle1 h1.kt-invoice__title + div{
+    margin-bottom:15px;
+}
+.paymentBoxGroup{
+    overflow:hidden;
+    padding:10px 0;
+}
+#invoiceTableWrp .ui-widget {
+    font-size: 13px !important;
+}
+#subTotalSection > div{
+    margin-bottom:10px;
+    font-size:14px;
+}
+.billStatus{
+    position:relative;
+    text-transform: uppercase;
+    width: 100%;
+}
+.billStatus:before{
+    display: block;
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-top: -6px;
+}
+.unpaid:after{
+    position: absolute;
+    display: block;
+    content: 'Unpaid';
+    font-size: 30px;
+    color: #ff4444;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    margin-top: -12px;
+    padding-left: 5px;
+}
+.paid:after{
+    position: absolute;
+    display: block;
+    content: 'Paid';
+    font-size: 30px;
+    color: #089608;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    margin-top: -12px;
+    margin-left: -17px;
+    padding-left: 0px;
+}
+.modal-content {
+    width: 949px;
+}

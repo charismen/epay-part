@@ -1,0 +1,298 @@
+*{
+    box-sizing: border-box;
+}
+
+ul
+{
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.baseColumn{
+    color: #333;
+    background: #ffffff;
+    
+}
+.kt-link{
+    font-size: 16px;
+}
+
+.kt-value{
+    font-weight: 500;
+    color: #5867dd; 
+}
+
+.baseColumn p{
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'poppins';
+}
+.baseColumn .name{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'poppins';
+    margin-top: 5px;
+}
+.status{
+    margin-top: 20px;
+}
+.title-main{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.kt-widget1 .kt-widget1__item {
+    padding: 0.4rem 0;
+}
+.kt-widget1 .kt-widget1__item .kt-widget1__info .kt-widget1__title {
+font-weight: 300;
+}
+
+.base-column-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.3fr 1.7fr;
+    grid-template-areas: ". . ." ". . .";
+    grid-gap: 10px;
+  }
+  
+.clinic-data{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+width: 100%;
+}
+  
+.clinic-data, .driver-data {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.clinic-data-list, .clinic-list-info {
+    padding-bottom: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+// Workorder detail table
+
+.managementWrap{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+}
+.kt-widget1 .kt-widget1__item {
+    border-bottom: none;
+}
+.column1_1{
+    order: 1;
+    flex: 1;
+    justify-content: flex-start;
+}
+.column1_2{
+    order: 2;
+    align-self: flex-end;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex: 1;
+    width: 300px;
+}
+.managementWrap ul li{
+    font-size: 14px;
+    color: #333;
+}
+ul li{
+    font-size: 14px;
+}
+
+// Tabs
+// ::ng-deep .nav-fill .nav-link.active {
+//     margin-top: -1px;
+//     border-top: 2px solid #20a8d8;
+// }
+
+// ::ng-deep .nav .nav-link.active, 
+// ::ng-deep .nav .show > .nav-link {
+//     color: #fff;
+//     background-color: #d8ad20;
+// }
+
+// .nav-item{
+//     background-color: rgb(251, 251, 251);
+//     color: rgb(150, 228, 147);
+//     font-size: 14px;
+// }
+// a.nav-link{
+//     color: #fff;
+// }
+// .nav-link .active{
+//     font-size: 14px;
+//     color: #fff;
+//     background-color: aqua;
+// }
+
+// .nav-tabs .nav-link.active
+// {
+//     color:black;
+// }
+// .nav-tabs .nav-link
+// {
+//     color:cyan;
+// }
+
+
+//Tab Data
+.remark-wrap{
+    font-size: 1.2rem;
+    border-radius: 5px;
+    height: 200px;
+    outline: 0;
+    border: 1px solid rgba(241, 243, 244, 0.123);
+    background: #F1F3F4;
+    transition: all 200ms;
+    width: 100%;
+    margin: 0.5rem 0.5rem;
+    margin-left: 0;
+    position: relative;
+    text-align: center;
+}
+  .remark-wrap:focus {
+    background: #FFF;
+    box-shadow: 1px 3px 5px 1px #e1e1e1;
+    border-color: #F1F3F4;
+  }
+
+
+.kt-widget__item .customerSignature{
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+.kt-widget__label{
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.remark{
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.desc__customer{
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 20px;
+}
+.kt-widget__data{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+// SupportingInformationn Tab
+.supporting-info-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.6fr 1.4fr;
+    grid-template-areas: ". . ." ". . .";
+    grid-gap: 20px;
+}
+
+.customer-data, .driver-data {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.customer-list, .customer-list-info {
+    padding-bottom: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.signature-wrap {
+    font-size: 1.2rem;
+    border-radius: 5px;
+    height: 200px;
+    outline: 0;
+    border: 1px solid rgba(241, 243, 244, 0.123);
+    background: #F1F3F4;
+    transition: all 200ms;
+    width: 100%;
+    margin: 0.5rem 0.5rem;
+    margin-left: 0;
+    position: relative;
+    text-align: center;
+}
+
+.signature-wrap:focus {
+    background: #FFF;
+    box-shadow: 1px 3px 5px 1px #e1e1e1;
+    border-color: #F1F3F4;
+}
+
+.name__customer {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.customer-signature-title, .driver-signature-title, .remark-signature-title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+agm-map{
+    height: 300px;
+}
+#custDetailModal{
+    position: relative;
+}
+#registerWizzard{
+    padding:0;
+}
+#custDetailModal > button
+{
+    position: ABSOLUTE;
+    right: 0;
+    padding: 5px 12px;
+    font-size: 35px;
+    font-weight: normal;
+    outline: none !important;
+    color: #74788d;
+    font-family: "LineAwesome";
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    -webkit-transition: all 0.3s;
+}
+#custDetailModal .modalWrpLg{
+    margin:0;
+    max-width:100%;
+    width:100%;
+}
+#registerWizzard .detail-company-profile > .row{
+    padding:5px 0;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+#registerWizzard  .valueSet
+{
+    color: #495057;
+    
+}

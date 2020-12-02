@@ -1,0 +1,426 @@
+<div [@routerTransition]>
+    <div id="HostDashboard">       
+        <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+         <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                  <h3 class="kt-subheader__title">
+                      <span>{{"InvoiceListing" | localize}}</span>
+                  </h3>
+                  <div class="kt-subheader__breadcrumbs">
+                     <a href="app/transaction/invoice-listing" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                     <span class="kt-subheader__breadcrumbs-separator"></span>
+                     <a href="" class="kt-subheader__breadcrumbs-link">
+                     {{"Invoice Listing" | localize}}</a>
+                   </div>
+                </div>
+            </div>
+         </div>
+         <!--Header Invoice-->
+        <div [class]="containerClass">
+           <div class="row">
+                <div id="totalInvoiceBlock" class="col-xl-9 col-sm-9">
+                    <div class="kt-portlet kt-portlet--bordered-semi kt-portlet--space kt-portlet--height-fluid">
+                        <div class="kt-portlet__body kt-padding-t-0 kt-padding-b-0">
+                        <div class="kt-widget25">
+                            <span class="currencyLocal">{{"CurrencyMyr" | localize}}</span>
+                            <span id="totalInvoiceAmt" class="kt-widget25__stats m-font-brand">{{totalInvoiceAmount | number:'1.2-2'}}</span>
+                            <span class="kt-widget25__subtitle">
+                                {{"Total Invoice : " | localize}}
+                                {{totalInvoice}}
+                            </span>
+                            <div class="kt-widget25__items">
+                                <div class="kt-widget25__item">
+                                    <span class="currencyLocal">{{"CurrencyMyr" | localize}}</span>
+                                    <span class="kt-widget25__number">
+                                        {{totalCreditBillAmount | number:'1.2-2'}}
+                                    </span>					 
+                                    <div class="progress kt-progress--sm">
+                                        <div class="progress-bar kt-bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="kt-widget25__desc">
+                                        {{"Credit Bill : " | localize}}
+                                        {{totalCreditBill}}
+                                    </span>
+                                </div>
+                                <div class="kt-widget25__item kt-margin-l-20">
+                                    <span class="currencyLocal">{{"CurrencyMyr" | localize}}</span>
+                                    <span class="kt-widget25__number">
+                                        {{totalProformaAmount | number:'1.2-2'}}
+                                    </span>					 				
+                                    <div class="progress m-progress--sm">
+                                        <div class="progress-bar kt-bg-success" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="kt-widget25__desc">
+                                        {{"Proforma : " | localize}}
+                                        {{totalProforma}}
+                                    </span>
+                                </div>
+                            </div>					
+                        </div>			 
+                        </div>
+                    </div>
+                </div>
+                <div id="paymentInvoiceBlock" class="col-xl-3 col-sm-3">
+                    <div class="kt-portlet kt-portlet--bordered-semi kt-portlet--space kt-portlet--height-fluid">
+                        <div style="margin: auto;">
+                            <div style="text-align: center;">
+                                <div class="labelMatrix kt-font-bold">{{"TotalAmountSelected" | localize}}</div>
+                                <!-- <span class="ql-size-small">{{"CurrencyMyr" | localize}}</span> -->
+                                <div class="float-right">
+                                    <span class="currencyLocal">{{"CurrencyMyr" | localize}}</span>
+                                    <span id="selectedCurValue" class="kt-font-bold">{{totalSelectedAmount | number:'1.2-2'}}</span>
+                                </div>
+                            </div>
+                        <div class="col-md-12" style="text-align:center;margin-bottom:5px;">
+                        <button id="payNowOne" (click)="payMultiInvoice()" class="btn btn-widest btn-warning payText" [disabled]="continue">
+                            {{"Pay " | localize}}{{totalSelected}}{{" Invoice" | localize}}
+                        </button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!--Tabel Invoice-->
+            <div class="kt-portlet kt-portlet--height-fluid kt-portlet--mobile">
+              <div class="kt-portlet__body" style="display: block;">
+                  <!--Search Filter-->
+                    <div class="row">
+                        <div class="col-sm-3 fullForm">
+                            <div class="" style="white-space: nowrap;">
+                                <div class="dateTime" style="white-space: nowrap;">
+                                    <div class="labelMatrix">{{"InvoiceType" | localize}}</div>
+                                    <div class="valueMatrix">
+                                        <ng-select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;"  [(ngModel)]="selectedInvoiceType"
+                                            [items]="typeCombo" [closeOnSelect]="true" bindLabel="Remark" placeholder="Select Invoice Type"
+                                            (change)="onInvoiceTypeChange($event)">
+                                        </ng-select>
+                                        <!-- <select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;" #typeSelect (change)="onInvoiceTypeChange(typeSelect.value)" placeholder="Select Invoice Type">
+                                            <option value="">All Invoice</option>
+                                            <option value="CDT">Credit Bill</option>
+                                            <option value="PRF">Proforma</option>
+                                        </select> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isGranted('Pages.Account.Payment.Offline')" class="col-sm-3 fullForm">
+                            <div class="" style="white-space: nowrap;">
+                                <div class="labelMatrix">{{"Customer" | localize}}</div>
+                                <div class="valueMatrix">
+                                    <ng-select id="customerSelect" style="margin: 0;padding: 5px 0px 0px;" [(ngModel)]="selectedCustomer"
+                                        [items]="customerCombo" [closeOnSelect]="true" bindLabel="Remark2" placeholder="Select Customer"
+                                        (change)="onCustomerChange($event)">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 fullForm">
+                            <div class="" style="white-space: nowrap;">
+                                <span style="display: inline-block;">
+                                    <div class="labelMatrix" style="margin-bottom: 5px;">{{"BillingDate" | localize}}</div>
+                                    <div id="billingDateWrp" class="valueMatrix">
+                                        <input name="DateFromPicker" type="text" placeholder="From" style="display: inline-block;width: 130px;"
+                                            #DateFromPicker name="DateFromPicker" [(ngModel)]="dateFrom" class="form-control" bsDatepicker datePickerMomentModifier
+                                            (dateChange)="checkDateFrom($event)" (change)="checkDateFrom($event)" />
+                                        <div class="inlineBlock" id="dateSeperator">
+                                            <span>...</span>
+                                        </div>
+                                        <input name="DateToPicker" type="text" placeholder="To" style="display: inline-block;width: 130px;"
+                                            #DateToPicker name="DateToPicker" class="form-control" [(ngModel)]="dateTo" bsDatepicker datePickerMomentModifier
+                                            (dateChange)="checkDateTo($event)" (change)="checkDateTo($event)" />
+                                    </div>
+                                </span>
+                                <span style="display: inline-block;margin-left:15px"><div class="ng-tns-c24-4"><button class="btn btn-primary btn-md input-group-append" (click)="searchFilter()"><i class="fa fa-search"></i>Search</button></div></span>
+                            </div>
+                            <div style="color:#ff0000">
+                                <span>{{errorDate}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 kt-padding-l-0 button-search" style="display: none;
+                            align-items: flex-end;
+                            justify-content: center;">
+
+                        </div>
+                        <div id="displayCustomerTbl" class="col-sm-3 hideThis">
+                            <button (click)="displayTargetBox($event)" class="btn btn-secondary btnAddSec" openTarget="displayCustomer"><i class="fa fa-plus"></i>Select Customer</button>
+                        </div>
+                        <!-- <div  c l ass="col-sm-3 fullForm" style="margin: 23px 0 10px;">
+                                                    <button class="btn btn-primary btn-brand--icon searchButton" >
+                                                        <span><span>{{"Search" | localize}}</span></span>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-wide" type="button" id="kt_search" (click)="searchFilter($event)">
+                                                        {{"Search" | localize}}
+                                                    </button>
+                                            </div> -->
+                    </div>
+                  <!--Search Filter-->
+                <div id="displayCustomer" class="hideThis">
+                    <div class="wrpContent">
+                        <div class="headingBoxTbl">Customer List</div>
+                        <div class="bodyBoxTbl"></div>
+                    </div>
+                </div>
+                 <div id="invoiceListingTbl" class="tableStylePlain kt-margin-t-20">
+                     <base-list #invoiceListComponent [(gridUrl)]="gridUrl" 
+                     [enableFilter]="false" actionColumn="checkbox" 
+                     (onSelectedChange)="onSelectedChange($event)"></base-list>
+                 </div>
+              </div>
+            </div>
+        </div>
+        </div>    
+            <!--Header Lama-->
+            <!--
+            <div class="kt-subheader kt-grid__item">  
+                    <div class="kt-subheader__main">
+                        <h3 class="kt-subheader__title">
+                            <span>{{"InvoiceListing" | localize}}</span>
+                        </h3>
+                    </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit">
+                <div class="kt-portlet kt-portlet--height-fluid">
+                    <div class="mt-element-step">
+                        <div id="rowMetric" style="padding: 0px 10px 20px">
+                            <div class="row invoiceWrap">
+                                <div id="legendInvoice" class="legendInvoice columnInvoice columnInvoice1 col-sm-9">
+                                    <div class="matrixBoxStyle1">
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="subMatrix" style="background-color: #009285;">
+                                                    <div class="inlineBlock" style="white-space: nowrap;">
+                                                        <div class="labelMatrix">{{"CreditBill" | localize}}</div>
+                                                        <div class="valueCurMatrix">
+                                                            <span id="creditBillCurValue" class="currencyShow">
+                                                                <span>{{totalCreditBillAmount | number:'1.2-2'}}</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inlineBlock">
+                                                        <div class="valueQtyMatrix">
+                                                            <span id="creditBillQty">{{totalCreditBill}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="subMatrix" style="background-color: #2f78b7e0;">
+                                                    <div class="inlineBlock">
+                                                        <div class="labelMatrix">{{"Proforma" | localize}}</div>
+                                                        <div class="valueCurMatrix">
+                                                            <span id="proformaCurValue" class="currencyShow">{{totalProformaAmount | number:'1.2-2'}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inlineBlock">
+                                                        <div class="valueQtyMatrix">
+                                                            <span id="proformaQty">{{totalProforma}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4">
+                                                <div id="totalInvoiceBox"> 
+                                                    <div class="inlineBlock" style="float:right">
+                                                        <div class="valueQtyMatrix">
+                                                            <span id="totalQty">{{totalInvoice}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inlineBlock" style="float:right">
+                                                        <div class="labelMatrix">{{"TotalInvoice" | localize}}</div>
+                                                    </div>
+                                                    <div class="valueCurMatrix">
+                                                        <span id="totalCurValue" class="currencyShow">{{totalInvoiceAmount | number:'1.2-2'}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="currentInvoiceList" class="currentInvoiceList columnInvoice columnInvoice3 col-sm-3" style="padding: 0px 0px 0px; border-radius: 8px;">
+                                    <div class="matrixBoxStyle1" style="background-color: #ffe498;">
+                                        <div class="row" style="padding: 10px;/* background-color: #ffe498; */">
+                                            <div class="col-md-12">
+                                                <div style="overflow: hidden;">
+                                                    <select id="invoiceType" class="defaultSize" #invoiceType (change)="typeSelectChange(invoiceType.value)" style="float: right;">
+                                                        <option value="">All Invoice</option>
+                                                        <option value="CDT">Credit Bill</option>
+                                                        <option value="PRF">Proforma</option>
+                                                    </select>
+                                                </div>
+                                                <div class="valueQtyMatrix">
+                                                    <span id="curViewaQty" style="">{{totalSelected}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class=""></div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="subMatrix" style="padding: 5px 15px 0px;" id="boxInvoiceType">
+                                                    <div class="inlineBlock" style="width: 100%;">
+                                                        <div class="labelMatrix" style="">{{"TotalAmountSelected" | localize}}</div>
+                                                        <div class="valueCurMatrix" style="">
+                                                            <span id="selectedCurValue" class="currencyShow">{{totalSelectedAmount | number:'1.2-2'}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="text-align:center;margin-bottom:5px;">
+                                                <button id="payNowOne" (click)="payMultiInvoice()" class="btn btn-widest btn-warning payText">
+                                                    {{"Pay " | localize}}{{totalSelected}}{{" Invoice" | localize}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row invoiceWrap">
+                                <div id="searchBoxInvoice" class=" searchBoxInvoice columnInvoice columnInvoice2 col-sm-12" style="">
+                                    <div id="controlSearchBox" class="dropController" (click)="showSearchBox()"><i class="fa fa-angle-down"></i> Advance Search</div>
+                                    <div class="matrixBoxStyle1 fadeInDown animated hideThis" style="width: 100%;">
+                                        <div class="row" style="margin: 0;padding: 10px 20px 10px;">
+                                            <div class="col-sm-3 fullForm">
+                                                <div class="dateTime" style="white-space: nowrap;">
+                                                    <div class="labelMatrix">{{"InvoiceType" | localize}}</div>
+                                                    <div class="valueMatrix">
+                                                        <ng-select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;" [(ngModel)]="selectedInvoiceType"
+                                                                   [items]="typeCombo" [closeOnSelect]="true" bindLabel="Remark"
+                                                                   placeholder="Select Invoice Type" (change)="onInvoiceTypeChange($event)">
+                                                        </ng-select>
+                                                        <select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;" #typeSelect (change)="onInvoiceTypeChange(typeSelect.value)"
+                                        placeholder="Select Invoice Type">
+                                            <option value="">All Invoice</option>
+                                            <option value="CDT">Credit Bill</option>
+                                            <option value="PRF">Proforma</option>
+                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            //kene
+                                            <div class="col-sm-4 fullForm" *ngIf="filterAdmin">
+                                                <div class="" style="white-space: nowrap;">
+                                                    <div class="labelMatrix">{{"Customer" | localize}}</div>
+                                                    <div class="valueMatrix">
+                                                        <ng-select id="customerSelect" style="margin: 0;padding: 5px 0px 0px;" [(ngModel)]="selectedCustomer"
+                                                                   [items]="customerCombo" [closeOnSelect]="true" bindLabel="Remark"
+                                                                   placeholder="Select Customer" (change)="onCustomerChange($event)">
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 fullForm">
+                                                <div class="" style="white-space: nowrap;">
+                                                    <div class="labelMatrix" style="margin-bottom: 5px;">{{"BillingDate" | localize}}</div>
+                                                    <div id="billingDateWrp" class="valueMatrix">
+                                                        <input name="DateFromPicker"
+                                                               type="text"
+                                                               placeholder="From"
+                                                               style="display: inline-block;width: 100px;"
+                                                               #DateFromPicker
+                                                               name="DateFromPicker"
+                                                               class="form-control"
+                                                               bsDatepicker
+                                                               datePickerMomentModifier
+                                                               [(date)]="dateFrom"
+                                                               (dateChange)="checkDateFrom($event)"
+                                                               (change)="checkDateFrom($event)" />
+                                                        <div class="inlineBlock" style="" id="dateSeperator">
+                                                            <span style="">...</span>
+                                                        </div>
+                                                        <input name="DateToPicker"
+                                                               type="text"
+                                                               placeholder="To"
+                                                               style="display: inline-block;width: 100px;"
+                                                               #DateToPicker
+                                                               name="DateToPicker"
+                                                               class="form-control"
+                                                               bsDatepicker
+                                                               datePickerMomentModifier
+                                                               [(date)]="dateTo"
+                                                               (dateChange)="checkDateTo($event)"
+                                                               (change)="checkDateTo($event)" />
+                                                    </div>
+                                                </div>
+                                                <div style="color:#ff0000">
+                                                    <span>{{errorDate}}</span>
+                                                </div>
+                                            </div>
+                                            <div  class="col-sm-2 fullForm" style="position:relative">
+                                                <div class="valueMatrix" style="position: absolute;bottom:0;">
+                                                    <button class="btn btn-primary btn-brand--icon searchButton" type="button" id="kt_search" (click)="searchFilter($event)">
+                                                        <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 512 512" enable-background="new 0 0 512 512" style="width: 16px;fill: #fff;vertical-align: middle;">
+                                                                <g>
+                                                                    <path d="M495,466.2L377.2,348.4c29.2-35.6,46.8-81.2,46.8-130.9C424,103.5,331.5,11,217.5,11C103.4,11,11,103.5,11,217.5   S103.4,424,217.5,424c49.7,0,95.2-17.5,130.8-46.7L466.1,495c8,8,20.9,8,28.9,0C503,487.1,503,474.1,495,466.2z M217.5,382.9   C126.2,382.9,52,308.7,52,217.5S126.2,52,217.5,52C308.7,52,383,126.3,383,217.5S308.7,382.9,217.5,382.9z"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span style="">{{"Search" | localize}}</span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <!--
+                                        //kene
+                                        <div class="row" style="margin: 0;padding: 20px 20px;"></div>
+                                        <div class="row hideThis" style="margin: 0;padding: 0px 20px;">
+                                            <div class="col-md-9 col-sm-12 fullForm hideThis">
+                                                <div class="" style="white-space: nowrap;">
+                                                    <div class="labelMatrix" style="margin-bottom: 5px;">{{"BillingDate" | localize}}</div>
+                                                    <div id="billingDateWrp_" class="valueMatrix">
+                                                        <input name="DateFromPicker"
+                                                               type="text"
+                                                               placeholder="From"
+                                                               style="display: inline-block;width: 100px;"
+                                                               #DateFromPicker
+                                                               name="DateFromPicker"
+                                                               class="form-control"
+                                                               bsDatepicker
+                                                               datePickerMomentModifier
+                                                               [(date)]="dateFrom"
+                                                               (dateChange)="checkDateFrom($event)"
+                                                               (change)="checkDateFrom($event)" />
+                                                        <div class="inlineBlock" style="" id="dateSeperator">
+                                                            <span style="">...</span>
+                                                        </div>
+                                                        <input name="DateToPicker"
+                                                               type="text"
+                                                               placeholder="To"
+                                                               style="display: inline-block;width: 100px;"
+                                                               #DateToPicker
+                                                               name="DateToPicker"
+                                                               class="form-control"
+                                                               bsDatepicker
+                                                               datePickerMomentModifier
+                                                               [(date)]="dateTo"
+                                                               (dateChange)="checkDateTo($event)"
+                                                               (change)="checkDateTo($event)" />
+                                                    </div>
+                                                </div>
+                                                <div style="color:#ff0000">
+                                                    <span>{{errorDate}}</span>
+                                                </div>
+                                            </div>
+                                            <div id="adminCustomerSelect" class="adminCustomerSelect col-md-3 col-sm-12" style="padding-left: 0;">
+                                                <div class="" style="white-space: nowrap;">
+                                                    <div class="labelMatrix hideThis" style="visibility: hidden;">text</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="tableStylePlain">
+                            <base-list #invoiceListComponent [(gridUrl)]="gridUrl" 
+                            [enableFilter]="false" actionColumn="checkbox" 
+                            (onSelectedChange)="onSelectedChange($event)"></base-list>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        -->
+    </div>
+</div>

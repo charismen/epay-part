@@ -1,0 +1,348 @@
+#TenantDashboard {
+
+    input[type="radio"] {
+        display: none;
+    }
+
+}
+
+.sales-summary-chart {
+    svg.ngx-charts {
+        margin-left: -50px;
+        margin-top: 0px;
+    }
+}
+
+.paymentSelect{
+	padding-top:0.5em;
+}
+
+.paymentBoxGroup{
+    // margin-right: 24px;
+
+}
+
+.wrpPayMethod{
+    width: 70px;
+    height: 40px;
+    margin-top: -10px;
+    border-radius: 3px;
+}
+.fpxBtn .wrpPayMethod,.maybankBtn .wrpPayMethod, .offlinePayment .wrpPayMethod{
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:contain;
+	background-image:url(../../../assets/qstl/img/fpxLogo.jpg);
+}
+.maybankBtn .wrpPayMethod{
+    background-image:url(assets/qstl/img/maybankLogo.png);
+    background-image:url(assets/qstl/img/paymentt.svg);
+    
+}
+body .ui-table .ui-table-tbody > tr > td{
+    font-weight:normal;
+}
+#totalBlock
+{
+    background-color: #054a82;
+    text-align: center;
+}
+#totalBlock > div {
+    padding-top: 60px;
+}
+#quickPaymentBox > .kt-invoice__head {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 250px;
+    overflow: visible;
+    margin-left:-20px;
+    margin-right:-20px;
+}
+#paymentBlock{
+    position:relative;
+    overflow: visible;
+    height: 100%;
+    text-align: center;
+    padding-top: 45px;
+    color: #000;
+}
+#trangleWrp{
+    position: absolute;
+    width:100%;
+    height:100%;
+    z-index:0;
+    left:0;
+    top:0;
+    overflow: hidden;
+}
+#trangleWrp:before {
+    content: ' ';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background-color: #054a82;
+    left: -460px;
+    transform: rotateZ(65deg);
+}
+#trangleWrp:after {
+    content: ' ';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background-color: #ef9c00;
+    right: -561px;
+    top: -206px;
+    transform: rotateZ(61deg);
+}
+#quickPaymentBox{
+    padding-top:0;
+}
+.kt-aside--enabled.kt-aside--fixed .kt-content{
+
+}
+#totalBlock {
+    text-align: center;
+    color: #fff;
+}
+#totalAmount {
+    text-align: right;
+    font-size: 2.3em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 0.6em;
+    border-bottom: 0.5px solid #fff;
+}
+#totaRecord {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+#totalAmount.currencyShow:before{
+    // left: -2.1em;
+}
+.payText {
+    padding: 5px;
+    color: #fff;
+    background-color: #e8641b;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px -1px #666;
+    border-color:#e8641b;
+}
+#quickPaymentBox > div:nth-child(2){
+    margin-top:35px;
+}
+#footerInvoice{
+    background-color: rgb(151, 147, 147);
+    // margin-left: -20px;
+    // margin-right: -20px;
+    // margin-bottom: -20px;
+}
+#footerInvoice > div > div{
+    padding-top:2.5em;
+    padding-bottom:2.5em;
+}
+
+.currencyShow-2:before,
+.currencyType-2:before{
+    // content: 'RM';
+    // font-size: 0.6em;
+    // font-weight: normal;
+    // position: absolute;
+    // left: -1.7em;
+    // top: 4px;
+}
+.valueSet {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #000;
+}
+.currValue {
+    text-align: left;
+}
+/*------------------------------------------------ 07/12/2019 ----------------------------------------------------------*/
+#paymentBlock{
+    text-align: right;
+    padding: 3em;
+}
+#paymentBlock > .boxCenter
+{
+    width: 100%;
+    display: inline-block;
+    padding: 0 120px;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+}
+#totalBlock > .boxCenter{
+    text-align: right;
+    padding-left: 25px;
+}
+#payNowFPX1,
+#payNowOne{
+    padding-left:1rem;
+    padding-right:1rem;
+}
+#fpxBoxOption .ng-dropdown-panel.ng-select-bottom{
+    text-align: left;
+    
+}
+// Responsive For Mobile
+
+@media only screen and (min-width : 150px) and (max-width : 768px){
+    #paymentBlock:before {
+        display: none;
+        
+    }
+    #paymentBlock:after {
+        display: none;
+        height: 100%;
+    }
+    #quickPaymentBox > .kt-invoice__head {
+        height: 100%;
+    }
+    .boxWrp_{
+      position: relative;
+        // margin-bottom: 30px;
+    }
+    .payText{
+        margin-top: 20px;
+    }
+    .paymentSelect{
+        margin-top: 20px;
+    }
+    #paymentBlock{
+        padding: 0;
+        height: 100%;
+        offset: auto;
+        offset: 10px 30px;
+        offset: none;
+    }
+    .bigLabelTop {
+        margin-top: 10px;
+    }
+    .boxCenter{
+        padding-top: 10px;
+    }
+    #totalBlock > div{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .checkTable{
+        width: 100%;
+    }
+
+    #paymentBlock > .boxCenter
+    {
+        padding: 0;
+        padding-right:25px;
+    }
+    #totalBlock > div{
+        padding-right:20px;
+    }
+    .tableStylePlain  td.ng-star-inserted > [style="text-align: right;"],
+    .tableStylePlain  td.ng-star-inserted > [style="text-align: center;"]{
+        text-align: left !important;
+    }
+    .total-records-count{
+        display: block;
+        float: none;
+        padding-top: 20px;
+        text-align: right;
+        bottom:0 !important;
+
+    }
+  }
+
+//   Responsive For Tablet
+@media (min-width: 768px) and (max-width: 1024px) {
+    #paymentBlock:before {
+        display: none;
+        
+    }
+    #paymentBlock:after {
+        display: none;
+        height: 100%;
+    }
+    #quickPaymentBox > .kt-invoice__head {
+        height: 100%;
+    }
+    .boxWrp_{
+      position: relative;
+        // margin-bottom: 30px;
+    }
+    #paymentBlock{
+        padding: 0;
+        height: 100%;
+        offset: auto;
+        offset: 10px 30px;
+        offset: none;
+    }
+    .bigLabelTop {
+        margin-top: 10px;
+    }
+    .boxCenter{
+        padding-top: 10px;
+    }
+    #totalBlock > div{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    
+  }
+  
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    #paymentBlock:before {
+        display: none;
+        
+    }
+    #paymentBlock:after {
+        display: none;
+        height: 100%;
+    }
+    #quickPaymentBox > .kt-invoice__head {
+        height: 100%;
+    }
+    .boxWrp_{
+      position: relative;
+        // margin-bottom: 30px;
+    }
+    #paymentBlock{
+        padding: 0;
+        height: 100%;
+        offset: auto;
+        offset: 10px 30px;
+        offset: none;
+    }
+    .bigLabelTop {
+        margin-top: 10px;
+    }
+    .boxCenter{
+        padding-top: 10px;
+    }
+    #totalBlock > div{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+  }
+
+#bankTypeList{
+    max-width: 300px;
+    display: inline-block;
+    margin-right: 20px;
+    width: 400px;
+    height: 100%;
+}
+
+.offlinePayment .wrpPayMethod{
+    width: unset;
+    height: unset;
+    margin-top: 0;
+}
+.offlinePayment{
+    vertical-align: top;
+}

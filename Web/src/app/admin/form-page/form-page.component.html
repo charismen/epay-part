@@ -1,0 +1,217 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Sample" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        {{"SampleComponents" | localize}}
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <div class="btn-group" dropdown>
+                            <button dropdownToggle type="button" class="btn btn-outline-success dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-excel"></i> {{"ExcelOperations" | localize}}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-excel-operations" *dropdownMenu>
+                                <a class="dropdown-item" id="ExportUsersToExcelButton" (click)="exportToExcel()"
+                                   href="javascript:;">
+                                    <i class="fa fa-download" style="font-size: 1rem;"></i>
+                                    {{'ExportToExcel' | localize}}
+                                </a>
+                                <a href="javascript:;" *ngIf="isGranted('Pages.Administration.Users.Create')"
+                                   class="no-padding">
+                                    <span class="fileinput-button">
+                                        <p-fileUpload customUpload="true" name="ExcelFileUpload" #ExcelFileUpload
+                                                      maxFileSize="10000000" auto="auto" accept=".csv,.xls,.xlsx"
+                                                      (uploadHandler)="uploadExcel($event)" (onError)="onUploadExcelError()"
+                                                      chooseLabel="{{'ImportFromExcel' | localize}}">
+                                        </p-fileUpload>
+                                    </span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <span class="dropdown-item-text text-muted pl-3" href="#">
+                                    <small [innerHTML]="l('ImportToExcelSampleFileDownloadInfo', '<a href=/assets/sampleFiles/ImportUsersSampleFile.xlsx>' + l('ClickHere') + '</a>')"></small>
+                                </span>
+                            </div>
+                        </div>
+
+                        <button *ngIf="isGranted('Pages.Administration.Users.Create')"
+                                class="btn btn-primary">
+                            <i class="fa fa-plus"></i> {{"CreateNewUser" | localize}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <!-- <countdown #cd [config]="config" (event)="handleEvent($event)"></countdown> -->
+                    <countdown #cd [config]="{leftTime: 27750, format: 'HH:mm:ss'}"></countdown>
+                    <ng-otp-input #otp (onInputChange)="onOtpChange($event)"
+                                  [config]="{length:6, allowNumbersOnly: true}"></ng-otp-input>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <card-list></card-list>
+                </div>
+            </div>
+        </div>
+
+        <!-- GENERAL LIST -->
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <base-list #baseList [gridUrl]="gridUrl" actionColumn="action" [downloadDoc]="true"
+                               (onRowRender)="onRowRender($event)" (onSelectedChange)="onSelectedChange($event)"
+                               [permissionView]="permissionView" (onViewClick)="refresh(0)" [permissionEdit]="permissionEdit"
+                               (onEditClick)="refresh(0)" [permissionDelete]="permissionDelete"
+                               (onDeleteClick)="delete($event, 0)" [filterTemplate]="filter"
+                               (onLoadFinished)="onLoadFinished()">
+                    </base-list>
+
+                    <ng-template #filter>
+                        <div class="row mb-4">
+                            <div class="col-md-6 fullform">
+                                <div class="kt-checkbox-list">
+                                    <label>{{'Single' | localize}}</label>
+                                    <ng-select [(ngModel)]="selectedSingleSelect" [items]="comboModel"
+                                               [closeOnSelect]="true" bindLabel="Remark" placeholder="I'm single select search"
+                                               (change)="onSingleSelectChange($event)">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 fullform">
+                                <div class="kt-checkbox-list">
+                                    <label>{{"MultiSelect" | localize}}</label>
+                                    <ng-select [(ngModel)]="selectedMultiSelect" [items]="comboModel" [multiple]="true"
+                                               [closeOnSelect]="false" [hideSelected]="true" bindLabel="Remark"
+                                               placeholder="I'm multi select" (change)="onMultiSelectChange($event)">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPANDED LIST -->
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <base-list #baseList1 [gridUrl]="gridUrl1" actionColumn="action" [downloadDoc]="true"
+                               (onRowRender)="onRowRender($event)" (onSelectedChange)="onSelectedChange($event)"
+                               [permissionView]="permissionView" (onViewClick)="refresh(1)" [permissionEdit]="permissionEdit"
+                               (onEditClick)="refresh(1)" [permissionDelete]="permissionDelete"
+                               (onDeleteClick)="delete($event, 1)" [bodyTemplate]="body"
+                               [rowExpandTemplate]="rowExpand" [rowExpand]="true" rowKey="CountryCode" rowExpandMode="multiple"
+                               (onRowExpand)="rowExpanded($event)" (onRowCollapse)="rowColapsed($event)"
+                               (onLoadFinished)="onLoadFinished()">
+                    </base-list>
+
+                    <!-- CUSTOM COLUMN SET -->
+                    <ng-template #body let-rowData="rowData" let-col="col">
+                        <div *ngIf="col.field === 'Section'">
+                            <span *ngIf="col.dataType != 'DateTime' && col.dataType != 'Byte' && col.dataType != 'Decimal' && col.statusBadges == undefined && col.iconSet == undefined">
+                                {{col.caps == 'uppercase' ? (rowData[col.field] | uppercase) : col.caps == 'lowercase' ? (rowData[col.field] | lowercase) : col.caps == 'titlecase' ?  (rowData[col.field] | titlecase) : rowData[col.field]}}
+                            </span>
+                        </div>
+                        <div *ngIf="col.field !== 'Section'">
+                            <label class="kt-checkbox kt-checkbox--success">
+                                <input class="form-control" type="checkbox" />
+                                <span></span>
+                            </label>
+                        </div>
+                    </ng-template>
+
+                    <!-- NESTEDLISTING -->
+                    <ng-template #rowExpand let-rowData="rowData" let-columns="columns">
+                        <tr>
+                            <td colspan="4">
+                                <!-- ColSpan == total columns displayed on the parent list -->
+                                <base-list #baseListExpanded [gridUrl]="gridUrl2 + 'countryCode=' + rowData.CountryCode + '&'" actionColumn="action" [downloadDoc]="true"
+                                           (onRowRender)="onRowRender($event)" (onSelectedChange)="onSelectedChange($event)"
+                                           [enableFilter]="false" [enablePaginator]="false"
+                                           [permissionView]="permissionView" (onViewClick)="refresh(2)"
+                                           [permissionEdit]="permissionEdit" (onEditClick)="refresh(2)"
+                                           [permissionDelete]="permissionDelete" (onDeleteClick)="delete($event, 2)"
+                                           [filterTemplate]="filter" (onLoadFinished)="onLoadFinished()">
+                                </base-list>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <!-- DIRECT BINDING -->
+                    <!-- <ng-template #rowExpand let-rowData="rowData" let-columns="columns">
+                        <tr>
+                            <td>
+                                <label>{{rowData.CountryDesc}}</label>
+                            </td>
+                        </tr>
+                    </ng-template> -->
+
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <div class="row align-items-center">
+                        <ng-select [(ngModel)]="selectedSingleSelect" [items]="comboModel" [closeOnSelect]="true"
+                                   bindLabel="Remark" placeholder="I'm single select search"
+                                   (change)="onSingleSelectChange($event)">
+                        </ng-select>
+
+                        <ng-select [(ngModel)]="selectedMultiSelect" [items]="comboModel" [multiple]="true"
+                                   [closeOnSelect]="false" [hideSelected]="true" bindLabel="Remark"
+                                   placeholder="I'm multi select" (change)="onMultiSelectChange($event)">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <gallery [galleryUrl]="galleryUrl" (onSelectClick)="onSelectedGallery($event)"></gallery>
+                    <!-- (onEditClick)="createOrEditFormModal.show($event)"
+                    <createOrEditFormModal #createOrEditUserModal (modalSave)="refresh()"></createOrEditFormModal> -->
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <calendar #calendar (onViewChange)="onCalendarViewChange($event)"
+                              (onDateClick)="onCalendarDateClick($event)" (onEventRender)="onCalendarEventRender($event)">
+                    </calendar>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <history id="bc560e50-2271-4298-a73a-53b41ea70638" name="Plexform.DTO.Core.Location.STATE">
+                    </history>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

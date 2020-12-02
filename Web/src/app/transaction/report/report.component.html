@@ -1,0 +1,77 @@
+<div [@routerTransition]>
+  <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="HostDashboard kt_content">
+    <div class="kt-content kt-grid__item kt-grid__item--fluid">
+      <div [class]="containerClass">
+        <div class="kt-subheader kt-grid__item">
+          <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+              <span>{{"TransactionReport" | localize}}</span>
+            </h3>
+            <div class="kt-subheader__breadcrumbs">
+              <a href="app/transaction/invoice-listing" class="kt-subheader__breadcrumbs-home"><i
+                  class="flaticon2-shelter"></i></a>
+              <span class="kt-subheader__breadcrumbs-separator"></span>
+              <a href="" class="kt-subheader__breadcrumbs-link">
+                {{"Report" | localize}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div [class]="containerClass">
+        <div class="kt-portlet kt-portlet--mobile">
+          <div class="kt-portlet__body">
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="" style="white-space: nowrap;">
+                    <div class="dateTime" style="white-space: nowrap;">
+                        <div class="labelMatrix">{{"TransactionStatus" | localize}}</div>
+                        <div class="valueMatrix">
+                            <ng-select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;"  [(ngModel)]="selectedTransStatus"
+                                [items]="statusCombo" [closeOnSelect]="true" bindLabel="Remark" placeholder="Select Transaction Status"
+                                (change)="onTransStatusChange($event)">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="" style="white-space: nowrap;">
+                    <span style="display: inline-block;">
+                        <div class="labelMatrix" style="margin-bottom: 5px;">{{"BillingDate" | localize}}</div>
+                        <div id="billingDateWrp" class="valueMatrix">
+                            <input name="DateFromPicker" type="text" placeholder="From" style="display: inline-block;width: 130px;"
+                                #DateFromPicker name="DateFromPicker" [(ngModel)]="dateFrom" class="form-control" bsDatepicker datePickerMomentModifier
+                                (dateChange)="checkDateFrom($event)" (change)="checkDateFrom($event)" />
+                            <div class="inlineBlock" id="dateSeperator">
+                                <span>...</span>
+                            </div>
+                            <input name="DateToPicker" type="text" placeholder="To" style="display: inline-block;width: 130px;"
+                                #DateToPicker name="DateToPicker" class="form-control" [(ngModel)]="dateTo" bsDatepicker datePickerMomentModifier
+                                (dateChange)="checkDateTo($event)" (change)="checkDateTo($event)" />
+                        </div>
+                    </span>
+                    <span style="display: inline-block;margin-left:15px"><div class="ng-tns-c24-4"><button class="btn btn-primary btn-md input-group-append" (click)="searchFilter()"><i class="fa fa-search"></i>Search</button></div></span>
+                </div>
+                <div style="color:#ff0000">
+                    <span>{{errorDate}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+        <div class="kt-portlet kt-portlet--mobile">
+          <div class="kt-portlet__body">
+            <div>
+              <div id="viewer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

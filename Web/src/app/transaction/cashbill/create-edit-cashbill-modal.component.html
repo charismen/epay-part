@@ -1,0 +1,43 @@
+<div appBsModal #createOrEditCashBillModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditCashBillModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog" [busyIf]="loading">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{'AddCashBillItem' | localize}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="loading">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #tenantCreateForm="ngForm" novalidate role="form" class="form-validation" >
+                    <div class="form-group">
+                        <label for="paymentfor" class="form-control-label">{{'PaymentFor' | localize}}</label>
+                        <div>
+                            <ng-select name="paymentforlist" id="paymentforlist" [closeOnSelect]="true" [(ngModel)]="selectedItem"
+                                [items]="itemCombo" bindLabel="Description" placeholder="Select Item"
+                                (change)="onItemChange($event)" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="form-control-label">{{'Description' | localize}}</label>
+                        <input name="description" type="text" class="form-control" id="description" [(ngModel)]="inputHelper.description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitprice" class="form-control-label">{{'UnitPrice' | localize}}</label>
+                        <input name="unitprice" type="number" class="form-control" id="unitprice" [disabled]="priceDisabled" [(ngModel)]="inputHelper.unitprice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity" class="form-control-label">{{'Quantity' | localize}}</label>
+                        <input name="quantity" type="number" min="{{minPax}}" step="1" (blur)="paxChange($event)" class="form-control" id="quantity" [(ngModel)]="inputHelper.quantity" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="close()">{{'Close' | localize}}</button>
+              <button type="button" class="btn btn-primary" [disabled]="!tenantCreateForm.form.valid" (click)="save()">{{'Add' | localize}}</button>
+            </div>
+        </div>
+    </div>
+</div>

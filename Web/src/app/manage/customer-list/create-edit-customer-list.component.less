@@ -1,0 +1,342 @@
+.stepContent{
+    display: none;
+    padding: 20px;
+    margin-top: 10px;
+}
+.stepContentWrp .btnFilter{
+    margin-top: 10px;
+}
+.activeStepControl .stepMain{
+    font-weight:600;
+    color:#fff !important;
+}
+.activeStepControl .stepControlWrp
+{
+    background-color: #1c77ab !important;
+}
+.activeStepControl .stepTitle{
+    color:#fff !important;
+}
+.activeStepControl .stepIcon{
+    fill: #fff !important;
+}
+.stepControl{
+    cursor:pointer;
+}
+.activeStepContent{
+    display: block !important;
+}
+.stepControl .stepMain{
+    text-transform: uppercase;
+    color:#000;
+    letter-spacing: 1px;
+}
+.stepControlWrp   
+{
+    padding: 15px;
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
+}
+.stepTitle {
+    color: #9c9c9c;
+    font-size: 12px;
+    font-weight: normal !important;
+}
+.stepText{
+    display: inline-block;
+    vertical-align: middle;
+}
+.stepIcon{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.qstlRow label{
+    text-transform:uppercase;
+    color:#000;
+    margin-bottom:8px;
+}
+.qstlRow label + span{
+    margin-bottom:10px;
+}
+.qstlRow {
+    color:#000;
+}
+.stepContentWrp input{
+    max-width:700px;
+    overflow:hidden;
+}
+.btnWrapperQstil {
+    text-align:right;
+}
+.btnWrapperQstil > button{
+    display:inline-block;
+    max-width:130px;
+}
+[disabled]{
+    cursor:default !important;
+}
+.reqInput{
+    position:relative;
+    padding-left:8px;
+}
+.reqInput:before{
+    content:'*';
+    color:red;
+    display:block;
+    position:absolute;
+    left:0;
+}
+.mb-10{
+    margin-bottom:10px !important;
+}
+.mb-0{
+    margin-bottom:0 !important;
+}
+.splitterRow > div{
+    border-top:1px solid #ccc;
+    width:100%;
+    margin:30px 0;
+}
+#searchPremiseWrp{
+    max-width:680px;
+}
+#searchPremiseWrp > div:first-child{
+    margin:10px 0;
+    padding-right:0
+}
+#searchPremiseWrp > div:nth-child(2){
+    // margin:10px 0;
+}
+#newCompanyModal{
+    position: relative;
+}
+#newCompanyModal .steperContentWrapper > .stepContent:nth-child(2){
+    padding:25px 10px;
+
+}
+#newCompanyModal .close{
+    position: ABSOLUTE;
+    right: 0;
+    padding: 5px 12px;
+    font-size: 35px;
+    font-weight: normal;
+    outline: none !important;
+    color: #74788d;
+    font-family: "LineAwesome";
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    -webkit-transition: all 0.3s;
+}
+#newCompanyModal .steperContentWrapper > .stepContent:nth-child(2) .modal-content{
+    width:100% !important;
+}
+#newCompanyModal .steperContentWrapper > .stepContent:nth-child(2) .kt-widget__head{
+    display: none;
+} 
+#newCompanyModal .kt-portlet--mobile .kt-portlet__body{
+    padding:0;
+}
+#modalBodyAddCompany{
+    padding:25px 10px 15px !important;
+}
+.lineFooter{
+    border-top: 1px solid #ebedf2;
+    padding-top: 20px;
+    display: inline-block;
+    text-align: right;
+}
+.lineFoote btn{
+    display: inline-block;
+
+}
+// Responsive
+
+@media only screen and (min-width : 150px) and (max-width : 640px){
+ body{
+    height: auto;
+}
+
+.stepperController {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    /* optional */
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+}
+.steperContentWrapper {
+    text-align: left;
+}
+.stepperController .stepControl1{
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -ms-flex-order: 1;
+    -webkit-order: 1;
+    order: 1;
+}
+.stepperController .stepControl1{
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+}
+.stepControl{
+    margin-top: 10px;
+} 
+
+.stepContentWrp .btnFilter{
+    margin-top: 10px;
+}
+
+.modal-header{
+    position:absolute;
+    top:0px;
+    width: 100%;
+    z-index:99;
+}
+.modalForm{
+    margin-top: 45px;
+    z-index:99;
+}
+.btnContinue{
+    z-index:99;
+}
+  
+  
+}
+
+// Resonsive for Tablet
+@media (min-width: 768px) and (max-width: 1024px) {
+    
+    body{
+        height: auto;
+    }
+    
+    .stepperController {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        /* optional */
+        -webkit-box-align: start;
+        -moz-box-align: start;
+        -ms-flex-align: start;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+        flex-direction: row-reverse;
+    }
+    .steperContentWrapper {
+        text-align: left;
+    }
+    .stepperController .stepControl1{
+        -webkit-box-ordinal-group: 1;
+        -moz-box-ordinal-group: 1;
+        -ms-flex-order: 1;
+        -webkit-order: 1;
+        order: 1;
+    }
+    .stepperController .stepControl1{
+        -webkit-box-ordinal-group: 2;
+        -moz-box-ordinal-group: 2;
+        -ms-flex-order: 2;
+        -webkit-order: 2;
+        order: 2;
+    }
+    // .stepControl{
+    //     margin-top: 10px;
+    // } 
+    
+    .stepContentWrp .btnFilter{
+        margin-top: 10px;
+    }
+    .modal-content{
+        position: relative;
+    }
+
+    .modal-header{
+        // position:absolute;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom:0;
+        left:0;
+        right:0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width:100%;
+        z-index:1;
+    }
+    .modal-body{
+        margin-top: 45px;
+        z-index:99;
+    }
+    .btnContinue{
+        z-index:99;
+    }
+      
+    .modalForm{
+        margin-top: 45px;
+    }
+
+    .buttonWrap{
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        /* optional */
+        -webkit-box-align: start;
+        -moz-box-align: start;
+        -ms-flex-align: start;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+        flex-direction: row-reverse;
+    }
+    .buttonWrap .buttonwrap1{
+        -webkit-box-ordinal-group: 2;
+        -moz-box-ordinal-group: 2;
+        -ms-flex-order: 2;
+        -webkit-order: 2;
+        order: 2;
+    }
+    .buttonWrap .buttonWrap2{
+        -webkit-box-ordinal-group: 1;
+        -moz-box-ordinal-group: 1;
+        -ms-flex-order: 1;
+        -webkit-order: 1;
+        order: 1;
+    }
+    .primeng-datatable-container .ui-table table thead tr th{
+        font-size: 12px;
+    }
+      
+    }

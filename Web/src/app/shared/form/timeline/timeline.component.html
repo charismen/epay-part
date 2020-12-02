@@ -1,0 +1,46 @@
+<div class="kt-timeline-v2">
+    <div class="kt-timeline-v2__items kt-padding-top-25 kt-padding-bottom-30">
+        <div *ngFor="let item of primengTableHelper.records" class="kt-timeline-v2__item">
+            <span class="kt-timeline-v2__item-time">
+                {{item.BidTime | momentFormat:'HH:mm'}}
+            </span>
+            <div class="kt-timeline-v2__item-cricle">
+                <i class="fa fa-genderless" [ngClass]="item.IsMe == 1? 'kt-font-success' : 'kt-font-danger'"></i>
+            </div>
+            <div class="kt-timeline-v2__item-text kt-padding-top-5">
+                <div [innerHTML]="item.IsMe == 1? 
+                (item.BidRank == 0 ? l(item.Description, item.BidPrize) : l(item.Description, item.BidPrize, item.BidRank))
+                : item.BidRank == 0 ? l(item.Description) : l(item.Description, item.BidRank)"></div>
+                <div class="kt-separator kt-margin-t-5 kt-margin-b-5"></div>
+                <div style="font-size: 10px; font-weight: 100;">{{item.BidTime | momentFormat:'DD MMM YYYY'}}</div>                                     	                                	               
+            </div>
+        </div>
+        
+        <!-- <div class="kt-timeline-v2__item">
+            <span class="kt-timeline-v2__item-time">
+                15:32
+            </span>
+            <div class="kt-timeline-v2__item-cricle">
+                <i class="fa fa-genderless kt-font-danger"></i>
+            </div>
+            <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                Other bidder placed a bid and in a possition of <a class="kt-font-bolder">Rank 2</a>.
+                <div class="kt-separator kt-margin-t-5 kt-margin-b-5"></div>
+                <div style="font-size: 10px; font-weight: 100;">17 Aug 2020</div>                                              	                                	               
+            </div>
+        </div>
+        <div class="kt-timeline-v2__item">
+            <span class="kt-timeline-v2__item-time">
+                14:11
+            </span>
+            <div class="kt-timeline-v2__item-cricle">
+                <i class="fa fa-genderless kt-font-success"></i>
+            </div>
+            <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                You have just place bid of <a class="kt-font-info kt-font-bolder">RM 110.00</a> and in a possition of <a class="kt-font-bolder">Rank 1</a>.
+                <div class="kt-separator kt-margin-t-5 kt-margin-b-5"></div>
+                <div style="font-size: 10px; font-weight: 100;">17 Aug 2020</div>                                           	                                	               
+            </div>
+        </div> -->
+    </div>
+</div>

@@ -1,0 +1,190 @@
+.inlineBlock{
+	display:inline-block;
+	vertical-align:top;
+}
+.subMatrix{
+	padding: 15px 15px;
+	border-radius:5px;
+	margin-bottom:5px;
+}
+.currencyShow,.currencyType{
+	position:relative;
+}
+.currencyShow:before, .currencyType:before {
+    content: 'MYR';
+    font-size: 0.6em;
+    font-weight: normal;
+    // position: absolute;
+    // left: -1.7em;
+    // top: 4px;
+}
+#legendInvoice{
+	color: #fff;
+    background-color: #0f2c61;
+	/*background: linear-gradient(347deg, rgba(2,0,36,1) 0%, rgba(9,82,121,1) 69%, rgba(0,212,255,1) 100%);*/
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+#legendInvoice .labelMatrix,
+#boxInvoiceType .labelMatrix{
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+.subMatrix > div:first-child{
+	width: calc(100% - 75px);
+}
+.valueQtyMatrix
+{
+    font-size: 15px;
+    font-weight: normal !important;
+}
+.valueCurMatrix > span
+{
+	font-size: 16px;
+    font-weight: 500;
+	margin-left: 20px;
+}
+#legendInvoice .matrixBoxStyle1 > div:last-child
+{
+    margin-left: 0;
+    margin-right: 0;
+    padding: 20px;
+	padding: 15px 10px 5px;
+}
+.valueQtyMatrix{
+    width: 60px;
+    text-align: right;
+    float: right;
+}
+#totalInvoiceBox > div:last-child{
+    float:right;
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+#totalCurValue,#selectedCurValue{
+	font-size:20px;
+	font-weight: 600;
+}
+#totalInvoiceBox > div > div:first-child{
+	margin-left:-5px;
+}
+/*
+#currentInvoiceList,#legendInvoice
+{
+	display: flex;
+	height: 100%;
+    flex-direction: row;
+    flex-grow: 1;
+}
+*/
+#currentInvoiceList,#legendInvoice{
+	min-height:175px;
+}
+#invoiceType
+{						
+	font-size: 20px;
+    padding: 0px 13px 0px;
+    background-color: transparent;
+    font-weight: 600;
+    color: #d06f00;
+    border: none;
+    max-width: 175px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: right;
+    width: 100% !important;
+    font-size: 20px;
+    padding: 0px 12px 5px;
+    background-color: transparent;
+    font-weight: 600;
+    color: #d06f00;
+    border: none;
+    max-width: 171px;
+    margin-right: 15px;
+    text-transform: uppercase;
+	}
+#curViewaQty{
+    padding-right: 18px;
+    display: block;
+    text-align: right;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: -10px;
+}
+#searchBoxInvoice > div{
+	background-color:#ccc;
+	border-radius:5px;
+	// min-height:175px;
+}
+#currentInvoiceList{
+	padding-left:0;
+}
+.labelMatrix{
+	text-transform:uppercase;
+}
+#typeSearch,#customerSelect{
+	margin-bottom: 5px;
+    width: 100%;
+    padding: 8px 5px;
+    border-radius: 3px;
+    border: none;
+    margin-top: 5px;
+}
+#dateSeperator{
+	width: 40px;
+    background-color: #f2f2f2;
+    margin-top: 2px;
+}
+#dateSeperator > span
+{
+	display: block;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    padding-bottom: 9px;
+    padding-top:3px;
+}
+#boxInvoiceType .labelMatrix,#selectedCurValue,#curViewaQty{
+    color:#000;
+}
+#totalQty{
+    font-weight: 600;
+}
+/*---------------------------------------------- Responsive section ----------------------------------------------------------*/
+@media only screen and (min-width:1025px){
+	#currentInvoiceList > div{
+		height: 175px !important;
+		background-color: #ffe498;
+		border-radius: 5px;
+	}
+	#searchBoxInvoice > div{
+		// height: 175px !important;
+	}
+}
+@media only screen and (max-width:1024px){
+	#currentInvoiceList,#searchBoxInvoice{
+		margin-right:-15px;
+	}
+	#searchBoxInvoice{
+	}
+}
+
+.currencyShow-2:before,
+.currencyType-2:before{
+    content: 'MYR';
+    font-size: 0.6em;
+    font-weight: normal;
+    // position: absolute;
+    // left: -1.7em;
+    // top: 4px;
+}
+.valueSet {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #000;
+}
+.currValue {
+    text-align: right;
+}

@@ -1,0 +1,274 @@
+<div *ngIf="enableFilter" class="kt-form">
+    <form autocomplete="new-password">
+        <div class="form-body">
+            <div class="row align-items-center mb-4">
+                <div class="col-xl-12">
+                    <div>
+                        <div class="input-group">
+                            <input [(ngModel)]="filter" name="filterText" autoFocus class="form-control m-input"
+                                [placeholder]="l('SearchWithThreeDot')" type="text">
+                            <span class="input-group-btn">
+                                <button (click)="refresh()" class="btn btn-primary" type="submit"><i
+                                        class="flaticon-search-1" [attr.aria-label]="l('Search')"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div *ngFor="let view of views" [hidden]="!advancedFiltersAreShown">
+                <ng-container *ngTemplateOutlet="view.template"></ng-container>
+            </div> -->
+            <div [hidden]="!advancedFiltersAreShown">
+                <ng-container [ngTemplateOutlet]="filterTemplate"></ng-container>
+            </div>
+
+            <div class="row mb-4" *ngIf="advancedFiltersAreShown">
+                <div class="col-sm-6" *ngIf="!hideActiveFilter">
+                    <div class="kt-checkbox-list">
+                        <label for="ShowActiveData" class="kt-checkbox">
+                            <input id="ShowActiveData" type="checkbox" name="flag" [(ngModel)]="flag">
+                            {{"Active" | localize}}
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="{{hideActiveFilter ? 'col-sm-12' : 'col-sm-6'}} text-right">
+                    <button class="btn btn-sm btn-primary" (click)="refresh()"><i class="la la-refresh"></i>
+                        {{"Refresh" | localize}}</button>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-12">
+                    <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown"
+                        (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i>
+                        {{"ShowAdvancedFilters" | localize}}</span>
+                    <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown"
+                        (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i>
+                        {{"HideAdvancedFilters" | localize}}</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row align-items-center">
+    <!--<Primeng-TurboTable-Start>-->
+    <div class="col primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+        <p-table #dataTable (onLazyLoad)="refresh($event)" [lazy]="true" [columns]="primengTableHelper.columns"
+            [value]="primengTableHelper.records" [dataKey]="rowKey" selectionMode="multiple"
+            [rowExpandMode]="rowExpandMode" [(selection)]="selectedData" [metaKeySelection]="actionColumn!=='checkbox'"
+            (onRowSelect)="onRowSelect($event)" (onRowExpand)="rowExpanded($event)"
+            (onRowCollapse)="rowColapsed($event)" (onRowUnselect)="onRowUnselect($event)"
+            (onHeaderCheckboxToggle)="onTableHeaderCheckboxToggle($event)" [scrollable]="true"
+            [rows]="primengTableHelper.defaultRecordsCountPerPage" [paginator]="false" ScrollWidth="100%"
+            [responsive]="primengTableHelper.isResponsive" [resizableColumns]="primengTableHelper.resizableColumns">
+            <ng-template pTemplate="header" let-columns>
+                <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{columns: columns}"></ng-container>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns"
+                let-rowIndex="rowIndex" let-record="$implicit">
+                <ng-container [ngTemplateOutlet]="body"
+                    [ngTemplateOutletContext]="{rowData: rowData, columns: columns, rowIndex: rowIndex, record: record, expanded: expanded}">
+                </ng-container>
+            </ng-template>
+
+            <ng-template #header let-columns="columns">
+                <tr>
+                    <th *ngIf="rowExpand" style="width: 3rem">
+                    </th>
+                    <th *ngIf="actionColumn==='action'" style="width: 130px"
+                        [hidden]="primengTableHelper.columns === undefined || !isGrantedAnySplit(permissionView + ',' + permissionEdit + ',' + permissionDelete + ',' + permissionHistory, ',')">
+                        <div style="text-align: center;">
+                            {{'Actions' | localize}}
+                        </div>
+                    </th>
+                    <th [hidden]="primengTableHelper.columns === undefined" *ngIf="actionColumn==='checkbox'"
+                        style="width: 3em">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th [hidden]="primengTableHelper.columns === undefined" *ngIf="indexing" style="width: 4em">
+                        <div style="text-align: center;">
+                            {{'#'}}
+                        </div>
+                    </th>
+                    <th [hidden]="primengTableHelper.columns === undefined"
+                        *ngIf="detail && detailAlignment === 'left'"
+                        style="width: 6em; word-wrap: break-word;">
+                        <div style="text-align: center;">
+                            {{detailLabel | localize}}
+                        </div>
+                    </th>
+                    <th [hidden]="primengTableHelper.columns === undefined"
+                        *ngIf="downloadDoc && downloadDocAlignment === 'left'"
+                        style="width: 7em; word-wrap: break-word;">
+                        <div style="text-align: center;">
+                            {{downloadDocLabel | localize}}
+                        </div>
+                    </th>
+                    <th *ngFor="let col of columns"
+                        [hidden]="col.permissions != '' ? !isGrantedAnySplit(col.permissions, ',') : !col.isVisible"
+                        [pSortableColumn]="col.isSortable ? col.field : ''"
+                        [ngStyle]="col.width != 0 ? {'width.px': col.width} : ''">
+                        <div
+                            [ngStyle]="headerAlignment != '' ? {'text-align': headerAlignment} : {'text-align': col.alignment}">
+                            {{col.field | localize}}
+                            <p-sortIcon *ngIf="col.isSortable" [field]="col.field"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th [hidden]="primengTableHelper.columns === undefined"
+                        *ngIf="detail && detailAlignment === 'right'"
+                        style="width: 6em; word-wrap: break-word;">
+                        <div style="text-align: center;">
+                            {{detailLabel | localize}}
+                        </div>
+                    </th>
+                    <th [hidden]="primengTableHelper.columns === undefined"
+                        *ngIf="downloadDoc && downloadDocAlignment === 'right'"
+                        style="width: 7em; word-wrap: break-word;">
+                        <div style="text-align: center;">
+                            {{downloadDocLabel | localize}}
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template #body let-rowData="rowData" let-expanded="expanded" let-columns="columns"
+                let-rowIndex="rowIndex" let-record="record">
+                <tr [pSelectableRow]="rowData" [ngStyle]="styleRender(rowData)"
+                    [style.background-color]="rowData.RowColor">
+                    <td *ngIf="rowExpand" style="width: 3rem">
+                        <button type="button" [pRowToggler]="rowData"
+                            class="btn btn-sm btn-outline-hover-info btn-elevate btn-circle btn-icon">
+                            <i [ngClass]="expanded ? 'la la-angle-down' : 'la la-angle-right'"></i>
+                        </button>
+                    </td>
+                    <td *ngIf="actionColumn==='action'" style="width: 130px"
+                        [hidden]="!isGrantedAnySplit(permissionView + ',' + permissionEdit + ',' + permissionDelete + ',' + permissionHistory, ',')">
+                        <div class="btn-group dropdown" dropdown container="body">
+                            <button dropdownToggle class="dropdown-toggle btn btn-sm btn-primary">
+                                <i class="fa fa-cog"></i><span class="caret"></span>
+                                {{"Actions" | localize}}
+                            </button>
+                            <ul class="dropdown-menu" *dropdownMenu>
+                                <li>
+                                    <a href="javascript:;" *ngIf="isGrantedAnySplit(permissionView, ',')"
+                                        (click)="view(record)">{{'View' | localize}}</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" *ngIf="isGrantedAnySplit(permissionEdit, ',')"
+                                        (click)="edit(record)">{{'Edit' | localize}}</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" *ngIf="isGrantedAnySplit(permissionDelete, ',')"
+                                        (click)="delete(record)">{{'Delete' | localize}}</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;"
+                                        *ngIf="isGrantedAnySplit(permissionHistory, ',') && historyName != '' && record.rowguid != ''"
+                                        (click)="history(record)">{{'History' | localize}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td *ngIf="actionColumn==='checkbox'" style="width: 3em">
+                        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngIf="indexing" style="width: 4em">
+                        <div style="text-align: center;">
+                            {{setIndexing(rowIndex + 1)}}
+                        </div>
+                    </td>
+                    <td *ngIf="detail && detailAlignment === 'left'" style="width: 6em">
+                        <div style="text-align: center;">
+                            <button class="{{iconStyle}} btn-outline-info" (click)="detailClick(record)"
+                                title="{{detailLabel | localize}}">
+                                <i class="la la-share"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td *ngIf="downloadDoc && downloadDocAlignment === 'left'" style="width: 7em">
+                        <div style="text-align: center;">
+                            <button (click)="downloadDocument(record)" class="{{iconStyle}} btn-outline-success"
+                                title="{{downloadDocLabel | localize}}">
+                                <i class="la la-download"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <!-- Content -->
+                    <td *ngFor="let col of columns"
+                        [hidden]="col.permissions != '' ? !isGrantedAnySplit(col.permissions, ',') : !col.isVisible"
+                        [ngStyle]="col.width != 0 ? {'width.px': col.width} : ''">
+                        <div [ngStyle]="{'text-align': col.alignment}">
+                            <ng-container [ngTemplateOutlet]="bodyTemplate? bodyTemplate: rowContent" [ngTemplateOutletContext]="{rowData: rowData, col: col}"></ng-container>
+                        </div>
+                    </td>
+                    <!-- End of Content -->
+                    <td *ngIf="detail && detailAlignment === 'right'" style="width: 6em">
+                        <div style="text-align: center;">
+                            <button class="{{iconStyle}} btn-outline-info" (click)="detailClick(record)"
+                                title="{{detailLabel | localize}}">
+                                <i class="la la-share"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td *ngIf="downloadDoc && downloadDocAlignment === 'right'" style="width: 7em">
+                        <div style="text-align: center;">
+                            <button (click)="downloadDocument(record)" class="{{iconStyle}} btn-outline-success"
+                                title="{{downloadDocLabel | localize}}">
+                                <i class="la la-download"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template #rowContent let-rowData="rowData" let-col="col">
+                <span
+                    *ngIf="col.dataType != 'DateTime' && col.dataType != 'Byte' && col.dataType != 'Decimal' && col.statusBadges == undefined && col.iconSet == undefined">
+                    {{col.caps == 'uppercase' ? (rowData[col.field] | uppercase) : col.caps == 'lowercase' ? (rowData[col.field] | lowercase) : col.caps == 'titlecase' ?  (rowData[col.field] | titlecase) : rowData[col.field]}}
+                </span>
+                <span *ngIf="col.dataType == 'DateTime'">{{rowData[col.field] | momentFormat:col.datetimeFormat}}</span>
+                <span
+                    *ngIf="col.dataType == 'Decimal'">{{ col.hasCurrency ? appSession.application.currencySign + (rowData[col.field] | number:col.decimalPlaces) : rowData[col.field] | number:col.decimalPlaces }}</span>
+                <span *ngIf="col.dataType == 'Byte'"
+                    class="kt-badge {{rowData[col.field] == 1 ? 'kt-badge--'+col.activeMaskingColor : 'kt-badge--'+col.inactiveMaskingColor}} kt-badge--inline">{{rowData[col.field] == 1 ? col.activeMaskingLabel : col.inactiveMaskingLabel | localize}}</span>
+                <span *ngIf="col.statusBadges != undefined"
+                    class="kt-badge {{'kt-badge--'+getArrayValue(col.statusBadges, rowData[col.field], 1)}} kt-badge--inline">
+                    {{rowData[col.field] | localize}}</span>
+                <span *ngIf="col.iconSet != undefined && !col.isIconClickable">
+                    <i class="{{getArrayValue(col.iconSet, rowData[col.field], 1)}}"
+                        title="{{getArrayValue(col.iconSet, rowData[col.field], 0) | localize}}"
+                        [ngStyle]="{'color': getArrayValue(col.iconSet, rowData[col.field], 2), 'font-size': (getArrayValue(col.iconSet, rowData[col.field], 3) != '' ? getArrayValue(col.iconSet, rowData[col.field], 3) : '2em')}"
+                        [attr.aria-label]="l(getArrayValue(col.iconSet, rowData[col.field], 0))"></i>
+                </span>
+                <button *ngIf="col.iconSet != undefined && col.isIconClickable"
+                    class="{{iconStyle + ' ' + getArrayValue(col.iconSet, rowData[col.field], 2)}}"
+                    (click)="iconClick(rowData, col.field)"
+                    title="{{getArrayValue(col.iconSet, rowData[col.field], 0) | localize}}">
+                    <i class="{{getArrayValue(col.iconSet, rowData[col.field], 1)}}"></i>
+                </button>
+            </ng-template>
+
+            <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+                <ng-container [ngTemplateOutlet]="rowExpandTemplate"
+                    [ngTemplateOutletContext]="{rowData: rowData, columns: columns}"></ng-container>
+            </ng-template>
+
+        </p-table>
+        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+            {{emptyMessage | localize}}
+        </div>
+        <div [hidden]="!enablePaginator" class="primeng-paging-container">
+            <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage" #paginator
+                (onPageChange)="refresh($event)" [totalRecords]="primengTableHelper.totalRecordsCount"
+                [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+
+            </p-paginator>
+            <span class="total-records-count">
+                {{'TotalRecordsCount' | localize:primengTableHelper.totalRecordsCount}}
+            </span>
+        </div>
+    </div>
+    <!--<Primeng-TurboTable-End>-->
+</div>

@@ -1,0 +1,535 @@
+.inlineBlock{
+	display:inline-block;
+	vertical-align:top;
+}
+.subMatrix{
+	padding: 15px 15px;
+	border-radius:5px;
+	margin-bottom:5px;
+}
+.currencyShow,.currencyType{
+	// position:relative;
+}
+.invoiceWrap{
+    display: flex;
+    flex-flow: row wrap;
+    margin: 5px 0;
+}
+.columnInvoice{
+flex: 1;
+margin: 2px;
+}
+.currencyShow:before, .currencyType:before {
+    // content: 'RM';
+    // font-size: 0.4em;
+    // font-weight: normal;
+    // position: absolute;
+    // left: -1.7em;
+    // top: 4px;
+}
+#legendInvoice{
+	color: #fff;
+    background-color: #0f2c61;
+	/*background: linear-gradient(347deg, rgba(2,0,36,1) 0%, rgba(9,82,121,1) 69%, rgba(0,212,255,1) 100%);*/
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+#legendInvoice .labelMatrix,
+#boxInvoiceType .labelMatrix{
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+.subMatrix > div:first-child{
+	width: calc(100% - 60px);
+}
+.valueQtyMatrix
+{
+    font-size: 15px;
+    font-weight: normal !important;
+}
+.valueCurMatrix > span
+{
+	font-size: 16px;
+    font-weight: 500;
+	margin-left: 20px;
+}
+#legendInvoice .matrixBoxStyle1 > div:last-child
+{
+    margin-left: 0;
+    margin-right: 0;
+    padding: 20px;
+	padding: 15px 10px 5px;
+}
+.valueQtyMatrix{
+    width: 60px;
+    text-align: right;
+    float: right;
+}
+#totalInvoiceBox > div:last-child{
+    float:right;
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+#totalCurValue,#selectedCurValue{
+	font-size:20px;
+	font-weight: 600;
+}
+#totalInvoiceBox > div > div:first-child{
+	margin-left:-5px;
+}
+/*
+#currentInvoiceList,#legendInvoice
+{
+	display: flex;
+	height: 100%;
+    flex-direction: row;
+    flex-grow: 1;
+}
+*/
+#currentInvoiceList,#legendInvoice,#searchBoxInvoice{
+	min-height:0;
+}
+#invoiceType
+{						
+	font-size: 20px;
+    padding: 0px 13px 0px;
+    background-color: transparent;
+    font-weight: 600;
+    color: #d06f00;
+    border: none;
+    max-width: 175px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: right;
+    width: 100% !important;
+    font-size: 20px;
+    padding: 0px 12px 5px;
+    background-color: transparent;
+    font-weight: 600;
+    color: #d06f00;
+    border: none;
+    max-width: 171px;
+    margin-right: 15px;
+    text-transform: uppercase;
+    border-radius: 5px;
+	}
+#curViewaQty{
+    padding-right: 18px;
+    display: block;
+    text-align: right;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: -10px;
+}
+#searchBoxInvoice{
+    padding:0;
+}
+#searchBoxInvoice > div{
+	background-color:#ccc;
+	border-radius:5px;
+    min-height:0 !important;
+    padding:20px 0;
+}
+#boxInvoiceType{
+    text-align: right;
+}
+#currentInvoiceList{
+	padding-left:0;
+}
+.labelMatrix{
+	text-transform:uppercase;
+}
+#typeSearch,#customerSelect{
+	margin-bottom: 5px;
+    width: 100%;
+    padding: 8px 5px;
+    border-radius: 3px;
+    border: none;
+    margin-top: 5px;
+}
+#dateSeperator{
+	width: 30px;
+    background-color: #f2f2f2;
+    margin-top: 2px;
+    display: inline-block !important;
+}
+.dropController{
+    padding: 0 !important;
+    background-color: #fff !important;
+    padding-bottom: 10px !important;
+    cursor:pointer;
+}
+.spacerSearch{
+    margin-bottom:100px;
+}
+#controlSearchBox + div
+{
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+}
+#controlSearchBox + div.fadeOutUp {
+    z-index: -1;
+}
+#dateSeperator > span
+{
+	display: block;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    padding-bottom: 9px;
+    padding-top:3px;
+}
+#boxInvoiceType .labelMatrix,#selectedCurValue,#curViewaQty{
+    color:#000;
+}
+#totalQty{
+    font-weight: 600;
+}
+/*---------------------------------------- 04/03/2020 ---------------------------------------------------*/
+#displayCustomerTbl{
+    /*display: flex;*/
+    padding-top: 27px;
+    
+}
+#displayCustomerTbl button{
+    border-radius:5px;
+}
+#displayCustomer{
+    display: inline-block;
+    padding-right: 10px;
+    width: 30%;
+    max-width: 400px;
+
+}
+#displayCustomer + div{
+    display: inline-block;
+    width:70%;
+    max-width:calc(100% - 420px);
+
+}
+#displayCustomer.hideThis + div{
+    width:100%;
+    max-width:100%;
+}
+#displayCustomer > .wrpContent{
+    border:1px solid #ccc;
+    border-radius:5px;
+    min-height: 200px;
+    padding: 0 20px 20px;
+}
+#displayCustomer .headingBoxTbl{
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 600;
+}
+.btnSelected,
+.btnSelected:focus,
+.btnSelected:hover,
+.btnSelected:active{
+    position:relative;
+    color:#fff;
+    background-color: #fff !important;
+}
+.btnSelected:before{
+    position: absolute;
+    content:'Close';
+    color:#212529;
+    width:100%;
+    height:100%;
+
+}
+.btnSelected i{
+    transform: rotateZ(45deg);
+    color:#212529;
+}
+/*---------------------------------------------- Responsive section ----------------------------------------------------------*/
+// @media only screen and (min-width:1025px){
+// 	#currentInvoiceList > div{
+// 		height: 175px !important;
+// 		background-color: #ffe498;
+// 		border-radius: 5px;
+// 	}
+// 	#searchBoxInvoice > div{
+// 		height: 175px !important;
+// 	}
+// }
+// @media only screen and (max-width:1024px){
+// 	#currentInvoiceList,#searchBoxInvoice{
+// 		margin-right:-15px;
+// 	}
+// 	#searchBoxInvoice{
+// 	}
+// }
+
+.currencyShow-2:before,
+.currencyType-2:before{
+    // content: 'RM';
+    // font-size: 0.6em;
+    // font-weight: normal;
+    // position: absolute;
+    // left: -1.7em;
+    // top: 4px;
+}
+.valueSet {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #000;
+}
+.currValue {
+    text-align: right;
+}
+.matrixBoxStyle1{
+    border-radius: 5px;
+    }
+/*------------------------------------------17/10/2019---------------------------------------*/
+.officer1{
+    background-color:rgb(0, 99, 165);
+    background-color:#de005c;
+    color: #fff;
+}
+.uka1{
+    background-color:rgb(146, 0, 165);
+    color:#fff;
+}
+.accept1{
+    background-color:rgb(153, 153, 0);
+    color:#fff;
+}
+.paid1{
+    background-color:rgb(0, 153, 0);
+    color:#fff;
+}
+#totalInvoiceAmt{
+   
+}
+#totalInvoiceAmt:before{
+   
+}
+.currencyShow, .currencyType {
+    // position: relative;
+}
+.currencyShow:before, .currencyType:before {
+    
+    // content: 'RM';
+    // font-size: 0.4em;
+    // font-weight: normal;
+    // position: absolute;
+    // left: -1.7em;
+    // top: 4px;
+}
+#totalInvoiceBlock .currencyShow{
+    // margin-left:1em;
+}
+#totalInvoiceBlock + div > div > div{
+    text-align: right;
+    width: 100%;
+}
+#totalInvoiceBlock + div > div > div > div{
+    height:65px;
+    position:relative;
+}
+#totalInvoiceBlock + div > div > div > div button{
+    position: ABSOLUTE;
+    left: 0;
+    bottom: 0;
+
+}
+#totalInvoiceBlock + div #payNowOne{
+    width:100%;
+
+}
+#totalInvoiceBlock + div > div .labelMatrix {
+    text-align: left;
+    padding: 0 15px;
+}
+#totalInvoiceBlock + div > div #selectedCurValue{
+    // float: right;
+    padding-right: 20px;
+    font-size: 2.5rem;
+    font-weight: 500 !important;
+}
+
+@media (min-width: 1281px) {
+  
+    #kt_search{
+        // margin-top: 55px;
+        // margin-left: -197px;
+        // margin-bottom: 10px;
+    }
+    
+  }
+  
+
+    
+  
+
+// Responsive For Mobile
+@media only screen and (min-width : 150px) and (max-width : 767px){
+    .legendInvoice{
+        margin-bottom: 10px;
+    }
+    .searchBoxInvoice{
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    .currentInvoiceList{
+        margin-top: 10px;
+    }
+    input{
+        width: 100%;
+    }
+    .form-control {
+        width: 17rem; 
+    }
+    .valueMatrix input {
+        width: 100%; 
+    }
+    .adminCustomerSelect{
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .adminCustomerSelect button{
+        margin-bottom: 10px;
+        margin: 0 auto;
+        width: 100%;
+        padding-right: 30px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .dateSeperator{
+        display: none;
+    }
+    .matrixBoxStyle1{
+        border-radius: 5px;
+    }
+    .labelMatrix{
+        margin-top: 10px;
+    }
+    .searchBoxInvoice{
+        padding: 0;
+        width: 100%;
+        display: block;
+        margin: 10 auto;
+    }
+    .payText{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .fullForm{
+        padding: 0;
+    }
+    .ui-column-title{
+        display: block;
+    }
+    td.ng-star-inserted > div{
+        text-align: left !important;
+    }
+    td.ng-star-inserted > div > span:last-child{
+        float:right;
+        
+    }
+    .button-search{
+        margin-top: 20px;
+    }
+
+  }
+
+//   Responsive for Tablet
+@media (min-width: 768px) and (max-width: 1024px)  {
+  #kt_search{
+      width: 20rem;
+      margin-left: -197px;
+      margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: -197px;
+  }
+  .matrixBoxStyle1{
+    border-radius: 5px;
+    }
+    .invoiceWrap{
+        display: flex;
+        flex-flow: row wrap;
+        margin: 5px 0;
+    }
+    .columnInvoice{
+    flex: 1;
+	margin: 2px;
+    }
+    .payText{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .invoiceWrap .columnInvoice {
+	margin-bottom: 5px;
+    flex-basis: 50%;
+    }
+
+    #boxInvoiceType .labelMatrix, #selectedCurValue, #curViewaQty{
+        text-align: center;
+    }
+    .valueCurMatrix{
+        text-align: center;
+    }
+    #paymentInvoiceBlock > div:first-child{
+        height: calc(100% - 20px);
+        padding: 0;
+    }
+    #totalInvoiceBlock + div > div > div{
+        padding:10px;
+
+    }
+    #totalInvoiceBlock + div > div > div > div{
+        height:75px;
+
+    }
+  }
+
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+      .button-search {
+    justify-content: flex-start;
+}
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+      .button-search {
+    justify-content: center;
+}
+    
+  }
+
+  @media (width: 1366x) and (orientation: landscape) {
+    
+    .button-search {
+  justify-content: center;
+}
+  
+}
+
+
+
+
+
+
+

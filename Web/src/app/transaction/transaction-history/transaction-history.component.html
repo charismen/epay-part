@@ -1,0 +1,42 @@
+<div [@routerTransition]>
+
+    <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="HostDashboard kt_content">            
+        <div class="kt-content kt-grid__item kt-grid__item--fluid">
+
+            <div  [class]="containerClass">
+             <div class="kt-subheader kt-grid__item">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"PaymentHistory" | localize}}</span>
+                    </h3>
+                    <div class="kt-subheader__breadcrumbs">
+                      <a href="app/transaction/payment-history" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                      <span class="kt-subheader__breadcrumbs-separator"></span>
+                      <a href="" class="kt-subheader__breadcrumbs-link">
+                      {{"PaymentHistory" | localize}}</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+            <div [class]="containerClass">
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__body">
+                        <div class="tableStylePlain">                        
+                            <div class="mt-element-step">
+                                <div id="rowMetric">
+                            </div>
+                            </div>
+                            <base-list #transactionHistoryComponent [(gridUrl)]="gridUrl" [enableFilter]="false" (onSelectedChange)="detail($event)"></base-list>
+                        </div>
+                    </div>              
+                </div>    
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>

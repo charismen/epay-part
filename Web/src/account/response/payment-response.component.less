@@ -1,0 +1,327 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    line-height: 1.6;
+    color: #333;
+    font-size: 1.1rem;
+    background-color:#F6F6F6;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.3;
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+  }
+
+
+  p{
+     font-family: 'PT Sans', sans-serif;
+     font-size: 14px;
+  }
+  
+  a {
+    color: #444;
+    text-decoration: none;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  img {
+    width: 100%;
+  }
+  
+  
+  .container {
+    max-width: 839px;
+    max-width:750px;
+    // margin: auto;
+    overflow: hidden;
+    /* padding: 0 2rem; */
+    padding:0;
+  }
+  .main .container{
+    background-color: #ffffff;
+    padding: 2rem;
+  }
+
+  
+
+  /* Headline */
+  .main-headline{
+      text-align: center;
+    //   margin-top: 5vh;
+      background-color: #31DCA9;
+      /* max-width: 600px; */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: ". .";
+        padding: 1rem 0;
+  }
+  .main-headline h1{
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    
+  }
+  .headline .container{
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Grid 1 */
+  .status{
+      text-align: center;
+  }
+  .status h1{
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    text-align: left;
+    font-size: 18px;
+    font-weight: normal;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: center;
+  }
+  .status h3{
+      font-size: 22px;
+  }
+  #responseTransactionSection > div{
+    border-radius:5px;
+  }
+
+  .line{
+      color: #6E6E6E;
+      margin-top: 3vh;
+  }
+
+  /* Grid 3 */
+  .info {
+    display: grid;
+    grid-template-columns:0.9fr 0.7fr 1.1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: ". . .";
+    /* text-align: center; */
+  }
+  
+  .info p{
+      line-height: 2rem;
+      font-weight: 500;
+  }
+  .main-info2 p{
+      font-weight: 600;
+  }
+
+  .success{
+    background: url('/assets/qstl/img/success.png') no-repeat center center ;
+    background-size: 150px;
+  }
+  .pending{
+    background: url('/assets/qstl/img/paymentpending.png') no-repeat center center ;
+    background-size: 150px;
+  }
+  .failed{
+    background: url('/assets/qstl/img/paymentfailed.png') no-repeat center center ;
+    background-size: 150px;
+    
+  }
+
+
+  /* Grid3 */
+  
+//   .office {
+//     padding: 0 2rem;
+//     display: grid;
+//     grid-template-columns: 1fr 1fr 1fr;
+//     grid-template-rows: 1fr;
+//     grid-template-areas: ". . .";
+//   }
+//   .office p{
+//     font-family: 'PT Sans', sans-serif; 
+//   }
+  
+/*-------------------------------------- Remove all page to blank ----- 18/10/2019 ---------------------------------*/
+#loginBox1 {
+  background-image: none !important;
+}
+#loginBox2{
+  background-color: #efefef;
+  max-width: 100%;
+  
+}
+#loginBox2 > div:nth-child(3){
+  max-width:100% !important;
+}
+#projectLogo,tenant-change,
+.loginBoxWrp:before, .loginBoxWrp:after,
+#loginBox1{
+  display:none;
+}
+#loginBox2{
+  width:100% !important;
+
+}
+.pl-0{
+  padding-left:0 !important;
+}
+/*----------------------------------------- End Default blank styling ----------------------------------------*/
+/*------------------------------------------ Structure styling -----------------------------------------------*/
+/*-- Logo and Company Name Styling -- */
+#logoWrp{
+  margin:0 auto;
+  width:75px;
+  height:75px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image:url(../../assets/common/images/logo.png);
+}
+#companyName{
+  text-transform: uppercase;
+  font-size: 22px;
+  color: #00a859;
+  margin-left: 20px;
+}
+#responseTitle{
+  margin-left: 20px;
+  font-size: 18px;
+  line-height: 14px;
+}
+#companyInformation > div:first-child{
+  padding:20px;
+}
+#bannerSection{
+  margin-bottom:20px;
+  margin-top:20px;
+}
+#iconCtr{
+  width: 65px;
+  height: 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 10px auto;
+}
+#labelStatus{
+  position:relative;
+  width:100%;
+}
+#labelStatus:before{
+  content:'';
+  // display:block;
+  // position:absolute;
+  width:100%;
+  text-align: center;
+}
+.successResponse #iconCtr {
+  background-image:url(../../assets/qstl/img/success.svg);
+}
+.successResponse #labelStatus:before{
+  content: 'Payment Successful';
+  color: #009e00;
+}
+.failResponse #iconCtr {
+  background-image:url(../../assets/qstl/img/fail.svg);
+}
+.failResponse #labelStatus:before{
+  content:'Payment Fail';
+  color:#e00000;
+}
+.pendingResponse #labelStatus:before{
+  content:'Pending Payment';
+  color:#e08600;
+}
+.companyInfoBlock 
+{
+    display: block;
+    text-align: center;
+}
+#bannerSection img{
+  width:100%;
+}
+#iconStatus{
+  display:none;
+}
+// #bannerSection > .container,
+// #responseTransactionSection > .container{
+//   box-shadow: 0 1px 7px -3px #000;
+// }
+#kt_login > div:first-child{
+  background-color: #dedede;
+}
+.successResponse,.failResponse,.pendingResponse{display:block !important;}
+
+  
+
+// New Design
+.main-transaction{
+  max-width: 600px;
+  margin: auto;
+}
+h2{
+  font-weight: 300;
+}
+.main-transaction__title{
+  background: #192F70;
+  color: #fff;
+  font-weight: 300;
+  display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+.kt-widget1 .kt-widget1__item .kt-widget1__number {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #74788d;
+}
+
+  @media all and (-ms-high-contrast:none) {
+    .grid-container {
+      display: -ms-grid;
+      -ms-grid-columns: 1fr 1fr 1fr;
+      -ms-grid-rows: 1fr;
+    }
+  
+  }
+
+
+  @media all and (-ms-high-contrast:none) {
+    .grid-container {
+      display: -ms-grid;
+      -ms-grid-columns: 1fr 1fr;
+      -ms-grid-rows: 1fr;
+    }
+  
+  }
+
+
+
+  
+  @media all and (-ms-high-contrast:none) {
+    .grid-container {
+      display: -ms-grid;
+      -ms-grid-columns: 0.9fr 1fr 1.1fr;
+      -ms-grid-rows: 1fr;
+    }
+  
+  }
+
+
+
+
+
+

@@ -1,0 +1,84 @@
+<div [@routerTransition]>
+    <div appBsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+            aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+            <div class="modal-body" style="max-width: 1024px; margin: 0 auto;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="custDetailModal" class="kt-portlet modalForm" style="overflow:hidden;">
+                            <div class="kt-portlet__body kt-padding-0">
+                                <div id="registerWizzard" class="stepperWizzard">
+                                    <div class="steperContentWrapper row">
+                                        <div class="stepContent fadeInUp animated col-md-12">
+                                            <div class="modal-dialog modal-lg modalWrpLg">
+                                                <div class="modal-content">
+                                                    
+                                                    <div class="modal-header" style="position: relative;">
+                                                        <h4 class="modal-title">
+                                                            <span>{{"CompanyProfileName" | localize}}</span>
+                                                        </h4>
+                                                        <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>                       
+                                                    </div>
+
+                                                    <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+                                                        <div class="kt-portlet kt-portlet--mobile">
+                                                            <div class="kt-portlet__body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="detail-company-profile kt-margin-t-20">
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"Company" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.CompanyName}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"AcctNo" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.AcctNo}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"Address" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.Address}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"ContactPerson2" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.ContactPerson}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"Email" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.Email}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"Country" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.CountryDesc}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"PostalCode" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.PostalCode}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"City" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.CityDesc}}</div>
+                                                                            </div>
+                                                                            <div class="kt-invoice__subtitle row">
+                                                                                <div class="col-md-4">{{"State" | localize}}</div>
+                                                                                <div class="col-md-8 valueSet">{{inputHelper.StateDesc}}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

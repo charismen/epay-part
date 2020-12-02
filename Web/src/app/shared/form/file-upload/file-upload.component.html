@@ -1,0 +1,112 @@
+<p-fileUpload #fileUploadInput class="file-upload-container" [multiple]="multiple" id="fileUploadInput"
+    [customUpload]="customUpload" name="DefaultFileUploadFileInput[]" [url]="uploadUrl" [accept]="accept"
+    [maxFileSize]="maxFileSize" [auto]="auto" (uploadHandler)="uploadHandler($event)" (onRemove)="removeAll($event)"
+    (onUpload)="onUploadComplete($event)" [showUploadButton]="showUploadButton"
+    [showCancelButton]="showCancelButton" (onBeforeSend)="onBeforeSend($event)" (onSelect)="onSelected()"
+    [chooseLabel]="labelText">
+
+    <ng-template let-file pTemplate="file" style="width: 100%;">
+        <div *ngIf="showChoosenUpload" class="kt-widget4" style="padding: 0px 15px;">
+            <div class="kt-widget4__item">
+                <div *ngIf="file.type.indexOf('image/') > -1" class="kt-widget4__pic kt-widget4__pic--pic">
+                    <img [src]="file.objectURL" alt="">
+                </div>
+                <div *ngIf="file.type.indexOf('/pdf') > -1" class="kt-widget4__pic kt-widget4__pic--icon">
+                    <img src="/assets/common/images/icon/pdf.svg" alt="">
+                </div>
+                <div *ngIf="file.type.indexOf('/vnd.openxmlformats-officedocument.spreadsheetml.sheet') > -1"
+                    class="kt-widget4__pic kt-widget4__pic--icon">
+                    <img src="/assets/common/images/icon/xlsx.svg" alt="">
+                </div>
+                <div *ngIf="file.type.indexOf('/vnd.ms-excel') > -1 && file.name.indexOf('.xls') > -1"
+                    class="kt-widget4__pic kt-widget4__pic--icon">
+                    <img src="/assets/common/images/icon/xls.svg" alt="">
+                </div>
+                <div *ngIf="file.type.indexOf('/vnd.ms-excel') > -1 && file.name.indexOf('.csv') > -1"
+                    class="kt-widget4__pic kt-widget4__pic--icon">
+                    <img src="/assets/common/images/icon/csv.svg" alt="">
+                </div>
+                <div *ngIf="file.type.indexOf('/vnd.openxmlformats-officedocument.wordprocessingml.document') > -1"
+                    class="kt-widget4__pic kt-widget4__pic--icon">
+                    <img src="/assets/common/images/icon/docx.svg" alt="">
+                </div>
+                <div *ngIf="file.type.indexOf('/msword') > -1" class="kt-widget4__pic kt-widget4__pic--icon">
+                    <img src="/assets/common/images/icon/doc.svg" alt="">
+                </div>
+                <div *ngIf="file.type.indexOf('/x-zip-compressed') > -1" class="kt-widget4__pic kt-widget4__pic--icon">
+                    <img src="/assets/common/images/icon/zip.svg" alt="">
+                </div>
+                <div class="kt-widget4__info">
+                    <a class="kt-widget4__title">
+                        {{file.name}}
+                    </a>
+                    <p class="kt-widget4__text">
+                        {{file.size | fileSize}}
+                    </p>
+                </div>
+                <!-- <a href="#" class="btn btn-sm btn-label-danger btn-bold pi pi-times">{{"Remove" | localize}}</a> -->
+                <span><button type="button" icon="pi pi-times" pButton (click)="remove($event, file)"></button></span>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template *ngIf="showUploaded" pTemplate="content">
+        <div *ngIf="uploadedFiles.length">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        {{"UploadedFile" | localize}}
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-widget4">
+                    <div *ngFor="let file of uploadedFiles" class="kt-widget4__item">
+                        <div *ngIf="file.type.indexOf('image/') > -1" class="kt-widget4__pic kt-widget4__pic--pic">
+                            <img [src]="file.objectURL" alt="">
+                        </div>
+                        <div *ngIf="file.type.indexOf('/pdf') > -1" class="kt-widget4__pic kt-widget4__pic--icon">
+                            <img src="/assets/common/images/icon/pdf.svg" alt="">
+                        </div>
+                        <div *ngIf="file.type.indexOf('/vnd.openxmlformats-officedocument.spreadsheetml.sheet') > -1"
+                            class="kt-widget4__pic kt-widget4__pic--icon">
+                            <img src="/assets/common/images/icon/xlsx.svg" alt="">
+                        </div>
+                        <div *ngIf="file.type.indexOf('/vnd.ms-excel') > -1 && file.name.indexOf('.xls') > -1"
+                            class="kt-widget4__pic kt-widget4__pic--icon">
+                            <img src="/assets/common/images/icon/xls.svg" alt="">
+                        </div>
+                        <div *ngIf="file.type.indexOf('/vnd.ms-excel') > -1 && file.name.indexOf('.csv') > -1"
+                            class="kt-widget4__pic kt-widget4__pic--icon">
+                            <img src="/assets/common/images/icon/csv.svg" alt="">
+                        </div>
+                        <div *ngIf="file.type.indexOf('/vnd.openxmlformats-officedocument.wordprocessingml.document') > -1"
+                            class="kt-widget4__pic kt-widget4__pic--icon">
+                            <img src="/assets/common/images/icon/docx.svg" alt="">
+                        </div>
+                        <div *ngIf="file.type.indexOf('/msword') > -1" class="kt-widget4__pic kt-widget4__pic--icon">
+                            <img src="/assets/common/images/icon/doc.svg" alt="">
+                        </div>
+                        <div *ngIf="file.type.indexOf('/x-zip-compressed') > -1"
+                            class="kt-widget4__pic kt-widget4__pic--icon">
+                            <img src="/assets/common/images/icon/zip.svg" alt="">
+                        </div>
+
+                        <div class="kt-widget4__info">
+                            <a class="kt-widget4__title">
+                                {{file.name}}
+                            </a>
+                            <p class="kt-widget4__text">
+                                {{file.size | fileSize}}
+                            </p>
+                        </div>
+                        <span class="kt-badge kt-badge--success kt-badge--inline"
+                            *ngIf="file.status === 200">{{'Success' | localize}}</span>
+                        <span class="kt-badge kt-badge--danger kt-badge--inline"
+                            *ngIf="file.status === 400">{{'Fail' | localize}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-fileUpload>

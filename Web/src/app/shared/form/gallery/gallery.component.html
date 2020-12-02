@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <a [href]="appBaseUrl + '/app/admin/tenants?editionId=' + moveTenantsI -->
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/121022/jquery.min.js"></script> -->
+    <script type="text/javascript" src="/assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+    <link rel="stylesheet" href="/assets/cubeportfolio/css/cubeportfolio.min.css">
+</head>
+
+<body style="background: transparent;">
+    <div class="portfolio-content portfolio-4">
+        <div id="filters-container" class="cbp-l-filters-button">
+            <div data-filter="*" class="cbp-filter-item btn dark btn-outline uppercase cbp-filter-item-active">
+                ALL
+                <div class="cbp-filter-counter"></div>
+            </div>
+            <div *ngFor="let gf of galleryFilter" attr.data-filter="{{gf.filter}}"
+                class="cbp-filter-item btn dark btn-outline uppercase">
+                {{gf.title}}
+                <div class="cbp-filter-counter"></div>
+            </div>
+        </div>
+
+        <div id="grid-container">
+            <div *ngFor="let gl of galleryList"
+                class="cbp-item {{gl.CodeRef.toLowerCase() | removewhitespaces}} {{gl.CodeRemark.toLowerCase() | removewhitespaces}}"
+                [ngStyle]="{'width.px': gl.CodeVal1}">
+                <div class="cbp-item-wrapper posRelative">
+
+                    <button [hidden]="selectMode!=='multiple'" class="btn btn-icon btn-circle radioCheck"
+                        (click)="select(gl)">
+                        <i class="la {{gl.Flag === 1 ? 'la-check-circle-o kt-font-success' : 'la-circle-o kt-font-warning'}}"
+                            style="font-size: 35px;"></i>
+                    </button>
+
+                    <div class="cbp-caption">
+                        <div class="cbp-caption-defaultWrap">
+                            <img src="{{gl.DocPath}}" alt="">
+                        </div>
+                        <div class="cbp-caption-activeWrap">
+                            <div class="cbp-l-caption-alignCenter">
+                                <div class="cbp-l-caption-body">
+                                    <div class="cbp-l-caption-title">{{gl.Description}}</div>
+                                    <div class="cbp-l-caption-desc">{{gl.CodeRef}} / {{gl.CodeRemark}}</div>
+                                    <div style="padding-top: 20px;">
+                                        <button [hidden]="selectMode!=='single'" (click)="select(gl)"
+                                            class="btn btn-outline-success">{{"Select" | localize}}</button>
+                                        <button attr.href="{{gl.DocPath}}" style="color: white;"
+                                            class="cbp-lightbox btn btn-hover-warning"
+                                            data-title="{{gl.CodeRef}} / {{gl.CodeRemark}}">{{"View" | localize}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div id="grid-loadMore" class="cbp-l-loadMore-button">
+            <a href="../assets/global/plugins/cubeportfolio/ajax/loadMore.html"
+                class="cbp-l-loadMore-link btn grey-mint btn-outline" rel="nofollow">
+                <span class="cbp-l-loadMore-defaultText">LOAD MORE</span>
+                <span class="cbp-l-loadMore-loadingText">LOADING...</span>
+                <span class="cbp-l-loadMore-noMoreLoading">NO MORE IMAGES</span>
+            </a>
+        </div>
+    </div>
+</body>

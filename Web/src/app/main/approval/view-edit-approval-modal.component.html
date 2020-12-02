@@ -1,0 +1,70 @@
+<div appBsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+    aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form #tenantCreateForm="ngForm" role="form" novalidate class="form-validation" *ngIf="active">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>{{modalTitle | localize}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')"
+                        [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="BizRegID">{{"BizRegID" | localize}}</label>
+                                <input type="text" name="BizRegID" id="BizRegID" class="form-control"
+                                    [(ngModel)]="inputHelper.BizRegID" [disabled]= "true">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="CompanyName">{{"CompanyName" | localize}}</label>
+                                <input type="text" name="CompanyName" id="CompanyName" class="form-control"
+                                    [(ngModel)]="inputHelper.CompanyName" [disabled]= "true">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="InitName">{{"InitName" | localize}}</label>
+                                <input type="text" name="InitName" id="InitName" class="form-control"
+                                    [(ngModel)]="inputHelper.InitName" [disabled]= "true">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="RegDate">{{"RegDate" | localize}}</label>
+                                <input type="text" name="RegDate" id="RegDate" class="form-control"
+                                    [(ngModel)]="inputHelper.RegDate" [disabled]= "true">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Country">{{"Country" | localize}}</label>
+                                <input type="text" name="Country" id="Country" class="form-control"
+                                    [(ngModel)]="inputHelper.Country" [disabled]= "true">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="ContactPerson">{{"ContactPerson" | localize}}</label>
+                                <input type="text" name="ContactPerson" id="ContactPerson" class="form-control"
+                                    [(ngModel)]="inputHelper.ContactPerson" [disabled]= "true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" [disabled]="saving" class="btn btn-success"
+                        (click)="save(approval.Approve)" [disabled]="!dataObtained">{{"Approve" | localize}}</button>
+                    <button type="button" *ngIf="!IsNew" [disabled]="!dataObtained" class="btn btn-danger"
+                        (click)="save(approval.Reject)">{{"Reject" | localize}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

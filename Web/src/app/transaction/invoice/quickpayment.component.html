@@ -1,0 +1,234 @@
+<div [@routerTransition] id="QuickPayment">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"QuickPayment" | localize}}</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass">
+            <div class="kt-portlet__body kt-portlet__body--fit">
+                <div id="quickPaymentBox" class="kt-portlet kt-portlet--mobile">
+                    <div class="row child300 kt-invoice__head kt-margin-0">
+                        <div id="totalBlock" class="col-md-4">
+                            <div class="displayInline boxCenter">
+                                <div class="boxWrp_">
+                                    <div class="labelText">{{"TotalAmountDue" | localize | uppercase}}</div>
+                                    <div id="totalAmount" class="currencyShow">{{totalSelectedAmount | number:'.2-2'}}</div>
+                                </div>
+                                <div class="boxWrp_ textAlignRight secondaryInfo">
+                                    <div class="labelText smallText"> {{"TotalRecord" | localize | uppercase}} </div>
+                                    <div id="totaRecord" class=""> {{totalSelected}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="paymentBlock" class="col-md-8 col-sm-12">
+                            <div id="trangleWrp" class="decorationTriangle"></div>
+                            <div class="displayInline boxCenter">
+                                <div class="bigLabelTop upperText" style="font-size: 2.1em;">
+                                    {{"QuickPayment" | localize}}
+                                </div>
+                                <div class="labelText kt-margin-b-10">
+                                    {{"SelectPaymentMethod" | localize}}
+                                </div>
+                                <!-- <div class="ng-tns-c20-1">
+                                    <div class="row">
+                                        <div class="col-md-12 paymentSelect paymentSelect1">
+                                            <div class="kt-radio-inline">
+                                                <label class="kt-radio fpxBtn kt-valign-top">
+                                                    <input class="activatePayment" type="radio" name="paymentmethod" id="fpx"
+                                                           value="0" targetShow="fpxBoxOption"
+                                                           (change)="selectPaymentChange('fpxPay')">
+                                                    <span></span>
+                                                    <div class="wrpPayMethod" style="margin-left: -12px"></div>
+                                                </label>
+                                                <label class="kt-radio maybankBtn kt-valign-top">
+                                                    <input class="activatePayment" type="radio" name="paymentmethod"
+                                                           id="maybank" value="1" (click)="maybank()" targetShow="payNowOneWrp"
+                                                           (change)="selectPaymentChange('ccPay')">
+                                                    <span></span>
+                                                    <div class="wrpPayMethod"></div>
+                                                </label>
+                                                <label class="kt-radio offlinePayment kt-valign-top">
+                                                    <input class="activatePayment" type="radio" name="paymentmethod"
+                                                           id="offlinePayment" value="2" (click)="offlinePayment()"
+                                                           targetShow="payNowOneWrp" (change)="selectPaymentChange('offPay')">
+                                                    <span></span>
+                                                    <div class="">offlinePayment</div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row float-right paymentBoxGroup">
+                                        <div id="fpxBoxOption" class=" animated bounceInUp col-md-12 boxPayWrp">
+                                            <div class="fpxContentWraper">
+                                                <div class="kt-radio-inline hideThis">
+                                                    <label class="kt-radio">
+                                                        <input type="radio" name="bankType" (click)="selectBank('02')" />
+                                                        Corporate Bank
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="kt-radio">
+                                                        <input type="radio" name="bankType" (click)="selectBank('01')"> Personal
+                                                        Bank
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <select *ngIf="bankListShow" #bankTypeList [(ngModel)]="inputHelper.buyerBankID"
+                                                        name="bankTypeList" class="form-control" id="bankTypeList"
+                                                        (change)="bankListChange(bankTypeList.value)">
+                                                    <option *ngFor="let bankList of bankListModel" [value]="bankList.bankcode">
+                                                        {{bankList.bankdisplayname}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="term" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
+                                                    <span>
+                                                        By clicking on the “Proceed” button below, <br />
+                                                        you agree to FPX’s terms and condition
+                                                    </span>
+                                                </div>
+                                                <div *ngIf="maxTotal" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
+                                                    <span>
+                                                        Your Total Amount more than RM 30,000, <br />
+                                                        please use Corporate Bank
+                                                        <br />
+                                                    </span>
+                                                </div>
+                                                <button id="payNowFPX1" (click)="proceed()" [disabled]="payButton"
+                                                        [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')"
+                                                        class="btn btn-widest btn-warning payText" style="width: 17rem">
+                                                    {{"Proceed" | localize}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div id="payNowOneWrp" class="hideThis col-md-12 animated bounceInUp boxPayWrp">
+                                            <button id="payNowOne" (click)="paynow(selectedPayment)" [disabled]="payButton"
+                                                    [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')"
+                                                    class="btn btn-widest btn-warning payText" style="width: 17rem">
+                                                {{"PayNow" | localize}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div>
+                                    <!-- <div *ngIf="!invoiceDetail"> -->
+                                    <div class="row">
+                                        <div class="col-md-12 paymentSelect paymentSelect1">
+                                            <div class="kt-radio-inline">
+                                                <label class="kt-radio fpxBtn">
+                                                    <input class="activatePayment" type="radio"
+                                                           name="paymentmethod" id="fpx" value="0"
+                                                           targetShow="fpxBoxOption"
+                                                           (change)="selectPaymentChange('fpxPay')">
+                                                    <span></span>
+                                                    <div class="wrpPayMethod" style="margin-left: -12px"></div>
+                                                </label>
+                                                <label class="kt-radio maybankBtn">
+                                                    <input class="activatePayment" type="radio"
+                                                           name="paymentmethod" id="maybank" value="1"
+                                                           (click)="maybank()" targetShow="payNowOneWrp"
+                                                           (change)="selectPaymentChange('ccPay')">
+                                                    <span></span>
+                                                    <div class="wrpPayMethod"></div>
+                                                </label>
+                                                <label *ngIf="isGranted('Pages.Account.Payment.Offline')"
+                                                       class="kt-radio offlinePayment">
+                                                    <input class="activatePayment" type="radio"
+                                                           name="paymentmethod" id="offlinePayment" value="2"
+                                                           (click)="offlinePayment()" targetShow="payNowOneWrp"
+                                                           (change)="selectPaymentChange('offPay')">
+                                                    <span></span>
+                                                    <div class="">{{"offlinePayment" | localize}}</div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row paymentBoxGroup">
+                                        <div id="fpxBoxOption" class=" animated bounceInUp col-md-12 boxPayWrp">
+                                            <div class="fpxContentWraper">
+                                                <div class="kt-radio-inline hideThis">
+                                                    <label class="kt-radio">
+                                                        <input type="radio" name="bankType"
+                                                               (click)="selectBank('02')" />
+                                                        {{"CorporateBank" | localize}}
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="kt-radio">
+                                                        <input type="radio" name="bankType"
+                                                               (click)="selectBank('01')">
+                                                        {{"PersonalBank" | localize}}
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <ng-select *ngIf="bankListShow" id="bankTypeList" [(ngModel)]="inputHelper.buyerBankID"
+                                                    [items]="bankListModel" [closeOnSelect]="true" bindLabel="bankdisplayname" placeholder="Select Bank"
+                                                    [loading]="bankLoading" (change)="bankListChange($event)">
+                                                </ng-select>
+                                                <button id="payNowFPX1" (click)="proceed()"
+                                                        [disabled]="payButton" [buttonBusy]="paying"
+                                                        [busyText]="l('PayingWithThreeDot')"
+                                                        class="btn btn-widest btn-warning payText"
+                                                        style="">
+                                                    {{"Proceed" | localize}}
+                                                </button>
+                                                <div *ngIf="term"
+                                                     style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
+                                                    <!-- <small>
+                                                        {{"FpxTermCondProceed" | localize}}
+                                                    </small> -->
+                                                    <small>{{"FpxTermCondProceed2" | localize}}</small>
+                                                    <small><a href="https://www.mepsfpx.com.my/FPXMain/termsAndConditions.jsp" target="_blank">
+                                                        {{"TermsAndCondition" | localize}}</a></small>
+                                                </div>
+                                                <div *ngIf="maxTotal"
+                                                     style="padding-top: 0.8rem; padding-bottom: 0.5rem;">
+                                                    <small>
+                                                        {{"FpxTermCondTotal" | localize}}
+                                                    </small>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div id="payNowOneWrp"
+                                             class="hideThis col-md-12 animated bounceInUp boxPayWrp">
+                                            <button id="payNowOne" (click)="paynow(selectedPayment)"
+                                                    [disabled]="payButton" [buttonBusy]="paying"
+                                                    [busyText]="l('PayingWithThreeDot')"
+                                                    class="btn btn-widest btn-warning payText" style="">
+                                                {{"PayNow" | localize}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body kt-portlet__body--fit tableStylePlain kt-padding-20">
+                        <base-list #invoiceListComponent [(gridUrl)]="gridUrl" [enableFilter]="false"></base-list>
+                    </div>
+
+                    <div id="footerInvoice" style="">
+                        <div class="kt-container" style="text-align: right; /* float: right; */">
+                            <div span="quickpaymentTotalTable kt-padding-20"
+                                 style="width: 100%; padding-top: 2rem; padding-bottom: 2rem; color: rgb(252, 245, 245);">
+                                <span class="labelTotalAmount" style="padding-right: 25px;">
+                                    {{"TotalAmountDue" | localize}}
+                                </span>
+                                <span class="currencyType" style="font-size: 1.6em; position: relative;">
+                                    {{totalSelectedAmount | number:'1.2-2' }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<paymentSummaryModal #paymentSummaryModal (modalSave)="refresh()" (modalClose)="refresh()"></paymentSummaryModal>
+<offlinePaymentModal #offlinePaymentModal (modalSave)="refresh()" (modalClose)="refresh()"></offlinePaymentModal>

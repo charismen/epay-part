@@ -1,0 +1,595 @@
+<div [@routerTransition]>
+    <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{pageTitle | localize}}</span>
+                    </h3>
+                    <!-- <button type="button" style="margin-right:15px;" (click)="back()" class="btn btn-dark back">
+                        <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+                    </button> -->
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button (click)="goBack()" class="btn btn-bold btn-md btn-font-md  btn-label-warning">
+                            <i class="fa fa-arrow-left"></i>{{"Back" | localize }}
+                        </button>
+                        <button (click)="refreshPaymentStat()" *ngIf="(inputHelper.status === 'Pending')" class="btn btn-bold btn-md btn-font-md btn-label-success">
+                            <i class="fa flaticon-refresh"></i>{{"Refresh" | localize }}
+                        </button>
+                        <button *ngIf="((MultiInvoice === false || ((PaymentHistory === true && inputHelper.status === 'Paid') && inputHelper.StkType !== 'CSH')) && isGranted('Pages.Account.Invoice.Print'))" (click)="printToPdf(printInv)"
+                                class="btn btn-bold btn-md btn-font-md  btn-label-danger">
+                            <i class="fa fa-file-pdf"></i> {{"printInvoice" | localize}}
+                        </button>
+                        <button *ngIf="(((PaymentHistory === true || PaymentHistoryMultiple === true) && inputHelper.status === 'Paid') && isGranted('Pages.Account.Invoice.Print'))" (click)="printToPdf(printRcp)"
+                                class="btn btn-bold btn-md btn-font-md  btn-label-danger">
+                            <i class="fa fa-file-pdf"></i> {{"printReceipt" | localize}}
+                        </button>
+                        <button *ngIf= "((PaymentHistory === true || PaymentHistoryMultiple === true) && inputHelper.status === 'Paid') && isGranted('Pages.Account.Invoice.Download')" (click)="exportToTxtAspx(trxno, taxAmt, Rounding)"
+                                class="btn btn-bold btn-md btn-font-md  btn-label-danger">
+                             {{"DownloadFile" | localize}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body kt-portlet__body--fit" [busyIf]="isLoading" style="color:#000;">
+                    <div class="kt-invoice-2 invoiceCustomStyle1">
+                        <div class="kt-invoice__head">
+                            <div class="kt-invoice__container kt-invoice__container--centered">
+                                <div class="kt-invoice__brand row" style="position:relative;z-index: 1;">
+                                    <div id="invoiceDetailP1" class="col-md-4 col-sm-12 col-xs-12">
+                                        <!-- <h1 class="kt-invoice__title">{{InvoiceTitle | localize | uppercase}}</h1>
+                                        <div class="kt-invoice__titlestat row">
+                                            <div class="col-md-4">{{"BillNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.billno}}</div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 14px" *ngIf="(PaymentHistory || PaymentHistoryMultiple)">
+                                            <div class="col-md-4">{{"TransNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{trxno}}</div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 14px" *ngIf="(PaymentHistory || PaymentHistoryMultiple)">
+                                            <div class="col-md-4">{{"ReceiptNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{"TRN"}}{{inputHelper.receiptno}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">{{InvoiceTitle | localize}} {{"Date" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.billdate}}</div>
+                                        </div> -->
+                                        <h1 style="margin-bottom: 14px;">{{InvoiceTitle | localize | uppercase}}</h1>
+                                        <div class="row">
+                                            <div class="col-md-4">{{"BillNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.billno}}</div>
+                                        </div>
+                                        <div class="row" *ngIf="(PaymentHistory || PaymentHistoryMultiple)">
+                                            <div class="col-md-4">{{"TransNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{trxno}}</div>
+                                        </div>
+                                        <div class="row" *ngIf="(PaymentHistory || PaymentHistoryMultiple)">
+                                            <div class="col-md-4">{{"ReceiptNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{"TRN"}}{{inputHelper.receiptno}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">{{InvoiceTitle | localize}} {{"Date" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.billdate}}</div>
+                                        </div>
+                                    </div>
+                                    <!-- <div id="statusInvoice" class="{{inputHelper.status | lowercase}} billStatus"></div> -->
+                                    <div id="statusInvoice" class="{{inputHelper.status | lowercase}} billStatus"></div>
+                                    <div id="invoiceDetailP3" class="kt-invoice__logo col-md-8 col-sm-12 col-xs-12">
+                                        <div *ngIf="(siNumber !== undefined || MultiInvoice == true) || inputHelper.status !== 'Paid'">
+                                            {{"TotalAmountDue" | localize}} <br />
+                                            <span class="currencyLocal">{{"CurrencyMyr" | localize}}</span>
+                                            <span id="totalAmount"
+                                                  class="backDefault">{{inputHelper.totalamountdue | number:'.2-2'}}</span>
+                                        </div>
+                                        <div *ngIf="trxno !== undefined && inputHelper.status === 'Paid'">
+                                            {{"TotalAmountPaid" | localize}} <br />
+                                            <span class="currencyLocal">{{"CurrencyMyr" | localize}}</span>
+                                            <span id="totalAmount"
+                                                  class="backDefault">{{inputHelper.total | number:'.2-2'}}</span>
+                                        </div>
+                                        <div *ngIf="invalidInvoice === false && (PaymentHistoryMultiple === false && PaymentHistory === false)">
+                                            <!-- <div *ngIf="!invoiceDetail"> -->
+                                            <div class="row">
+                                                <div class="col-md-12 paymentSelect paymentSelect1">
+                                                    <div class="kt-radio-inline">
+                                                        <label class="kt-radio fpxBtn">
+                                                            <input class="activatePayment" type="radio"
+                                                                   name="paymentmethod" id="fpx" value="0"
+                                                                   targetShow="fpxBoxOption"
+                                                                   (change)="selectPaymentChange('fpxPay')">
+                                                            <span></span>
+                                                            <div class="wrpPayMethod" style="margin-left: -12px"></div>
+                                                        </label>
+                                                        <label class="kt-radio maybankBtn">
+                                                            <input class="activatePayment" type="radio"
+                                                                   name="paymentmethod" id="maybank" value="1"
+                                                                   (click)="maybank()" targetShow="payNowOneWrp"
+                                                                   (change)="selectPaymentChange('ccPay')">
+                                                            <span></span>
+                                                            <div class="wrpPayMethod"></div>
+                                                        </label>
+                                                        <label *ngIf="isGranted('Pages.Account.Payment.Offline')"
+                                                               class="kt-radio offlinePayment">
+                                                            <input class="activatePayment" type="radio"
+                                                                   name="paymentmethod" id="offlinePayment" value="2"
+                                                                   (click)="offlinePayment()" targetShow="payNowOneWrp"
+                                                                   (change)="selectPaymentChange('offPay')">
+                                                            <span></span>
+                                                            <div class="">{{"offlinePayment" | localize}}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row paymentBoxGroup">
+                                                <div id="fpxBoxOption" class=" animated bounceInUp col-md-12 boxPayWrp">
+                                                    <div class="fpxContentWraper">
+                                                        <div class="kt-radio-inline hideThis">
+                                                            <label class="kt-radio">
+                                                                <input type="radio" name="bankType"
+                                                                       (click)="selectBank('02')" />
+                                                                {{"CorporateBank" | localize}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="kt-radio">
+                                                                <input type="radio" name="bankType"
+                                                                       (click)="selectBank('01')">
+                                                                {{"PersonalBank" | localize}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <ng-select *ngIf="bankListShow" id="bankTypeList" [(ngModel)]="inputHelper.buyerBankID"
+                                                            [items]="bankListModel" [closeOnSelect]="true" bindLabel="bankdisplayname" placeholder="Select Bank"
+                                                            [loading]="bankLoading" (change)="bankListChange($event)">
+                                                        </ng-select>
+                                                        <button id="payNowFPX1" (click)="proceed()"
+                                                                [disabled]="payButton" [buttonBusy]="paying"
+                                                                [busyText]="l('PayingWithThreeDot')"
+                                                                class="btn btn-widest btn-warning payText"
+                                                                style="width: 17rem">
+                                                            {{"Proceed" | localize}}
+                                                        </button>
+                                                        <div *ngIf="term"
+                                                             style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
+                                                            <!-- <small>
+                                                                {{"FpxTermCondProceed" | localize}}
+                                                            </small> -->
+                                                            <small>{{"FpxTermCondProceed2" | localize}}</small>
+                                                            <small><a href="https://www.mepsfpx.com.my/FPXMain/termsAndConditions.jsp" target="_blank">
+                                                                {{"TermsAndCondition" | localize}}</a></small>
+                                                        </div>
+                                                        <div *ngIf="maxTotal"
+                                                             style="padding-top: 0.8rem; padding-bottom: 0.5rem;">
+                                                            <small>
+                                                                {{"FpxTermCondTotal" | localize}}
+                                                            </small>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div id="payNowOneWrp"
+                                                     class="hideThis col-md-12 animated bounceInUp boxPayWrp">
+                                                    <button id="payNowOne" (click)="paynow(selectedPayment)"
+                                                            [disabled]="payButton" [buttonBusy]="paying"
+                                                            [busyText]="l('PayingWithThreeDot')"
+                                                            class="btn btn-widest btn-warning payText" style="width: 17rem">
+                                                        {{"PayNow" | localize}}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kt-invoice__items row">
+                                    <div class="kt-invoice__item col-md-5">
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"Attn" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.attn}}</div>
+                                        </div>
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"Company" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.customer}}</div>
+                                        </div>
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"Address" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.address}}</div>
+                                        </div>
+                                        <!-- <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-8" style="word-break: break-word;">{{inputHelper.customer}}</div>
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-8" style="word-break: break-word;">{{inputHelper.address}}</div>
+                                        </div> -->
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="kt-invoice__item col-md-5">
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"CustomerNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.customerno}}</div>
+                                        </div>
+                                        <div *ngIf="!isCashBill" class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"CreditVote" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.creditvote}}</div>
+                                        </div>
+                                        <div *ngIf="!isCashBill" class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"ProjectCode" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.projectcode}}</div>
+                                        </div>
+                                        <div *ngIf="!isCashBill" class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"CostCenter" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.costcenter}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kt-invoice__items row">
+                                    <div class="kt-invoice__item col-md-5">
+                                        <div *ngIf="!isCashBill" class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"RefNo" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.refno}}</div>
+                                        </div>
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"DeliveryRef" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.deliveryref}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="kt-invoice__item col-md-5">
+                                        <div *ngIf="!isCashBill" class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"OurRef" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.ourref}}</div>
+                                        </div>
+                                        <div *ngIf="!isCashBill" class="kt-invoice__subtitle row">
+                                            <div class="col-md-4">{{"YourRef" | localize}}</div>
+                                            <div class="col-md-8 valueSet">{{inputHelper.yourref}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-invoice__body">
+                            <div *ngIf="MultiInvoice === false" id="invoiceTableWrp"
+                                class="row align-items-center tableStylePlain kt-margin-0">
+                                <!--<Primeng-TurboTable-Start>-->
+                                <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                                    <p-table #dataTable (onLazyLoad)="refresh()" [value]="primengTableHelper.records"
+                                        [rows]="primengTableHelper.defaultRecordsCountPerPage" [paginator]="false"
+                                        [lazy]="true" [scrollable]="true" ScrollWidth="100%"
+                                        [responsive]="primengTableHelper.isResponsive"
+                                        [resizableColumns]="primengTableHelper.resizableColumns">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 25px; text-align-last: center;">
+                                                    {{'#' | localize}}
+                                                </th>
+                                                <th style="width: 66px">
+                                                    {{'ItemCode' | localize}}
+                                                </th>
+                                                <th style="width: 193px" pSortableColumn="name">
+                                                    {{'Description' | localize}}
+                                                </th>
+                                                <!-- <th style="width: 60px">
+                                                    {{'TaxCode' | localize}}
+                                                </th> -->
+                                                <th style="width: 62px">
+                                                    {{'Quantity' | localize}}
+                                                </th>
+                                                <th style="width: 64px">
+                                                    {{'UnitPrice' | localize}}
+                                                </th>
+                                                <th style="width: 42px">
+                                                    {{'SubTotal' | localize}}
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-i='rowIndex' let-record="$implicit">
+                                            <tr>
+                                                <td style="width: 30px; text-align-last: center;">
+                                                    <span class="ui-column-title"> {{'#' | localize}}</span>
+                                                    {{i+1}}
+                                                </td>
+                                                <td style="width: 75px">
+                                                    <span class="ui-column-title"> {{'ItemCode' | localize}}</span>
+                                                    {{record.ItemCode}}
+                                                </td>
+                                                <td style="width: 200px">
+                                                    <span class="ui-column-title"> {{'Description' | localize}}</span>
+                                                    {{record.Description}}
+                                                </td>
+                                                <!-- <td style="width: 60px; text-align-last: center;">
+                                                    <span class="ui-column-title"> {{'TaxCode' | localize}}</span>
+                                                    {{record.TaxCode.substr(-3, 2)}}
+                                                </td> -->
+                                                <td class="currValue" style="width: 60px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'Quantity' | localize}}</span>
+                                                        <span class="">{{record.Quantity}}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="currValue" style="width: 75px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'UnitPrice' | localize}}</span>
+                                                        <span style="position: relative;"></span>{{"CurrencyMyr" | localize}}
+                                                        {{record.UnitPrice | number:'.2-2'}}
+                                                    </div>
+                                                </td>
+                                                <td class="currValue" style="width: 75px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'SubTotal' | localize}}</span>
+                                                        <span style="position: relative;"></span>{{"CurrencyMyr" | localize}}
+                                                        {{record.SubTotal | number:'.2-2'}}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                                <!--<Primeng-TurboTable-End>-->
+                            </div>
+                            <div *ngIf="MultiInvoice === true" id="invoiceTableWrp"
+                                class="row align-items-center tableStylePlain kt-margin-0">
+                                <!--<Primeng-TurboTable-Start>-->
+                                <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                                    <p-table #dataTable (onLazyLoad)="refresh()" [value]="primengTableHelper.records"
+                                        [rows]="primengTableHelper.defaultRecordsCountPerPage" [paginator]="false"
+                                        [lazy]="true" [scrollable]="true" ScrollWidth="100%"
+                                        [responsive]="primengTableHelper.isResponsive"
+                                        [resizableColumns]="primengTableHelper.resizableColumns">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 30px">
+                                                    {{'No' | localize}}
+                                                </th>
+                                                <th style="width: 100px">
+                                                    {{'BillNo' | localize}}
+                                                </th>
+                                                <th style="width: 300px" pSortableColumn="name">
+                                                    {{'Description' | localize}}
+                                                </th>
+                                                <!-- <th style="width: 60px">
+                                                    {{'TaxCode' | localize}}
+                                                </th> -->
+                                                <th style="width: 75px" id="subTotal">
+                                                    {{'SubTotal' | localize}}
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-i='rowIndex' let-rowData let-record="$implicit">
+                                            <tr [pSelectableRow]="rowData" (click)='showDetail(rowData)'>
+                                                <td style="width: 30px" id="no">
+                                                    <span class="ui-column-title"> {{'No' | localize}}</span>
+                                                    {{i+1}}
+                                                </td>
+                                                <td style="width: 100px">
+                                                    <span class="ui-column-title"> {{'ItemCode' | localize}}</span>
+                                                    {{record.BillNo}}
+                                                </td>
+                                                <td style="width: 300px">
+                                                    <span class="ui-column-title"> {{'Description' | localize}}</span>
+                                                    {{record.Detail}}
+                                                </td>
+                                                <!-- <td style="width: 60px; text-align-last: center;">
+                                                    <span class="ui-column-title"> {{'TaxCode' | localize}}</span>
+                                                    {{inputHelper.taxcode}}
+                                                </td> -->
+                                                <td class="currValue" style="width: 75px; padding-right: 0 !important;">
+                                                    <span class="ui-column-title"> {{'SubTotal' | localize}}</span>
+                                                    <span style="position: relative;"></span>{{"CurrencyMyr" | localize}}
+                                                    {{record.Amount | number:'.2'}}
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                                <!--<Primeng-TurboTable-End>-->
+                            </div>
+                            <!-- Text Form ASPX -->
+                            <form method="POST" #txtForm="ngForm" id="txtForm" hidden="true">
+                                <input type="hidden" id="textinvoice" name="textinvoice" [(ngModel)]="txtHelper.textinvoice">
+                                <input type="hidden" id="billtype" name="billtype" [(ngModel)]="txtHelper.billtype">
+                            </form>
+                            <!-- End Text Form -->
+                            <div *ngIf="PaymentHistoryMultiple === true" id="invoiceTableWrp" class="row align-items-center tableStylePlain kt-margin-0">
+                                <!--<Primeng-TurboTable-Start>-->
+                                <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                                    <p-table #dataTable (onLazyLoad)="refresh()" [value]="primengTableHelper.records"
+                                        [rows]="primengTableHelper.defaultRecordsCountPerPage" [paginator]="false"
+                                        [lazy]="true" [scrollable]="true" ScrollWidth="100%"
+                                        [responsive]="primengTableHelper.isResponsive"
+                                        [resizableColumns]="primengTableHelper.resizableColumns">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 25px; text-align-last: center;">
+                                                    {{'No' | localize}}
+                                                </th>
+                                                <th style="width: 66px">
+                                                    {{'BillNo' | localize}}
+                                                </th>
+                                                <th style="width: 193px" pSortableColumn="name">
+                                                    {{'Description' | localize}}
+                                                </th>
+                                                <!-- <th style="width: 60px">
+                                                    {{'TaxCode' | localize}}
+                                                </th> -->
+                                                <th style="width: 62px">
+                                                    {{'Quantity' | localize}}
+                                                </th>
+                                                <th style="width: 64px">
+                                                    {{'UnitPrice' | localize}}
+                                                </th>
+                                                <th style="width: 43px">
+                                                    {{'SubTotal' | localize}}
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-i='rowIndex' let-rowData let-record="$implicit">
+                                            <tr [pSelectableRow]="rowData" (click)='showDetail(rowData)'>
+                                                <td style="width: 30px; text-align-last: center;">
+                                                    <span class="ui-column-title"> {{'No' | localize}}</span>
+                                                    {{i+1}}
+                                                </td>
+                                                <td style="width: 75px">
+                                                    <span class="ui-column-title"> {{'BillNo' | localize}}</span>
+                                                    {{record.ItemCode}}
+                                                </td>
+                                                <td style="width: 200px">
+                                                    <span class="ui-column-title"> {{'Description' | localize}}</span>
+                                                    {{record.ItemDesc}}
+                                                </td>
+                                                <!-- <td style="width: 60px; text-align-last: center;">
+                                                    <span class="ui-column-title"> {{'TaxCode' | localize}}</span>
+                                                    {{inputHelper.taxcode}}
+                                                </td> -->
+                                                <td class="currValue" style="width: 60px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'Quantity' | localize}}</span>
+                                                        <span class="">{{record.Qty}}</span>
+                                                    </div>
+
+                                                </td>
+                                                <td class="currValue" style="width: 75px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'UnitPrice' | localize}}</span>
+                                                        <span style="position: relative;"></span>{{"CurrencyMyr" | localize}} {{record.UnitPrice | number:'.2'}}
+                                                    </div>
+
+                                                </td>
+                                                <td class="currValue" style="width: 75px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'SubTotal' | localize}}</span>
+                                                        <span style="position: relative;"></span>{{"CurrencyMyr" | localize}} {{record.SubTotal | number:'.2'}}
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                                <!--<Primeng-TurboTable-End>-->
+                            </div>
+                            <div *ngIf="PaymentHistory === true" id="invoiceTableWrp" class="row align-items-center tableStylePlain kt-margin-0">
+                                <!--<Primeng-TurboTable-Start>-->
+                                <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                                    <p-table #dataTable (onLazyLoad)="refresh()" [value]="primengTableHelper.records"
+                                        [rows]="primengTableHelper.defaultRecordsCountPerPage" [paginator]="false"
+                                        [lazy]="true" [scrollable]="true" ScrollWidth="100%"
+                                        [responsive]="primengTableHelper.isResponsive"
+                                        [resizableColumns]="primengTableHelper.resizableColumns">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 25px; text-align-last: center;">
+                                                    {{'No' | localize}}
+                                                </th>
+                                                <th style="width: 66px">
+                                                    {{'ItemCode' | localize}}
+                                                </th>
+                                                <th style="width: 193px" pSortableColumn="name">
+                                                    {{'Description' | localize}}
+                                                </th>
+                                                <!-- <th style="width: 60px">
+                                                    {{'TaxCode' | localize}}
+                                                </th> -->
+                                                <th style="width: 62px">
+                                                    {{'Quantity' | localize}}
+                                                </th>
+                                                <th style="width: 64px">
+                                                    {{'UnitPrice' | localize}}
+                                                </th>
+                                                <th style="width: 43px">
+                                                    {{'SubTotal' | localize}}
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-i='rowIndex' let-rowData let-record="$implicit">
+                                            <tr>
+                                                <td style="width: 30px; text-align-last: center;">
+                                                    <span class="ui-column-title"> {{'No' | localize}}</span>
+                                                    {{i+1}}
+                                                </td>
+                                                <td style="width: 75px">
+                                                    <span class="ui-column-title"> {{'ItemCode' | localize}}</span>
+                                                    {{record.ItemCode}}
+                                                </td>
+                                                <td style="width: 200px">
+                                                    <span class="ui-column-title"> {{'Description' | localize}}</span>
+                                                    {{record.ItemDesc}}
+                                                </td>
+                                                <!-- <td style="width: 60px; text-align-last: center;">
+                                                    <span class="ui-column-title"> {{'TaxCode' | localize}}</span>
+                                                    {{inputHelper.taxcode}}
+                                                </td> -->
+                                                <td class="currValue" style="width: 60px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'Quantity' | localize}}</span>
+                                                        <span class="">{{record.Qty}}</span>
+                                                    </div>
+
+                                                </td>
+                                                <td class="currValue" style="width: 75px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'UnitPrice' | localize}}</span>
+                                                        <span style="position: relative;"></span>{{"CurrencyMyr" | localize}} {{record.UnitPrice | number:'.2'}}
+                                                    </div>
+
+                                                </td>
+                                                <td class="currValue" style="width: 75px; text-align-last: end;">
+                                                    <div class="backTab">
+                                                        <span class="ui-column-title"> {{'SubTotal' | localize}}</span>
+                                                        <span style="position: relative;"></span>{{"CurrencyMyr" | localize}} {{record.SubTotal | number:'.2'}}
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                                <!--<Primeng-TurboTable-End>-->
+                            </div>
+                        </div>
+                        <div class="kt-invoice__footer invoiceFooter">
+                            <div class="kt-invoice__container">
+                                <div class="kt-invoice__items row col-md-12" style="padding: 0;display: flex;
+                                justify-content: flex-end;">
+                                    <div id="subTotalSection" class="kt-invoice__item col-md-4">
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-5 subTotal">{{"SubTotal" | localize}}</div>
+                                            <div class="col-md-7 currValue">
+                                                <span style="position:relative;">{{"CurrencyMyr" | localize}} {{inputHelper.subtotal | number:'.2-2'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-5">{{"SST" | localize}} {{sstAmt}} {{'%'}}</div>
+                                            <div class="col-md-7 currValue">
+                                                <span style="position: relative;">{{"CurrencyMyr" | localize}} {{inputHelper.sst | number:'.2-2'}}</span>
+                                            </div>
+                                        </div>
+                                        <!-- <div *ngIf="MultiInvoice === true || (PaymentHistoryMultiple === true || PaymentHistory === true)" class="kt-invoice__subtitle row"> -->
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-5">{{"Rounding" | localize}}</div>
+                                            <div class="col-md-7 currValue">
+                                                <span style="position: relative;">{{"CurrencyMyr" | localize}} {{inputHelper.valueRounding | number:'.2-2'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="kt-invoice__subtitle row">
+                                            <div class="col-md-5">{{"Total" | localize}}</div>
+                                            <div class="col-md-7 currValue  valueSet">
+                                                <span style="position: relative;">{{"CurrencyMyr" | localize}} {{inputHelper.total | number:'.2-2'}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<detailInvoiceModal #detailInvoiceModal (generatePdf)="printToPdf(printInv, $event)"></detailInvoiceModal>
+<paymentSummaryModal #paymentSummaryModal (modalSave)="refresh()" (modalClose)="refresh()"></paymentSummaryModal>
+<offlinePaymentModal #offlinePaymentModal (modalSave)="refresh()" (modalClose)="refresh()"></offlinePaymentModal>

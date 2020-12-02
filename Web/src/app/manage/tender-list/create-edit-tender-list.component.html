@@ -1,0 +1,70 @@
+<div appBsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 900px;">
+    <form #tenantCreateForm="ngForm" name="tenderForm" role="form" novalidate class="form-validation">
+    <div class="modal-header">
+       <h4 class="modal-title">
+           <span>{{modalTitle | localize}}</span>
+       </h4>
+        <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body noUlLine">
+            <div class="row row kt-padding-t-30">
+                <div class="form-group col-sm-6">
+                    <label for="itemCode" class="form-control-label">{{'RevenueCode' | localize}} :</label>
+                    <input name="RevCode" placeholder="Revenue Code" type="text" class="form-control" id="RevCode"
+                    [(ngModel)]="inputHelper.RevCode" [disabled]="modalTitle!='CreateNewTender'" required>
+                </div>
+                <div class="form-group col-sm-6 radioUnset">
+                    <div class="row kt-padding-t-30">
+                        <div class="col-sm-4">
+                            <label for="DatabaseTender" class="form-control-label">{{'Database' | localize}} :</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <input type="radio" value="WAC"  name="DatabaseTender" [(ngModel)]="inputHelper.DatabaseTender" [disabled]="view" required> WAC
+                                <input type="radio" value="CSA"  name="DatabaseTender" [(ngModel)]="inputHelper.DatabaseTender" [disabled]="view" required> CSA
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label for="DescriptionTender" class="form-control-label">{{'Description' | localize}} :</label>
+                    <input name="Description" placeholder="Description Tender" type="text" #nameInput="ngModel" class="form-control" id="DescriptionTender"
+                    [(ngModel)]="inputHelper.DescriptionTender" [disabled]="view" required>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="Unit" class="form-control-label">{{'Unit' | localize}} :</label>
+                    <input name="unit" placeholder="Unit Tender" type="text" #nameInput="ngModel" class="form-control" id="Unit"
+                    [(ngModel)]="inputHelper.Unit" [disabled]="view" required>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="Amount" class="form-control-label">{{'Amount' | localize}} :</label>
+                    <input name="amount" placeholder="Amount" type="number" #nameInput="ngModel" class="form-control" id="Amount"
+                    [(ngModel)]="inputHelper.Amount" [disabled]="view" required>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="TaxAmount" class="form-control-label">{{'TaxAmount' | localize}} :</label>
+                    <input name="taxAmount" placeholder="Tax Amount" type="number" #nameInput="ngModel" class="form-control" id="TaxAmount"
+                    [(ngModel)]="inputHelper.TaxAmount" [disabled]="view" required>
+                </div>
+            </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" 
+        [disabled]="saving"
+        (click)="close()">{{'Close' | localize}}</button>
+        <button type="button" class="btn btn-primary" [disabled]="!tenantCreateForm.form.valid" type="submit" 
+        class="btn btn-primary" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"
+        (click)="saveData()" ng-disabled="tenderForm.$invalid"
+        *ngIf="modalTitle!='ViewTender'">{{'Save' | localize}}</button>
+    </div> 
+    </form> 
+    </div> 
+</div>
+</div>

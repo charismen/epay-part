@@ -1,0 +1,61 @@
+<base-list #baseList [gridUrl]="gridUrl" detail="true" (onDetailClick)="onDetailClick($event)" hideActiveFilter="true" [filterTemplate]="filter">
+</base-list>
+
+<ng-template #filter>
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <label class="col-form-label">{{"Action" | localize}}</label>
+            <ng-select [(ngModel)]="selectedActionType" [items]="comboModelActionType" [closeOnSelect]="true" bindValue="Code" bindLabel="Remark" (change)="refresh($event)">
+            </ng-select>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <label class="col-form-label">{{"ActionBy" | localize}}</label>
+            <ng-select [(ngModel)]="selectedActionBy" [items]="comboModelActionBy" [closeOnSelect]="true" bindValue="Code" bindLabel="Remark" (change)="refresh($event)">
+            </ng-select>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <label class="col-form-label">Start date</label>
+            <div class="input-group date">
+                <div class="input-group">
+                    <input id="startDate" (dateChange)="refresh($event)" type="text"
+                           #processFilterStartPicker
+                           name="startDate" class="form-control"
+                           [(ngModel)]="startDate"
+                           datePickerMomentModifier bsDatepicker
+                           [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                    <div class="input-group-append">
+                        <span class="input-group-text"
+                              id="basic-addon2">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <label class="col-form-label">End date</label>
+            <div class="input-group date">
+                <div class="input-group">
+                    <input id="endDate" (dateChange)="refresh($event)" type="text"
+                           #processFilterStartPicker
+                           name="endDate" class="form-control"
+                           [(ngModel)]="endDate"
+                           datePickerMomentModifier bsDatepicker
+                           [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                    <div class="input-group-append">
+                        <span class="input-group-text"
+                              id="basic-addon2">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<history-detail-modal #historyDetailModal [detailUrl]="detailUrl"></history-detail-modal>

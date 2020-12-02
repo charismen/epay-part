@@ -1,0 +1,21 @@
+<div class="form-group">
+    <div class="kt-input-icon kt-input-icon--right">
+        <label class="{{required ? 'required' : '' }}">{{ title | localize }}</label>
+        <span class="kt-input-icon__icon kt-input-icon__icon--right" [popover]="popTemplate" triggers="mouseenter:mouseleave" placement="left">
+            <span>
+                <i id="hintIcon" style="color:slateblue; font-size: 1.3em;" class="la la-info-circle" data-toggle="kt-popover" data-placement="bottom" data-html="true"></i>
+            </span>
+        </span>
+        <ng-template #popTemplate>
+            <div [innerHtml]="subtitle">
+            </div>
+        </ng-template>
+    </div>
+
+    <div class="input-group">
+        <input type="text" class="form-control" [required]="required" [disabled]="completed" [placeholder]="completed ? placeholder : l('ChoseFileOrDrag')">
+        <div class="input-group-append">
+            <button class="btn {{completed ? 'btn-success' : 'btn-warning'}} btn-icon" [disabled]="true" type="button"><i style="color: white;" class="fa {{completed ? 'fa fa-check' : 'fa-exclamation'}}"></i></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<div appBsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+    aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" *ngIf="active">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{"PaymentSummary" | localize}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')"
+                    [disabled]="saving">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="transactionSummary">
+                    <div id="transactionInfoCnt" class="row">
+                        <div class="transactionBlock col-sm-12">
+                            <div id="paymentMethodTypeHeader">
+                                <div class="row">
+                                    <div class="col-sm-8">{{paymentSubHeader | localize | uppercase}}</div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                            </div>
+                            <div id="paymentBlockTable">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-4">{{"InvoiceNo" | localize}}</div>
+                                                <div class="col-sm-8">{{transModel.TransHdr.BillNo}}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">{{"OrderNo" | localize}}</div>
+                                                <div class="col-sm-8">{{transModel.TransHdr.TransNo}}</div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-sm-4">{{"TotalAmount" | localize }}</div>
+                                            <div class="col-sm-8">{{"CurrencyMyr" | localize }} {{totalAmount | number : '1.2-2'}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div id="bankLogoPaid" [ngStyle]="{'background-image':'url(' + appRootUrl() + bankName + ')'}">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row stretchRow">
+                                    <div class="col-md-9"></div>
+                                    <div class="col-sm-3">
+                                        <button class="btn btn-primary payText" [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')" (click)="proceed()">{{"Pay" | localize | uppercase}}</button>
+                                        <button class="btn btn-secondary" [buttonBusy]="paying" (click)="close()" style="margin-left:0;margin-top: 10px;">{{"Close" | localize | uppercase}}</button>
+                                    </div>
+                                </div>
+                                <form method="POST" #fpxForm="ngForm" id="fpxForm" hidden="true">
+                                    <input type="hidden" id="fpx_msgType" name="fpx_msgType" [(ngModel)]="paymentModel.fpx_msgType">
+                                    <input type="hidden" id="fpx_msgToken" name="fpx_msgToken" [(ngModel)]="paymentModel.fpx_msgToken">
+                                    <input type="hidden" id="fpx_sellerExId" name="fpx_sellerExId" [(ngModel)]="paymentModel.fpx_sellerExId">
+                                    <input type="hidden" id="fpx_sellerExOrderNo" name="fpx_sellerExOrderNo" [(ngModel)]="paymentModel.fpx_sellerExOrderNo">
+                                    <input type="hidden" id="fpx_sellerOrderNo" name="fpx_sellerOrderNo" [(ngModel)]="paymentModel.fpx_sellerOrderNo">
+                                    <input type="hidden" id="fpx_sellerTxnTime" name="fpx_sellerTxnTime" [(ngModel)]="paymentModel.fpx_sellerTxnTime">
+                                    <input type="hidden" id="fpx_sellerId" name="fpx_sellerId" [(ngModel)]="paymentModel.fpx_sellerId">
+                                    <input type="hidden" id="fpx_sellerBankCode" name="fpx_sellerBankCode" [(ngModel)]="paymentModel.fpx_sellerBankCode">
+                                    <input type="hidden" id="fpx_txnCurrency" name="fpx_txnCurrency" [(ngModel)]="paymentModel.fpx_txnCurrency">
+                                    <input type="hidden" id="fpx_txnAmount" name="fpx_txnAmount" [(ngModel)]="paymentModel.fpx_txnAmount">
+                                    <input type="hidden" id="fpx_buyerEmail" name="fpx_buyerEmail" [(ngModel)]="paymentModel.fpx_buyerEmail">
+                                    <input type="hidden" id="fpx_checkSum" name="fpx_checkSum" [(ngModel)]="paymentModel.fpx_checkSum">
+                                    <input type="hidden" id="fpx_buyerId" name="fpx_buyerId" [(ngModel)]="paymentModel.fpx_buyerId">
+                                    <input type="hidden" id="fpx_buyerName" name="fpx_buyerName" [(ngModel)]="paymentModel.fpx_buyerName">
+                                    <input type="hidden" id="fpx_buyerBankId" name="fpx_buyerBankId" [(ngModel)]="paymentModel.fpx_buyerBankId">
+                                    <input type="hidden" id="fpx_buyerBankBranch" name="fpx_buyerBankBranch" [(ngModel)]="paymentModel.fpx_buyerBankBranch">
+                                    <input type="hidden" id="fpx_buyerAccNo" name="fpx_buyerAccNo" [(ngModel)]="paymentModel.fpx_buyerAccNo">
+                                    <input type="hidden" id="fpx_makerName" name="fpx_makerName" [(ngModel)]="paymentModel.fpx_makerName">
+                                    <input type="hidden" id="fpx_buyerIban" name="fpx_buyerIban" [(ngModel)]="paymentModel.fpx_buyerIban">
+                                    <input type="hidden" id="fpx_productDesc" name="fpx_productDesc" [(ngModel)]="paymentModel.fpx_productDesc">
+                                    <input type="hidden" id="fpx_version" name="fpx_version" [(ngModel)]="paymentModel.fpx_version">
+                                </form>
+                                <form method="POST" #maybankForm="ngForm" id="maybankForm" hidden="true">
+                                    <input type="hidden" id="MERCHANT_ACC_NO" name="MERCHANT_ACC_NO" [(ngModel)]="paymentModel.mmerchant_acc_no">
+                                    <input type="hidden" id="AMOUNT" name="AMOUNT" [(ngModel)]="paymentModel.amount">
+                                    <input type="hidden" id="TRANSACTION_TYPE" name="TRANSACTION_TYPE" [(ngModel)]="paymentModel.transaction_type">
+                                    <input type="hidden" id="MERCHANT_TRANID" name="MERCHANT_TRANID" [(ngModel)]="paymentModel.merchant_tranid">
+                                    <input type="hidden" id="TRANSACTION_ID" name="TRANSACTION_ID" [(ngModel)]="paymentModel.transaction_id">
+                                    <input type="hidden" id="RESPONSE_TYPE" name="RESPONSE_TYPE" [(ngModel)]="paymentModel.response_type">
+                                    <input type="hidden" id="RETURN_URL" name="RETURN_URL" [(ngModel)]="paymentModel.return_url">
+                                    <input type="hidden" id="TXN_DESC" name="TXN_DESC" [(ngModel)]="paymentModel.txn_desc">
+                                    <input type="hidden" id="CUSTOMER_ID" name="CUSTOMER_ID" [(ngModel)]="paymentModel.customer_id">
+                                    <input type="hidden" id="FR_HIGHRISK_EMAIL" name="FR_HIGHRISK_EMAIL" [(ngModel)]="paymentModel.fr_highrisk_email">
+                                    <input type="hidden" id="FR_HIGHRISK_COUNTRY" name="FR_HIGHRISK_COUNTRY" [(ngModel)]="paymentModel.fr_highrisk_country">
+                                    <input type="hidden" id="FR_BILLING_ADDRESS" name="FR_BILLING_ADDRESS" [(ngModel)]="paymentModel.fr_billing_address">
+                                    <input type="hidden" id="FR_SHIPPING_ADDRESS" name="FR_SHIPPING_ADDRESS" [(ngModel)]="paymentModel.fr_shipping_address">
+                                    <input type="hidden" id="FR_SHIPPING_COST" name="FR_SHIPPING_COST" [(ngModel)]="paymentModel.fr_shipping_cost">
+                                    <input type="hidden" id="FR_PURCHASE_HOUR" name="FR_PURCHASE_HOUR" [(ngModel)]="paymentModel.fr_purchase_hour">
+                                    <input type="hidden" id="FR_CUSTOMER_IP" name="FR_PURCFR_CUSTOMER_IPHASE_HOUR" [(ngModel)]="paymentModel.fr_customer_ip">
+                                    <input type="hidden" id="TXN_SIGNATURE" name="TXN_SIGNATURE" [(ngModel)]="paymentModel.txn_signature">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="paymentInfoCnt" class="row">
+                        <div id="bankMember" class="transactionBlock col-sm-12 kt-hide">
+                            <div class="bankMemberIconWrp row">
+                                <div class="bankMemberIcon col-sm-3"></div>
+                                <div class="bankMemberIcon col-sm-3"></div>
+                                <div class="bankMemberIcon col-sm-3"></div>
+                                <div class="bankMemberIcon col-sm-3"></div>
+                            </div>
+                        </div>
+                        <div class="transactionBlock col-sm-12">
+                            <div class="noteInfo">
+                                <div class="infoIcon"><img [src]="appRootUrl() + 'assets/qstl/img/onlineBanking.svg'"/></div>
+                                <div class="infoIconText">You must have internet banking account in order to
+                                    make transaction with FPX / Credit Card</div>
+                            </div>
+                            <div class="noteInfo">
+                                <div class="infoIcon"><img  [src]="appRootUrl() + 'assets/qstl/img/popUp.svg'" /></div>
+                                <div class="infoIconText">Please ensure that your browser's pop up blocker
+                                    has been disabled to avoid any interruption
+                                </div>
+                            </div>
+                            <div class="noteInfo">
+                                <div class="infoIcon"><img [src]="appRootUrl() + 'assets/qstl/img/stop.svg'"/></div> 
+                                <div class="infoIconText">Do not close browser / refresh until you have received
+                                    response.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

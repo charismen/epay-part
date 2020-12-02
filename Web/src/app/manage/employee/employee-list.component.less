@@ -1,0 +1,236 @@
+.metricBox{
+	padding-right:0;
+}
+
+.metricBox.inlineChild > div > div{
+	display: inline-block;
+}
+
+.metricBox.inlineChild > div .labelTopDash{
+	padding-right:10px;
+}
+
+.metricBox > div{
+	padding:0.35em 1em;
+	border-radius:5px;
+	overflow:hidden;
+	text-align: right;
+	background-color:#828282;
+    color: #fff;
+}
+
+.labelTopDash{
+	font-size:0.9em;
+	text-transform:uppercase;
+}
+.valueBelowDash{
+	font-size: 1.5em;
+    font-weight: 700;
+    position:relative;
+}
+
+#totalTripStat,.totalTripStat{
+	padding-top:0.8em;
+}
+
+#totalTripStat .valueBelowDash,
+.totalTripStat .valueBelowDas{
+	font-size:1.8em;
+}
+
+#totalTripStat + div .valueBelowDash,
+.totalTripStat + div .valueBelowDash{
+	font-size:1em !important;
+}
+
+#totalTripStat + div .valueBelowDash:before,
+.totalTripStat + div .valueBelowDash:before{
+	margin-top:0;
+}
+
+#totalTripStat + div,
+.totalTripStat + div{
+	border-left:1px solid #666;
+}
+
+/*------------------------------------- Weekly Planner Indra 17/09/2019 -----------------------------------------------*/
+.btnWeekly{
+	padding: 5px 10px;
+	font-size:14px;
+	border-radius:5px;
+	max-width:30px;
+	text-align:center;
+	display:inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.elementDisplayWrapper{
+	display:inline-block;
+	height:30px;
+	overflow:hidden;
+	vertical-align: middle;
+	padding-top: 6px;
+}
+.elementDisplayWrapper > span{
+	padding: 0px 10px;
+    border-right: 2px solid #ccc;
+	display:none;
+	cursor: pointer;
+	font-size: 14px;
+	color:#000;
+}
+.elementDisplayWrapper > span:last-child{
+	border-right:0;
+}
+.activeElement{
+	display:inline-block !important;
+}
+.dateInterface{
+    margin-top: 25px;
+    /*margin-left: 25px;*/
+}
+.no-right > div{
+	padding-right:0;
+}
+.metricBox > div{
+	max-height: 70px;
+    padding-bottom: 20px;
+}
+.metricBox > div > div:last-child
+{
+	font-size: 18px;
+    font-weight: 600;
+}
+.colorBlue, .colorBlue > span, .colorBlue > .text-muted
+{
+	color:#00108e !important;
+}
+.kt-portlet{
+	padding:10px;
+}
+.dropDownAbsolute{
+	z-index: 99999999;
+    position: absolute;
+    box-shadow: 0px 0px 5px -2px #000;
+    background-color: white;
+    border-radius: 5px;
+}
+.dropDownAbsolute .primeng-paging-container
+{
+	background-color:#fff;
+}
+
+.icon-allocation{
+	font-size: 48px;
+	float: left;
+	color: #191A25;
+}
+
+.text-allocation{
+	font-size: 18px;
+	font-weight: 400;
+}
+.subtext-allocation{
+	font-size: 12px;
+	font-weight: 400;
+	color: #9b9898;
+}
+.btn-clear{
+	padding: 10px;
+	width: 160px;
+}
+.btn-add{
+	padding: 10px;
+	width: 160px;
+}
+
+.icon-angle{
+	font-size: 32px;
+	color: #191A25;
+	margin: 10px;
+}
+.date-filter{
+	display: flex;
+	justify-content: space-between;
+}
+ul{
+list-style: none;
+padding: 0;
+margin: 0;
+align-items: center;
+}
+.link {
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+  }
+
+  .date-text{
+	  margin-right: 10px;
+	  font-size: 14px;
+  }
+  #addNewAllocation,.boxBorderWrp{
+	border: 1px solid rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+  }
+  /*-------------------------------------- 24/10/2019 ---------------------------------------------*/
+  [opentarget]{
+	  position:relative;
+  }
+  [opentarget] i{
+	transition:transform 0.3s;
+	transform:rotate(0deg);
+  }
+  [opentarget].activeObject
+  {
+	padding-right: 25px;
+  }
+  [opentarget].activeObject i{
+	transform:rotate(45deg) !important;
+	margin-left: -5px;
+    display: inline-block;
+  }
+  [opentarget].activeObject:before{
+	content: 'CLOSE';
+    position: absolute;
+    display: block;
+    width: 100%;
+    padding: 7px 0;
+    padding-left: 20px;
+    border-radius: 2px;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+  }
+  .leftFloatScase,.rightFloatScase{
+	  display: inline !important;
+  }
+  .leftFloatScase{
+	  float:left !important;
+  }
+  .rightFloatScase{
+	  float:right !important;
+  }
+.plannerTitleWIcon {
+}
+  .plannerTitleWIcon:before{
+	  content:'';
+	  display:inline-block;
+	  vertical-align: middle;
+	  width:25px;
+	  height:25px;
+	  background-repeat: no-repeat;
+	  background-position: center;
+	  background-size:contain;
+	  background-image:url(/assets/qstl/img/planner.svg);
+  }
+  .plannerTitleWIcon > div
+  {
+    display: inline-block;
+    vertical-align: middle;
+    color: #000;
+    text-transform: uppercase; 
+  }
+

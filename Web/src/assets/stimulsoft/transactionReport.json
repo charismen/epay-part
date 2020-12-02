@@ -1,0 +1,30 @@
+{
+	"items": [
+		{
+        "RTT": "",
+        "R_R_R_R_DT2_R_R_DP": "",
+        "Account Code": "ADR001",
+        "Exported": "NO",
+        "Trans Status": "PENDING",
+        "Company Name": "LGMEVO SAMPLE REPORT DATA",
+        "Trans Date": "01/01/2020",
+        "Trans No": "20200101120802",
+        "Invoice No": "20200101120802",
+        "Payment Method": "FPX",
+        "Amount": 100000
+      },
+      {
+        "RTT": "",
+        "R_R_R_R_DT2_R_R_DP": "",
+        "Account Code": "ADR002",
+        "Exported": "NO",
+        "Trans Status": "PENDING",
+        "Company Name": "LGMEVO SAMPLE REPORT DATA",
+        "Trans Date": "01/01/2020",
+        "Trans No": "20200101121053",
+        "Invoice No": "20200101121053",
+        "Payment Method": "FPX",
+        "Amount": 32981.7
+      }
+	]
+}
