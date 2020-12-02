@@ -55,28 +55,28 @@
     ]
   },
   "DownloadText": {
-    "URL" : "https://42.61.96.158/LGMEVOEXP/download.aspx"
+    "URL" : ""
   },
   "Stimulsoft": {
-    "license": "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHnS5hzEUPZrpU2U6sO1iFfT+RRg+mD+VEIfuBmZvh8VSX9kKJg5dvJwCDJeIZyLCgxCOb6TukJC3H7mnD/BJxk2ZMIpPLj4LbyGtAvH0c34tCkm+sdhjwog6NrvjTL9RxPpnQWn3TNfxmICK+/ahA0EoO0v0ViC/FiizE4gyUcvexG5tYTh5dp6waASKIrlM1KLHifWFdRVFvs9wfjXqTo8Fv8gw3VL7Ao+AvsWEHhP5PdZrCemeQYH+l/+zwrdwWER1e4j9ggOuQPO8L7ZxZyBdiuKN7HwILdIV64Dk40fHt7dzU354WOQ5LziTz+n4M//1VEyj23m3h15xEfQHKCCydkc82XVV/Ln3xa5ROR1X+n+MBLAiSeFd5wfxIvreuKfzjrF9jzxzho/Ouj/iZO3u57KdXnzrvpNob+/lYAW145ee4NwXf3JQMZE59wYHYPO/MgZOPPtZnyUfAq9uhpoubXztySrVdxx4TrSkKT/0xXjncM4fvHV3VCR9C+dW/E="
+    "license": ""
   },
   "FPX": {
-    "sellerExId": "EX00003925",
-    "sellerId": "SE00004392",
+    "sellerExId": "",
+    "sellerId": "",
     "sellerBankCode": "01",
     "txnCurrency": "MYR",
     "version": "6.0",
-    "FPXJSP": "https://uat.mepsfpx.com.my/FPXMain/seller2DReceiver.jsp",
-    "FPXTXNSTAT": "https://uat.mepsfpx.com.my/FPXMain/sellerNVPTxnStatus.jsp"
+    "FPXJSP": "",
+    "FPXTXNSTAT": ""
   },
   "MayBank": {
-    "MBBCCMerchantHashKey": "56KePYzj",
-    "MBBCCMerchantAccount": "02700770183275001265",
-    "MBBCCMerchantHashKey_eL": "6GdJqJt9",
-    "MBBCCMerchantAccount_eL": "02700770427375001541",
-    "MBBEBPGCARDSURL": "https://ebpgcards.maybank.com/BPG/admin/payment/PaymentWindowSimulator.jsp",
-    "MBBReturnURL": "https://localhost:44301/api/Accounting/MBCCGetResponse",
-    "MBBQueryURL": "https://ebpgcards.maybank.com/BPG/admin/payment/process_simulator"
+    "MBBCCMerchantHashKey": "",
+    "MBBCCMerchantAccount": "",
+    "MBBCCMerchantHashKey_eL": "",
+    "MBBCCMerchantAccount_eL": "",
+    "MBBEBPGCARDSURL": "",
+    "MBBReturnURL": "",
+    "MBBQueryURL": ""
   },
   "isUAT": true
 }
